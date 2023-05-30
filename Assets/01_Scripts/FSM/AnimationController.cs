@@ -12,8 +12,11 @@ public class AnimationController : MonoBehaviour
     private readonly int _isAttackHash = Animator.StringToHash("is_Attack");
     private readonly int _AttackTriggerhash = Animator.StringToHash("attack");
 
-    private readonly int _isHitHash = Animator.StringToHash("is_hit");
+    private readonly int _isHitHash = Animator.StringToHash("is_Hit");
     private readonly int _hitTriggerhash = Animator.StringToHash("hit");
+
+    private readonly int _isNuckHash = Animator.StringToHash("is_Nuck");
+    private readonly int _nuckTriggerhash = Animator.StringToHash("nuckdown");
 
     public event Action OnAnimationEndTrigger = null;
     public event Action OnAnimationEventTrigger = null;
@@ -52,6 +55,34 @@ public class AnimationController : MonoBehaviour
     public void OnAnimationEnd()
     {
         OnAnimationEndTrigger?.Invoke();
+    }
+
+    public void SetHitAnimation(bool b)
+    {
+        if (b == true)
+        {
+            _animator.SetBool(_isHitHash, b);
+            _animator.SetTrigger(_hitTriggerhash);
+        }
+        else
+        {
+            _animator.SetBool(_isHitHash, b);
+            _animator.ResetTrigger(_hitTriggerhash);
+        }
+    }
+
+    public void SetNuckDownAnimation(bool b)
+    {
+        if (b == true)
+        {
+            _animator.SetBool(_isNuckHash, b);
+            _animator.SetTrigger(_nuckTriggerhash);
+        }
+        else
+        {
+            _animator.SetBool(_isNuckHash, b);
+            _animator.ResetTrigger(_nuckTriggerhash);
+        }
     }
 
     public void SetMoveAnimation(bool b)

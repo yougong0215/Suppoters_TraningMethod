@@ -9,8 +9,9 @@ public enum FSMState
     Hit     = 8,
     Faint   = 16, // De Buff
     NuckDown= 32,
-    Death   = 64,
-    Skill   = 128
+    WakeUp  = 64,
+    Death   = 128,
+    Skill   = 256
 }
 
 public enum BuddyState

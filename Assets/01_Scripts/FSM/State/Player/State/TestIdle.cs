@@ -23,6 +23,10 @@ public class TestIdle : CommonAction
         {
             com.FSMMain.ChangeState(FSMState.Skill);
         }
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            com.FSMMain.ChangeState(FSMState.Hit);
+        }
     }
 
 
