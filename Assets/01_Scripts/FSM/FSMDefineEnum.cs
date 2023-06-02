@@ -8,7 +8,7 @@ public enum FSMState
     Attack  = 4,
     Hit     = 8,
     Faint   = 16, // De Buff
-    NuckDown= 32,
+    nuckdown = 32,
     WakeUp  = 64,
     Death   = 128,
     Skill   = 256

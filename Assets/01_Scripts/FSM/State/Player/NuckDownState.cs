@@ -22,6 +22,6 @@ public class NuckDownState : CommonState
 
     public override void UpdateState()
     {
-
+        UpdateAction?.Invoke();
     }
 }

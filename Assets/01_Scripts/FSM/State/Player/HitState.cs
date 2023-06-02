@@ -11,9 +11,6 @@ public class HitState : CommonState
     public override void EnterState()
     {
         _animator.SetHitAnimation(true);
-
-
-
         _animator.OnAnimationEventTrigger += EventAction;
         _animator.OnAnimationEndTrigger += EndAction;
         

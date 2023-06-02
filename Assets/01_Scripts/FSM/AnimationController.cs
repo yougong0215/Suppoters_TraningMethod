@@ -18,6 +18,9 @@ public class AnimationController : MonoBehaviour
     private readonly int _isNuckHash = Animator.StringToHash("is_Nuck");
     private readonly int _nuckTriggerhash = Animator.StringToHash("nuckdown");
 
+    private readonly int _isWakeHash = Animator.StringToHash("is_wake");
+    private readonly int _wakeTriggerhash = Animator.StringToHash("wakeUP");
+
     public event Action OnAnimationEndTrigger = null;
     public event Action OnAnimationEventTrigger = null;
     public event Action OnPreAnimationEventTrigger = null;
@@ -71,6 +74,20 @@ public class AnimationController : MonoBehaviour
         }
     }
 
+
+    public void SetWakeAnimation(bool b)
+    {
+        if (b == true)
+        {
+            _animator.SetBool(_isWakeHash, b);
+            _animator.SetTrigger(_wakeTriggerhash);
+        }
+        else
+        {
+            _animator.SetBool(_isWakeHash, b);
+            _animator.ResetTrigger(_wakeTriggerhash);
+        }
+    }
     public void SetNuckDownAnimation(bool b)
     {
         if (b == true)

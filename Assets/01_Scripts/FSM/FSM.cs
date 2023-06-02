@@ -57,6 +57,12 @@ public class FSM : MonoBehaviour
 
     private void Update()
     {
+        Vector3 velocity =Vector3.zero;
+
+        velocity.y -= 9.8f * Time.deltaTime;
+
         currentState?.UpdateState();
+        GetComponent<CharacterController>().Move(velocity * Time.deltaTime);
+
     }
 }
