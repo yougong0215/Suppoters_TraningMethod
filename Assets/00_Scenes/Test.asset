@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ddd6c932b870104f820eda330476351, type: 3}
-  m_Name: Sworld
+  m_Script: {fileID: 11500000, guid: a69aff9d57080624c84bb4dd0db0c90e, type: 3}
+  m_Name: Test
   m_EditorClassIdentifier: 
-  clips: {fileID: -7524964340392654364, guid: c9b785ca3ebfffa4a940c0f9b927b484, type: 3}
-  SkillObj: {fileID: 5352999750627282729, guid: eb442f67a853ecd4697dc2bc6f82f088,
-    type: 3}
+  HP: 200
+  ATK: 10
+  DEF: 0
+  Speed: 0

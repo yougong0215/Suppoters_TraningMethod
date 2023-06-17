@@ -18,13 +18,16 @@ public class SkillCommonAction : CommonAction
     }
     protected override void OnEndFunc()
     {
+        com.FSMMain.ChangeState(FSMState.Idle);
         com.FSMMain.Next();
     }
 
 
     protected override void OnEventFunc()
     {
-        GameObject obj = Instantiate(_skillSO.SkillObj, transform);
+        DamageCaster obj = PoolManager.Instance.Pop(_skillSO.SkillObj.name) as DamageCaster;
+        obj.Init(Random.Range(6000,12000),1,1);
+        obj.transform.position = com.FSMMain.Object.dir;
         obj.transform.rotation = Quaternion.LookRotation(com.FSMMain.Object.dir - transform.position);
     }
 

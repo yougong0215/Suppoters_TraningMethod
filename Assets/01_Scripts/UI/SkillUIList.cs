@@ -9,8 +9,8 @@ public struct skillinfo
     public FSMState state;
     public Sprite spi;
     public SkillSO _skill;
-    [System.NonSerialized] public Vector3 dir;
-    [System.NonSerialized] public Vector3 pos;
+     public Vector3 dir;
+     public Vector3 pos;
 
 }
 
@@ -178,6 +178,7 @@ public class SkillUIList : MonoBehaviour
             Destroy(WorldUI[i].gameObject);
         }
         WorldUI.Clear();
+        SettingCount = 0;
         return SkillInfo;
     }
     
@@ -188,14 +189,17 @@ public class SkillUIList : MonoBehaviour
         if(WorldUI.Count > 0)
         {
             for(int i =0; i < WorldUI.Count; i++)
-            {
-                if(SkillInfo[i].state != FSMState.Move)
-                    WorldUI[i].transform.position = SkillInfo[i].pos + new Vector3(-0.2f, 0+i, 0.2f);
-                else
+            { 
+            if(SkillInfo.Count > 0)
                 {
-                    WorldUI[i].transform.position = SkillInfo[i].pos;
+                    if (SkillInfo[i].state != FSMState.Move)
+                        WorldUI[i].transform.position = SkillInfo[i].pos + new Vector3(-0.2f, 0 + i, 0.2f);
+                    else
+                    {
+                        WorldUI[i].transform.position = SkillInfo[i].pos;
+                    }
+                    WorldUI[i].Seting(SkillInfo[i].spi, i + 1);
                 }
-                WorldUI[i].Seting(SkillInfo[i].spi, i+1);
             }
         }
     }

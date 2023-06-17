@@ -7,6 +7,6 @@ public class SkillSO : ScriptableObject
 {
     public AnimationClip clips;
 
-    public GameObject SkillObj;
+    public DamageCaster SkillObj;
 }
 

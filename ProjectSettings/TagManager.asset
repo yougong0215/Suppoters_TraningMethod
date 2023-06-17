@@ -9,6 +9,8 @@ TagManager:
   - Player3
   - Player4
   - List
+  - pool
+  - Pool
   layers:
   - Default
   - TransparentFX
@@ -16,10 +18,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Player
   - AbleGround
-  - 
-  - 
+  - Enemy
+  - Text
   - 
   - 
   - 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -22,6 +23,7 @@ public class FSM : MonoBehaviour
 
     public skillinfo Object => useing;
 
+    bool b = true;
     private void Awake()
     {
         _nav = GetComponent<NavMeshAgent>();
@@ -31,20 +33,38 @@ public class FSM : MonoBehaviour
     public void SetUseing(List<skillinfo> sk)
     {
         useinged = sk;
+        b = true;
         Next();
     }
 
     public void Next()
     {
-        if(useinged.Count > 0)
+        StartCoroutine(delay());
+    }
+
+    public IEnumerator delay()
+    {
+        yield return new WaitForSeconds(0.005f);
+        if (TimeController.Instance.Timer == 1)
         {
-            useing = useinged[0];
-            useinged.RemoveAt(0);
-            ChangeState(useing.state);
-        }
-        else
-        {
-            GameController.Contorller.StopPlayer();
+            if (useinged.Count > 0)
+            {
+                b = true;
+                useing = useinged[0];
+                useinged.RemoveAt(0);
+                yield return new WaitUntil(()=>NowState() == FSMState.Idle);
+                ChangeState(useing.state);
+            }
+            else
+            {
+                if (b == true)
+                {
+                    yield return new WaitUntil(() => NowState() == FSMState.Idle);
+                    GameController.Contorller.StopPlayer();
+                    b = false;
+                }
+            }
+
         }
     }
     public void LookRotations(Vector3 dir)

@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum GetTypeShape
+{
+    Box,
+    Sphere,
+    Polygon
+}
+
 public class ClickUI : MonoBehaviour
 {
     bool Clicked = false;
@@ -10,17 +17,37 @@ public class ClickUI : MonoBehaviour
     public static bool btnEnable = true;
 
     public players pl;
-    Transform Player; // ÇÃ·¹ÀÌ¾î
+    Transform Player; // í”Œë ˆì´ì–´
     Transform center;
-    SpriteRenderer circleSprite; // Circle Sprite
-    public float radius = 1f; // ¿øÀÇ ¹İÁö¸§
+    SpriteRenderer shapeSprite; // í˜•íƒœ ìŠ¤í”„ë¼ì´íŠ¸
+    public float radius = 1f; // í˜•íƒœì˜ ë°˜ì§€ë¦„
+    public Vector2 size = Vector2.one; // í˜•íƒœì˜ í¬ê¸° (ë„ˆë¹„ì™€ ë†’ì´)
 
     SkillUIList gm;
     Canvas cans;
     Vector3 vec;
     Button bt;
+    Collider colliders;
+    [SerializeField] GetTypeShape tp;
 
     [SerializeField] skillinfo info;
+
+
+    public T FindComponentInChildren<T>(GameObject parentObject) where T : Component
+    {
+        T[] components = parentObject.GetComponentsInChildren<T>(true);
+
+        foreach (T component in components)
+        {
+            if (component.gameObject.activeSelf)
+            {
+                return component;
+            }
+        }
+
+        return null;
+    }
+
     public void onClick()
     {
         gm = GameObject.Find("List").GetComponent<SkillUIList>();
@@ -34,24 +61,72 @@ public class ClickUI : MonoBehaviour
         }
     }
 
-
     private void Awake()
     {
         Player = GameObject.Find(pl.ToString()).transform;
         cans = GameObject.Find("Render").GetComponent<Canvas>();
         print(Player.name);
-        center = Player.Find("center").transform;
-        circleSprite = center.GetComponent<SpriteRenderer>();
-        radius = circleSprite.bounds.size.x / 2f;
+
+        switch (tp)
+        {
+            case GetTypeShape.Sphere:
+                center = Player.Find("Sphere").transform;
+                shapeSprite = center.GetComponent<SpriteRenderer>();
+                break;
+            case GetTypeShape.Box:
+                center = Player.Find("Box").transform;
+                shapeSprite = center.GetChild(0).GetComponent<SpriteRenderer>();
+                break;
+            case GetTypeShape.Polygon:
+                center = Player.Find("Polygon").transform;
+                shapeSprite = center.GetChild(0).GetComponent<SpriteRenderer>();
+                break;
+        };
+        Debug.Log(shapeSprite.name);
+        colliders = shapeSprite.GetComponent<Collider>();
+        radius = GetShapeRadius();
         center.gameObject.SetActive(false);
         bt = GetComponent<Button>();
     }
+
+    private float GetShapeRadius()
+    {
+        if (shapeSprite == null)
+            return 0f;
+
+        Debug.Log(colliders);
+
+        if (colliders == null)
+        {
+            Debug.LogWarning("ì½œë¼ì´ë”ê°€ ì—†ëŠ” í˜•íƒœ ìœ í˜•ì…ë‹ˆë‹¤.");
+            return 0f;
+        }
+
+        if (colliders is SphereCollider sphereCollider)
+        {
+            return sphereCollider.radius;
+        }
+        else if (colliders is BoxCollider boxCollider)
+        {
+            return Mathf.Max(boxCollider.size.x, boxCollider.size.y, boxCollider.size.z) / 2f;
+        }
+        else if (colliders is MeshCollider meshCollider)
+        {
+            Bounds bounds = meshCollider.bounds;
+            return Mathf.Max(bounds.size.x, bounds.size.y, bounds.size.z) / 2f;
+        }
+        else
+        {
+            Debug.LogWarning("ì§€ì›ë˜ì§€ ì•ŠëŠ” í˜•íƒœ ìœ í˜•ì…ë‹ˆë‹¤.");
+            return 0f;
+        }
+    }
+
     private void Update()
     {
-        if(Clicked == true)
+        if (Clicked == true)
         {
-
-            if(vec == Vector3.zero)
+            if (vec == Vector3.zero)
             {
                 center.position = Player.position;
             }
@@ -62,34 +137,32 @@ public class ClickUI : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                // ¸¶¿ì½º Å¬¸¯ÇÑ À§Ä¡ÀÇ ½ºÅ©¸° ÁÂÇ¥¸¦ °¡Á®¿È
+                // ë§ˆìš°ìŠ¤ í´ë¦­í•œ ìœ„ì¹˜ì˜ ìŠ¤í¬ë¦° ì¢Œí‘œë¥¼ ê°€ì ¸ì˜´
                 Vector3 screenPos = Input.mousePosition;
 
-                // Å¬¸¯ÇÑ À§Ä¡ÀÇ 3D ÁÂÇ¥¸¦ °è»ê
+                // í´ë¦­í•œ ìœ„ì¹˜ì˜ 3D ì¢Œí‘œë¥¼ ê³„ì‚°
                 Ray ray = Camera.main.ScreenPointToRay(screenPos);
                 if (Physics.Raycast(ray, out RaycastHit hit))
                 {
                     Vector3 clickPos = hit.point;
-                    float distance = Vector2.Distance(clickPos, center.position);
-                    clickPos.y = 1;
-
-
-                    // Å¬¸¯ÇÑ À§Ä¡°¡ ¿øÀÇ ¹üÀ§ ¾È¿¡ ÀÖ´ÂÁö È®ÀÎ
-                    if (distance <= circleSprite.bounds.size.x / 2f)
+                    float distance = GetDistanceToShape(clickPos);
+                    Debug.Log($"{distance}, {GetShapeRadius()}");
+                    // í´ë¦­í•œ ìœ„ì¹˜ê°€ í˜•íƒœì˜ ë²”ìœ„ ì•ˆì— ìˆëŠ”ì§€ í™•ì¸
+                    if (distance*0.1f <= GetShapeRadius())
                     {
+                        clickPos.y = 0;
                         skillinfo skilled = info;
                         gm.Setting(skilled, clickPos, Player);
-                        // Å¬¸¯ÇÑ À§Ä¡ÀÇ 3D ÁÂÇ¥¸¦ µğ¹ö±× ·Î±×·Î Ãâ·Â
-                        Debug.Log("Clicked Position: " + clickPos);
+                        // í´ë¦­í•œ ìœ„ì¹˜ì˜ 3D ì¢Œí‘œë¥¼ ë””ë²„ê·¸ ë¡œê·¸ë¡œ ì¶œë ¥
+                        Debug.Log("í´ë¦­í•œ ìœ„ì¹˜: " + clickPos);
                         Clicked = false;
                     }
                     else
                     {
-                        // Å¬¸¯ÇÑ À§Ä¡°¡ ¿øÀÇ ¹üÀ§ ¹Û¿¡ ÀÖÀ½
+                        // í´ë¦­í•œ ìœ„ì¹˜ê°€ í˜•íƒœì˜ ë²”ìœ„ ë°–ì— ìˆìŒ
                         Clicked = false;
-                        Debug.Log("Clicked Position: " + clickPos);
+                        Debug.Log("í´ë¦­í•œ ìœ„ì¹˜: " + clickPos);
                     }
-
                 }
                 else
                 {
@@ -99,10 +172,74 @@ public class ClickUI : MonoBehaviour
                 cans.planeDistance = 1;
                 btnEnable = true;
             }
-            
         }
 
+        bt.enabled = btnEnable;
+    }
 
-       bt.enabled = btnEnable;
+    private float GetDistanceToShape(Vector3 point)
+    {
+        if (shapeSprite == null)
+            return 0f;
+
+        if (colliders == null)
+        {
+            Debug.LogWarning("ì½œë¼ì´ë”ê°€ ì—†ëŠ” í˜•íƒœ ìœ í˜•ì…ë‹ˆë‹¤.");
+            return 0f;
+        }
+
+        if (colliders is SphereCollider)
+        {
+            return Vector3.Distance(point, center.position);
+        }
+        else if (colliders is BoxCollider boxCollider)
+        {
+            return DistanceToRectangle(point, boxCollider);
+        }
+        else if (colliders is MeshCollider meshCollider)
+        {
+            return DistanceToMesh(point, meshCollider);
+        }
+        else
+        {
+            Debug.LogWarning("ì§€ì›ë˜ì§€ ì•ŠëŠ” í˜•íƒœ ìœ í˜•ì…ë‹ˆë‹¤.");
+            return 0f;
+        }
+    }
+
+    private float DistanceToRectangle(Vector3 point, BoxCollider boxCollider)
+    {
+        Vector3 localPoint = center.InverseTransformPoint(point);
+        Vector3 size = boxCollider.size;
+        Vector3 scaledSize = new Vector3(size.x * center.lossyScale.x, size.y * center.lossyScale.y, size.z * center.lossyScale.z);
+        Vector3 halfSize = scaledSize / 2f;
+        Vector3 min = -halfSize;
+        Vector3 max = halfSize;
+
+        float dx = Mathf.Max(min.x - localPoint.x, 0, localPoint.x - max.x);
+        float dy = Mathf.Max(min.y - localPoint.y, 0, localPoint.y - max.y);
+        float dz = Mathf.Max(min.z - localPoint.z, 0, localPoint.z - max.z);
+
+        return Mathf.Sqrt(dx * dx + dy * dy + dz * dz);
+    }
+
+    private float DistanceToMesh(Vector3 point, MeshCollider meshCollider)
+    {
+        Vector3 localPoint = center.InverseTransformPoint(point);
+        Mesh mesh = meshCollider.sharedMesh;
+        float closestDistance = float.MaxValue;
+
+        if (mesh != null)
+        {
+            foreach (var triangle in mesh.triangles)
+            {
+                Vector3 vertex = mesh.vertices[triangle];
+                Vector3 worldVertex = center.TransformPoint(vertex);
+                float distance = Vector3.Distance(localPoint, worldVertex);
+                closestDistance = Mathf.Min(closestDistance, distance);
+            }
+        }
+
+        return closestDistance;
     }
 }

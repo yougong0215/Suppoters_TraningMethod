@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,9 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     static GameController _con;
+
+    public CinemachineVirtualCamera cam;
+    public GameObject cav;
 
     public static GameController Contorller
     {
@@ -30,14 +34,17 @@ public class GameController : MonoBehaviour
     {
         Render = GameObject.Find("Render");
         TimeController.Instance.SetTime(0);
+        cam.Priority = 100;
     }
 
     public void StartGame()
     {
         TimeController.Instance.SetTime(1);
+        cam.Priority = 0;
         for (int i = 0; i < players.Count; i++)
         {
             Render.SetActive(false);
+            cav.SetActive(true); ;
             CO(i);
         }
     }
@@ -48,7 +55,9 @@ public class GameController : MonoBehaviour
         {
             stCount = 0;
             TimeController.Instance.SetTime(0);
+            cam.Priority = 100;
             Render.SetActive(true);
+            cav.SetActive(false);
         }
 
     }

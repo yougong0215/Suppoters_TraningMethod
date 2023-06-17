@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class MoveState : CommonState
 {
+    float MoveTime = 0;
     
     public override void EnterState()
     {
@@ -12,8 +13,8 @@ public class MoveState : CommonState
         _animator.OnAnimationEventTrigger  += EventAction;
         _animator.OnAnimationEndTrigger    += EndAction;
         FSMMain.AG.enabled = true;
-        FSMMain.AG.SetDestination(FSMMain.Object.pos);
         FSMMain.Character.enabled = false;
+        MoveTime = 0;
     }
 
     public override void ExitState()
@@ -29,11 +30,14 @@ public class MoveState : CommonState
 
     public override void UpdateState()
     {
+        MoveTime += Time.deltaTime;
 
-        print($"Range : " + FSMMain.AG.remainingDistance);
-        if(FSMMain.AG.remainingDistance < 0.2f && !FSMMain.AG.pathPending)
+        FSMMain.AG.SetDestination(FSMMain.Object.pos);
+        //print($"Range : " + FSMMain.AG.remainingDistance);
+        if ((FSMMain.AG.remainingDistance < 0.2f || FSMMain.AG.pathPending) && MoveTime > 0.1f)
         {
             FSMMain.Next();
+            FSMMain.ChangeState(FSMState.Idle);
         }
 
         UpdateAction?.Invoke();

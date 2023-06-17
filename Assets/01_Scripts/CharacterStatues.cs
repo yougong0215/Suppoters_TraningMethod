@@ -10,4 +10,6 @@ public class CharacterStatues : ScriptableObject
     public int DEF;
     public int Speed;
 
+    
+
 }

@@ -18,7 +18,7 @@ public class TimeController : Singleton<TimeController>
     {
         if(_worldTime == 1)
         {
-            print(times += Time.deltaTime);
+            //print(times += Time.deltaTime);
         }
     }
 
