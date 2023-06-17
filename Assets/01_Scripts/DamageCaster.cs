@@ -34,10 +34,11 @@ public class DamageCaster : PoolAble
     public ParticleSystem ps;
     GameObject effect;
     bool vfxcast = false;
-    bool init = false;
+    protected bool init = false;
 
     private void OnEnable()
     {
+        MaxAttackfrequency = Attackfrequency;
     }
 
     public void Init(int damage, float cird, float cri)
@@ -63,7 +64,7 @@ public class DamageCaster : PoolAble
         init = true;
     }
 
-    private void Update()
+    protected void Update()
     {
         if(init == true)
         {
@@ -91,7 +92,7 @@ public class DamageCaster : PoolAble
                     Attackfrequency = 0;
                     if (collider.TryGetComponent<IDamageAble>(out damageable))
                     {
-                        StartCoroutine(Attack(damageable, times / AttackCount, AttackCount, collider));
+                        StartCoroutine(Attack(damageable, times / AttackCount, AttackCount-1, collider));
                     }
                 }
             }
@@ -99,7 +100,7 @@ public class DamageCaster : PoolAble
             if (lifeTime <= 0)
             {
                 Destroy(effect);
-                Destroy(gameObject); // 재생 시간이 끝났을 때 오브젝트를 파괴합니다.
+                PoolManager.Instance.Push(this); // 재생 시간이 끝났을 때 오브젝트를 파괴합니다.
             }
         }
 
@@ -151,14 +152,14 @@ public class DamageCaster : PoolAble
         }
     }
 
-    private float GetColliderRadius()
+    protected float GetColliderRadius()
     {
 
         Vector3 colliderSize = GetColliderSize();
         return Mathf.Max(colliderSize.x, colliderSize.y, colliderSize.z) / 2f;
 
     }
-    private Vector3 GetColliderSize()
+    protected Vector3 GetColliderSize()
     {
         Collider collider = GetComponent<Collider>();
 

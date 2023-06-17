@@ -20,6 +20,7 @@ public class FSM : MonoBehaviour
 
     [SerializeField] List<skillinfo> useinged = new List<skillinfo>();
     [SerializeField]skillinfo useing;
+    public AgentStatus ststed;
 
     public skillinfo Object => useing;
 
@@ -28,6 +29,7 @@ public class FSM : MonoBehaviour
     {
         _nav = GetComponent<NavMeshAgent>();
         _chara = GetComponent<CharacterController>();
+        ststed = GetComponent<AgentStatus>();
     }
 
     public void SetUseing(List<skillinfo> sk)
@@ -37,12 +39,12 @@ public class FSM : MonoBehaviour
         Next();
     }
 
-    public void Next()
+    public void Next(bool b= false)
     {
-        StartCoroutine(delay());
+        StartCoroutine(delay(b));
     }
 
-    public IEnumerator delay()
+    public IEnumerator delay(bool bd = false)
     {
         yield return new WaitForSeconds(0.005f);
         if (TimeController.Instance.Timer == 1)
@@ -50,9 +52,9 @@ public class FSM : MonoBehaviour
             if (useinged.Count > 0)
             {
                 b = true;
+                yield return new WaitUntil(() => NowState() == FSMState.Idle);
                 useing = useinged[0];
                 useinged.RemoveAt(0);
-                yield return new WaitUntil(()=>NowState() == FSMState.Idle);
                 ChangeState(useing.state);
             }
             else

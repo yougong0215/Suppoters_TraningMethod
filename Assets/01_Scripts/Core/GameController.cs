@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
 
 public class GameController : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class GameController : MonoBehaviour
 
     public CinemachineVirtualCamera cam;
     public GameObject cav;
+
+    float curtime = 0;
 
     public static GameController Contorller
     {
@@ -59,7 +62,23 @@ public class GameController : MonoBehaviour
             Render.SetActive(true);
             cav.SetActive(false);
         }
-
+        if(TimeController.Instance.Timer == 1)
+        {
+            curtime += Time.deltaTime;
+            if(curtime >= 1)
+            {
+                for (int i = 0; i < con.Count; i++)
+                {
+                    con[i].Cost++;
+                }
+                curtime = 0;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < con.Count; i++)
+                con[i].tmpCost.text = $"Cost : {con[i].Cost} / {con[i].MaxCost}";
+        }
     }
 
     public void StopPlayer()

@@ -31,6 +31,7 @@ public class ClickUI : MonoBehaviour
     [SerializeField] GetTypeShape tp;
 
     [SerializeField] skillinfo info;
+    [SerializeField] Vector3 Scale;
 
 
     public T FindComponentInChildren<T>(GameObject parentObject) where T : Component
@@ -55,6 +56,7 @@ public class ClickUI : MonoBehaviour
         {
             Clicked = true;
             center.gameObject.SetActive(true);
+            center.localScale = Scale;
             vec = gm.returnpos();
             cans.planeDistance = 100;
             btnEnable = false;

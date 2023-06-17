@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SniperShoot
   m_EditorClassIdentifier: 
   clips: {fileID: 7400000, guid: 75e5a995984946f46a4d8b92e1ca72fb, type: 3}
-  SkillObj: {fileID: 4779182136367655494, guid: 0ed652345f8a5104fa11c70262593db3,
+  SkillObj: {fileID: 4721093932626093151, guid: f3b096409a8b5e44abb4b24ecb4baf25,
     type: 3}

@@ -26,8 +26,15 @@ public class SkillCommonAction : CommonAction
     protected override void OnEventFunc()
     {
         DamageCaster obj = PoolManager.Instance.Pop(_skillSO.SkillObj.name) as DamageCaster;
-        obj.Init(Random.Range(6000,12000),1,1);
-        obj.transform.position = com.FSMMain.Object.dir;
+        obj.Init((int)(com.FSMMain.ststed.stat.ATK + com.FSMMain.ststed.AddDamage), com.FSMMain.ststed.stat.Critical + com.FSMMain.ststed.Cirt, com.FSMMain.ststed.stat.CriticalDamage + com.FSMMain.ststed.CirtDAM);
+        if(com.FSMMain.Object.Fire==false)
+        {
+            obj.transform.position = com.FSMMain.Object.dir;
+        }
+        else
+        {
+            obj.transform.position = com.FSMMain.Object.pos;
+        }
         obj.transform.rotation = Quaternion.LookRotation(com.FSMMain.Object.dir - transform.position);
     }
 

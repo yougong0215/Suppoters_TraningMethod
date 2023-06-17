@@ -18,13 +18,14 @@ public class TimeController : Singleton<TimeController>
     {
         if(_worldTime == 1)
         {
-            //print(times += Time.deltaTime);
+            print(times += Time.deltaTime);
         }
     }
 
     public void PlayTime()
     {
         SetTime(1);
+        Time.timeScale = 1;
         StartCoroutine(playing(SkillUIList.count));
     }
 
@@ -32,5 +33,6 @@ public class TimeController : Singleton<TimeController>
     {
         yield return new WaitForSeconds(t);
         SetTime(0);
+        Time.timeScale = 0;
     }
 }

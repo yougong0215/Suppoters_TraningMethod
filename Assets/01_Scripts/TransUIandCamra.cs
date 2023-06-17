@@ -18,7 +18,7 @@ public class TransUIandCamra : MonoBehaviour
     public void Click()
     {
         CameraController.Instance.SetCam(PL);
-        con.Click(PL);
+        //con.Click(PL);
         Debug.Log("Å¬¸¯");
     }
 

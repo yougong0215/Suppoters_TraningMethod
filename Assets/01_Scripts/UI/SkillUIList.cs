@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,9 @@ public struct skillinfo
     public SkillSO _skill;
      public Vector3 dir;
      public Vector3 pos;
+    public bool Fire;
+    public int Cost;
+    public float WaitTime;
 
 }
 
@@ -19,11 +23,16 @@ public class SkillUIList : MonoBehaviour
     public static int count = 4;
     [SerializeField] SimpleImg imgs;
     [SerializeField] GameObject UIs;
+    [SerializeField] public TextMeshProUGUI tmpCost;
     [SerializeField] List<skillinfo> SkillInfo = new List<skillinfo>();
     [SerializeField] List<Image> img = new List<Image>();
     [SerializeField] List<SimpleImg> WorldUI = new List<SimpleImg>();
 
     public int SettingCount = 0;
+
+    [Header("Cost")]
+    public int Cost = 20;
+    public int MaxCost = 20;
 
     public int ReturnCount()
     {
@@ -32,7 +41,13 @@ public class SkillUIList : MonoBehaviour
 
     public void Setting(skillinfo info, Vector3 pos, Transform pl)
     {
-        if(info.state == FSMState.Move)
+        if(info.Cost > Cost)
+        {
+            return;
+        }
+        Cost -= info.Cost;
+
+        if (info.state == FSMState.Move)
         {
 
             info.pos = pos;
@@ -88,6 +103,7 @@ public class SkillUIList : MonoBehaviour
                 SettingCount--;
                 Destroy(WorldUI[SettingCount].gameObject);
                 WorldUI.RemoveAt(SettingCount);
+                Cost += SkillInfo[SettingCount].Cost;
                 SkillInfo.RemoveAt(SettingCount);
             }
         }
@@ -182,10 +198,11 @@ public class SkillUIList : MonoBehaviour
         return SkillInfo;
     }
     
+    
 
     private void Update()
     {
-
+        Cost = Mathf.Clamp(Cost, 0, MaxCost);
         if(WorldUI.Count > 0)
         {
             for(int i =0; i < WorldUI.Count; i++)
