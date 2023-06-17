@@ -8,35 +8,36 @@ public class NuckDownAction : CommonAction
     public float pushDuration = 0.5f; // 밀려나는 시간
     public float pushSpeed = 5f; // 밀려나는 속도
 
-    private bool isPushed = false;
+    private bool isPushed = true;
     private Vector3 pushDirection;
 
     public float _wakeUPTime = 5;
 
+    float curtime = 5;
     Coroutine co;
     protected override void OnEndFunc()
     {
-        co = StartCoroutine(WakeUpTime());
+        curtime = _wakeUPTime;
+        isPushed = false;
     }
 
     protected override void OnEventFunc()
     {
     }
 
-    IEnumerator WakeUpTime()
-    {
-        yield return new WaitForSeconds(_wakeUPTime);
-
-        com.FSMMain.ChangeState(FSMState.WakeUp);
-    }
 
     protected override void OnUpdateFunc()
     {
-        if (Input.GetKeyDown(KeyCode.O))
+        if (isPushed == false)
+            curtime -= Time.deltaTime;
+
+        if(curtime < 0)
         {
-            com.FSMMain.ChangeState(FSMState.nuckdown);
-            StopCoroutine(co);
+            isPushed = true;
+            com.FSMMain.ChangeState(FSMState.WakeUp);
         }
+
+        
 
     }
 }

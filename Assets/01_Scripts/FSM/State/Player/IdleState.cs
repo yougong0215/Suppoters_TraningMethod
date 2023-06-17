@@ -14,6 +14,7 @@ public class IdleState : CommonState
 
         _animator.OnAnimationEndTrigger += EndAction;
         _animator.OnAnimationEventTrigger += EventAction;
+
     }
 
     public override void ExitState()

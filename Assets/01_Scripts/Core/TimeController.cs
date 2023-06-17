@@ -5,10 +5,32 @@ using UnityEngine;
 public class TimeController : Singleton<TimeController>
 {
     float _worldTime = 1;
+    float times = 0;
     public float Timer => _worldTime;
 
     public void SetTime(float x)
     {
         _worldTime = x;
+        times = 0;
+    }
+
+    private void Update()
+    {
+        if(_worldTime == 1)
+        {
+            print(times += Time.deltaTime);
+        }
+    }
+
+    public void PlayTime()
+    {
+        SetTime(1);
+        StartCoroutine(playing(SkillUIList.count));
+    }
+
+    public IEnumerator playing(int t)
+    {
+        yield return new WaitForSeconds(t);
+        SetTime(0);
     }
 }

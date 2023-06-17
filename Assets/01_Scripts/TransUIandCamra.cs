@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrnszitonCamra : MonoBehaviour
+public class TransUIandCamra : MonoBehaviour
 {
     public players PL;
     public CinemachineVirtualCamera cam;
+    public CharUIController con;
+    
 
     private void Start()
     {
@@ -16,6 +18,9 @@ public class TrnszitonCamra : MonoBehaviour
     public void Click()
     {
         CameraController.Instance.SetCam(PL);
+        con.Click(PL);
         Debug.Log("Å¬¸¯");
     }
+
+
 }

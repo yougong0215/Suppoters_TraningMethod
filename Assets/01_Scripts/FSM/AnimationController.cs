@@ -39,13 +39,19 @@ public class AnimationController : MonoBehaviour
     {
             _animator = GetComponent<Animator>();
 
+        if(av!=null)
         _animator.avatar = av;
+        if(AOC!=null)
         _animator.runtimeAnimatorController = AOC;
 
         
         _fsm = transform.parent.GetComponent<FSM>();
     }
 
+    private void Update()
+    {
+        _animator.speed = TimeController.Instance.Timer;    
+    }
     public void ChangeAnimationClip(FSMState fsm, AnimationClip clip)
     {
         AOC[fsm.ToString()] = clip;
