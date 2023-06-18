@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SkillCommonAction : CommonAction
@@ -25,9 +26,9 @@ public class SkillCommonAction : CommonAction
 
     protected override void OnEventFunc()
     {
-        DamageCaster obj = PoolManager.Instance.Pop(_skillSO.SkillObj.name) as DamageCaster;
-        obj.Init((int)(com.FSMMain.ststed.stat.ATK + com.FSMMain.ststed.AddDamage), com.FSMMain.ststed.stat.Critical + com.FSMMain.ststed.Cirt, com.FSMMain.ststed.stat.CriticalDamage + com.FSMMain.ststed.CirtDAM);
-        if(com.FSMMain.Object.Fire==false)
+        PoolAble obj = PoolManager.Instance.Pop(_skillSO.SkillObj.name);
+
+        if (com.FSMMain.Object.Fire == false)
         {
             obj.transform.position = com.FSMMain.Object.dir;
         }
@@ -35,7 +36,20 @@ public class SkillCommonAction : CommonAction
         {
             obj.transform.position = com.FSMMain.Object.pos;
         }
+        if (obj.GetComponent<DamageCaster>())
+        {
+
+            obj.GetComponent<DamageCaster>().Init((int)(com.FSMMain.ststed.stat.ATK + com.FSMMain.ststed.AddDamage), com.FSMMain.ststed.stat.Critical + com.FSMMain.ststed.Cirt, com.FSMMain.ststed.stat.CriticalDamage + com.FSMMain.ststed.CirtDAM);
+        }
         obj.transform.rotation = Quaternion.LookRotation(com.FSMMain.Object.dir - transform.position);
+
+        GetBuff[] get = obj.GetComponentsInChildren<GetBuff>();
+        foreach(GetBuff bt in get)
+        {
+            bt.transform.position = com.FSMMain.Object.dir;
+            
+        }
+       
     }
 
     protected override void OnUpdateFunc()

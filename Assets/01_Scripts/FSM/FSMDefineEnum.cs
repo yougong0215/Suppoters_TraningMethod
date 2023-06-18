@@ -5,7 +5,7 @@ public enum FSMState
 {
     Idle    = 1,
     Move    = 2,
-    Attack  = 4,
+    Dash  = 4,
     Hit     = 8,
     Faint   = 16, // De Buff
     nuckdown = 32,

@@ -1,5 +1,7 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -69,6 +71,10 @@ public class ClickUI : MonoBehaviour
         cans = GameObject.Find("Render").GetComponent<Canvas>();
         print(Player.name);
 
+        foreach(TextMeshProUGUI tmp in transform.GetComponentsInChildren<TextMeshProUGUI>())
+        {
+            tmp.raycastTarget = false;
+        }
         switch (tp)
         {
             case GetTypeShape.Sphere:
@@ -154,6 +160,8 @@ public class ClickUI : MonoBehaviour
                     {
                         clickPos.y = 0;
                         skillinfo skilled = info;
+                        info.dir = clickPos;
+                        Debug.Log(info.state);
                         gm.Setting(skilled, clickPos, Player);
                         // 클릭한 위치의 3D 좌표를 디버그 로그로 출력
                         Debug.Log("클릭한 위치: " + clickPos);

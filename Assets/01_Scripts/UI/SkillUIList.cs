@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 [System.Serializable]
@@ -56,7 +57,7 @@ public class SkillUIList : MonoBehaviour
         {
             if(SkillInfo.Count > 0)
             {
-                info.pos = SkillInfo[SettingCount - 1].pos;
+                info.pos = SkillInfo[SettingCount-1].pos;
             }
             else
             {
@@ -69,11 +70,25 @@ public class SkillUIList : MonoBehaviour
         SkillInfo.Add(info);
         
         WorldUI.Add(Instantiate(imgs));
-        if (info.spi != null)
+
+        if (SkillInfo[SkillInfo.Count - 1].state != FSMState.Move)
+        {
+            Debug.Log(SkillInfo[SettingCount].pos);
+            WorldUI[SettingCount].transform.position = SkillInfo[SettingCount].pos + new Vector3(-0.2f, 0.1f, 0.2f);
+        }
+        else
+        {
+            WorldUI[SettingCount].transform.position = SkillInfo[SettingCount].pos;
+        }
+        WorldUI[SkillInfo.Count - 1].Seting(SkillInfo[SkillInfo.Count - 1].spi, SkillInfo.Count - 1 + 1);
+
+        if(info.spi != null)
         {
             WorldUI[SettingCount].Seting(info.spi, SettingCount + 1);
             img[SettingCount].sprite = info.spi;
+
         }
+
         img[SettingCount].GetComponent<ClickSettingUI>().bSet();
 
         
@@ -203,21 +218,6 @@ public class SkillUIList : MonoBehaviour
     private void Update()
     {
         Cost = Mathf.Clamp(Cost, 0, MaxCost);
-        if(WorldUI.Count > 0)
-        {
-            for(int i =0; i < WorldUI.Count; i++)
-            { 
-            if(SkillInfo.Count > 0)
-                {
-                    if (SkillInfo[i].state != FSMState.Move)
-                        WorldUI[i].transform.position = SkillInfo[i].pos + new Vector3(-0.2f, 0 + i, 0.2f);
-                    else
-                    {
-                        WorldUI[i].transform.position = SkillInfo[i].pos;
-                    }
-                    WorldUI[i].Seting(SkillInfo[i].spi, i + 1);
-                }
-            }
-        }
+
     }
 }

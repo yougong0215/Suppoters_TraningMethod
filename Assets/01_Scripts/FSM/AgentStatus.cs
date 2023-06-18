@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
@@ -25,8 +26,7 @@ public class AgentStatus : MonoBehaviour, IDamageAble
     [SerializeField] public float AddDamage;
     [SerializeField] public float Cirt;
     [SerializeField] public float CirtDAM;
-    [SerializeField] float DEF;
-    [SerializeField] List<Coroutine> corutime = new List<Coroutine>();
+    [SerializeField] public float DEF;
 
 
     public LayerMask _player;
@@ -66,29 +66,9 @@ public class AgentStatus : MonoBehaviour, IDamageAble
 
         }
 
-        Collider[] colliders = null;
-
-
-        colliders = Physics.OverlapSphere(transform.position, GetColliderRadius(), _player);
-
-        for(int i =0; i< corutime.Count; i++)
-        {
-            StopCoroutine(corutime[i]);
-            AddDamage = 0;
-            Cirt = 0;
-            CirtDAM = 0;
-            DEF = 0;
-        }
-        foreach (Collider collider in colliders)
-        {
-            GetBuff stat;
-            if (collider.TryGetComponent<GetBuff>(out stat))
-            {
-                corutime.Add(StartCoroutine(Buffs(stat.value, stat.st, stat.LifeTime)));
-            }
-        }
+        
     }
-    IEnumerator Buffs(float value, Stat st, float Time)
+    public IEnumerator Buffs(float value, Stat st, float Time)
     {
         switch (st)
         {
@@ -113,22 +93,12 @@ public class AgentStatus : MonoBehaviour, IDamageAble
         Cirt = 0;
         CirtDAM = 0;
         DEF = 0;
-
     }
-    protected float GetColliderRadius()
+
+    private void OnDrawGizmos()
     {
-
-        Vector3 colliderSize = GetColliderSize();
-        return Mathf.Max(colliderSize.x, colliderSize.y, colliderSize.z) / 2f;
-
+        // Draw a wire sphere to represent the overlap area
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, 2f);
     }
-    protected Vector3 GetColliderSize()
-    {
-        Collider collider = GetComponent<Collider>();
-
-
-        BoxCollider boxCollider = (BoxCollider)collider;
-        return Vector3.Scale(boxCollider.size, transform.localScale);
-    }
-}
 }

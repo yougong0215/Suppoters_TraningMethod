@@ -36,8 +36,9 @@ public class GameController : MonoBehaviour
     void Start()
     {
         Render = GameObject.Find("Render");
-        TimeController.Instance.SetTime(0);
+
         cam.Priority = 100;
+        TimeController.Instance.SetTime(0);
     }
 
     public void StartGame()
@@ -54,14 +55,6 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        if(stCount == players.Count)
-        {
-            stCount = 0;
-            TimeController.Instance.SetTime(0);
-            cam.Priority = 100;
-            Render.SetActive(true);
-            cav.SetActive(false);
-        }
         if(TimeController.Instance.Timer == 1)
         {
             curtime += Time.deltaTime;
@@ -78,6 +71,15 @@ public class GameController : MonoBehaviour
         {
             for (int i = 0; i < con.Count; i++)
                 con[i].tmpCost.text = $"Cost : {con[i].Cost} / {con[i].MaxCost}";
+        }
+
+        if (stCount == players.Count)
+        {
+            stCount = 0;
+            cam.Priority = 100;
+            Render.SetActive(true);
+            cav.SetActive(false);
+            TimeController.Instance.SetTime(0);
         }
     }
 

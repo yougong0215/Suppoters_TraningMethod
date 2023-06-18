@@ -21,12 +21,12 @@ public class TextDamageCast : PoolAble
         tmp.text = $"{Damage}";
         if(crit == true)
         {
-            tmp.fontSize = 14;
+            tmp.fontSize = 8;
             tmp.color = Color.yellow;
         }
         else
         {
-            tmp.fontSize = 8;
+            tmp.fontSize = 5;
             tmp.color = Color.white;
         }
     }

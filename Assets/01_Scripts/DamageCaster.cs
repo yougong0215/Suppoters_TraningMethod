@@ -17,6 +17,7 @@ public class DamageCaster : PoolAble
     public GetTypeShape shape;
     [Header("시간 ( 만약 한번만 공격할꺼면 frequency > lifeTIme )")]
     public float lifeTime = 0;           // Destroy
+    [System.NonSerialized]public float onLife;
     [Header("공격 속도")]
     public float Attackfrequency = 0.4f; // 공격 속도
     float MaxAttackfrequency = 0.4f;
@@ -32,13 +33,20 @@ public class DamageCaster : PoolAble
     [Header("VFX")]
     public VisualEffect vfx;
     public ParticleSystem ps;
-    GameObject effect;
+    VisualEffect Veffect;
+    ParticleSystem Peffect;
     bool vfxcast = false;
     protected bool init = false;
+    bool b;
+    private void Awake()
+    {
+        onLife = lifeTime;
+    }
 
     private void OnEnable()
     {
         MaxAttackfrequency = Attackfrequency;
+        lifeTime = onLife;
     }
 
     public void Init(int damage, float cird, float cri)
@@ -46,16 +54,16 @@ public class DamageCaster : PoolAble
         if (vfx != null)
         {
             GameObject obj = Instantiate(vfx.gameObject, transform);
-           
 
-            effect = obj.gameObject;
+
+            Veffect = obj.gameObject.GetComponent<VisualEffect>();
         }
 
         if (ps != null)
         {
             GameObject obj = Instantiate(ps.gameObject, transform);
-            
-            effect = obj.gameObject;
+
+            Peffect = obj.gameObject.GetComponent<ParticleSystem>();
         }
 
         CriticalDamage += cird;
@@ -66,7 +74,35 @@ public class DamageCaster : PoolAble
 
     protected void Update()
     {
-        if(init == true)
+        if (Time.timeScale == 0)
+        {
+            b = true;
+            if (Peffect)
+            {
+                Peffect.Pause();
+            }
+            if (Veffect)
+            {
+                Veffect.pause = true;
+            }
+        }
+        else
+        {
+            if (b == true)
+            {
+                b = false;
+                if (Peffect)
+                {
+                    Peffect.Play();
+                }
+                if (Veffect)
+                {
+                    Veffect.pause = false;
+                }
+            }
+        }
+
+        if (init == true)
         {
             lifeTime -= Time.deltaTime;
             Attackfrequency += Time.deltaTime;
@@ -99,7 +135,10 @@ public class DamageCaster : PoolAble
 
             if (lifeTime <= 0)
             {
-                Destroy(effect);
+                if(Veffect)
+                    Destroy(Veffect);
+                if (Peffect)
+                    Destroy(Peffect);
                 PoolManager.Instance.Push(this); // 재생 시간이 끝났을 때 오브젝트를 파괴합니다.
             }
         }

@@ -12,6 +12,7 @@ public class TimeController : Singleton<TimeController>
     {
         _worldTime = x;
         times = 0;
+        Time.timeScale = x;
     }
 
     private void Update()

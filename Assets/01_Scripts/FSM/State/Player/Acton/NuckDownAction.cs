@@ -23,6 +23,7 @@ public class NuckDownAction : CommonAction
 
     protected override void OnEventFunc()
     {
+        isPushed = true;
     }
 
 
