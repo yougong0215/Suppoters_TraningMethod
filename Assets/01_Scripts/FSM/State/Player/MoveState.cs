@@ -34,9 +34,8 @@ public class MoveState : CommonState
 
         FSMMain.AG.SetDestination(FSMMain.Object.pos);
         //print($"Range : " + FSMMain.AG.remainingDistance);
-        if ((FSMMain.AG.remainingDistance < 0.2f || FSMMain.AG.pathPending) && MoveTime > 0.1f)
+        if ((FSMMain.AG.remainingDistance < 0.2f) && MoveTime > 0.2f)
         {
-            FSMMain.Next();
             FSMMain.ChangeState(FSMState.Idle);
         }
 

@@ -32,7 +32,7 @@ public class SkillUIList : MonoBehaviour
     public int SettingCount = 0;
 
     [Header("Cost")]
-    public int Cost = 20;
+    public int Cost  = 20;
     public int MaxCost = 20;
 
     public int ReturnCount()
@@ -42,13 +42,10 @@ public class SkillUIList : MonoBehaviour
 
     public void Setting(skillinfo info, Vector3 pos, Transform pl)
     {
-        if(info.Cost > Cost)
-        {
-            return;
-        }
         Cost -= info.Cost;
+        info.pos = pos;
 
-        if (info.state == FSMState.Move)
+        if (info.state == FSMState.Move || info.state == FSMState.Dash || info.state == FSMState.Telpo)
         {
 
             info.pos = pos;
@@ -57,7 +54,7 @@ public class SkillUIList : MonoBehaviour
         {
             if(SkillInfo.Count > 0)
             {
-                info.pos = SkillInfo[SettingCount-1].pos;
+                info.pos = SkillInfo[SkillInfo.Count-1].pos;
             }
             else
             {
@@ -71,7 +68,7 @@ public class SkillUIList : MonoBehaviour
         
         WorldUI.Add(Instantiate(imgs));
 
-        if (SkillInfo[SkillInfo.Count - 1].state != FSMState.Move)
+        if (SkillInfo[SkillInfo.Count - 1].state != FSMState.Move || SkillInfo[SkillInfo.Count - 1].state != FSMState.Dash || SkillInfo[SkillInfo.Count - 1].state == FSMState.Telpo)
         {
             Debug.Log(SkillInfo[SettingCount].pos);
             WorldUI[SettingCount].transform.position = SkillInfo[SettingCount].pos + new Vector3(-0.2f, 0.1f, 0.2f);
@@ -189,7 +186,7 @@ public class SkillUIList : MonoBehaviour
             print(SettingCount);
             for(int i = SettingCount-1; i >=0; i--)
             {
-                if(SkillInfo[i].state == FSMState.Move)
+                if(SkillInfo[i].state == FSMState.Move || SkillInfo[i].state == FSMState.Dash)
                 {
                     return SkillInfo[i].dir;
                 }
@@ -215,9 +212,4 @@ public class SkillUIList : MonoBehaviour
     
     
 
-    private void Update()
-    {
-        Cost = Mathf.Clamp(Cost, 0, MaxCost);
-
-    }
 }

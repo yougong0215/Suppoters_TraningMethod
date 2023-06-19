@@ -18,12 +18,14 @@ public enum Stat
 
 public class AgentStatus : MonoBehaviour, IDamageAble
 {
+    [SerializeField] public players pl;
     [SerializeField] public CharacterStatues stat;
     [SerializeField] int HP;
     [SerializeField] int MaxHP;
     [SerializeField] TextDamageCast tmp;
     [SerializeField] Image hpbar;
     [SerializeField] public float AddDamage;
+    [SerializeField] public float himsDamage;
     [SerializeField] public float Cirt;
     [SerializeField] public float CirtDAM;
     [SerializeField] public float DEF;
@@ -34,13 +36,18 @@ public class AgentStatus : MonoBehaviour, IDamageAble
     {
         MaxHP = stat.HP;
         HP = stat.HP;
+        himsDamage = 1;
         //hpbar = transform.Find("HP").GetComponent<Image>();
     }
     public void TakeDamage(int value, Vector3 position, float cirt, bool critical)
     {
         TextDamageCast damageCast = PoolManager.Instance.Pop("TMP") as TextDamageCast;
+        
+        Debug.Log($"DMG : {value} => {(int)(100 / (100 + stat.DEF))} * { (value + Random.Range(-(value * 0.1f), (value * 0.1f)))} * {cirt}" +
+            $"= {(int)(100 / (100 + stat.DEF) * (value + Random.Range(-(value * 0.1f), (value * 0.1f))) * cirt)}"); 
+
         damageCast.Init((int)(100 / (100 + stat.DEF) * (value + Random.Range(-(value * 0.1f), (value * 0.1f))) * cirt), critical, position);
-        HP -= (int)(100 / (100 + stat.DEF) * (value + Random.Range(-(value * 0.1f), (value * 0.1f))) * cirt);
+        HP -= (int)((100 / (100 + stat.DEF) * (value + Random.Range(-(value * 0.1f), (value * 0.1f)))) * cirt);
     }
 
 
@@ -68,12 +75,13 @@ public class AgentStatus : MonoBehaviour, IDamageAble
 
         
     }
-    public IEnumerator Buffs(float value, Stat st, float Time)
+    public IEnumerator Buffs(float value, float hims, Stat st, float Time)
     {
         switch (st)
         {
             case Stat.ATK:
-                AddDamage = value;
+                AddDamage += value;
+                himsDamage += hims;
                 break;
             case Stat.HP:
                 HP += (int)value;
@@ -88,11 +96,26 @@ public class AgentStatus : MonoBehaviour, IDamageAble
                 CirtDAM += value;
                 break;
         }
+        Debug.Log($"{st.ToString()} {gameObject.name} Ω√¿€ : {value}|{hims}");
+        
         yield return new WaitForSeconds(Time);
-        AddDamage = 0;
-        Cirt = 0;
-        CirtDAM = 0;
-        DEF = 0;
+        Debug.Log($"{st.ToString()} ≥° : {value}");
+        switch (st)
+        {
+            case Stat.ATK:
+                AddDamage -= value;
+                himsDamage -= hims;
+                break;
+            case Stat.DEF:
+                DEF -= (int)value;
+                break;
+            case Stat.CRIT:
+                Cirt -= value;
+                break;
+            case Stat.CRITDAM:
+                CirtDAM -= value;
+                break;
+        }
     }
 
     private void OnDrawGizmos()

@@ -35,36 +35,48 @@ public class FSM : MonoBehaviour
     public void SetUseing(List<skillinfo> sk)
     {
         useinged = sk;
-        b = true;
-        Next();
+        Next(true);
     }
 
-    public void Next(bool b= false)
+    Coroutine co = null;
+
+    public void Next(bool a)
     {
-        StartCoroutine(delay(b));
+        if(a==true)
+        {
+            b = true;
+        }
+
+        if(b == true)
+        {
+            b = false;
+            StartCoroutine(delay());
+            Debug.Log($"{gameObject.name} : {useinged.Count}");
+        }
+
     }
 
-    public IEnumerator delay(bool bd = false)
+    public IEnumerator delay()
     {
-        yield return new WaitForSeconds(0.005f);
+        //yield return null;
         if (TimeController.Instance.Timer == 1)
         {
+            yield return new WaitUntil(() => NowState() == FSMState.Idle);
             if (useinged.Count > 0)
             {
-                b = true;
-                yield return new WaitUntil(() => NowState() == FSMState.Idle);
+               
                 useing = useinged[0];
-                useinged.RemoveAt(0);
                 ChangeState(useing.state);
+                useinged.RemoveAt(0);
+                b = true;
             }
             else
             {
-                if (b == true)
-                {
-                    yield return new WaitUntil(() => NowState() == FSMState.Idle);
-                    GameController.Contorller.StopPlayer();
-                    b = false;
-                }
+
+              
+                GameController.Contorller.StopPlayer(ststed.pl);
+                b = true;
+
             }
 
         }

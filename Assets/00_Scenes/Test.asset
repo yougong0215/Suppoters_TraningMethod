@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Test
   m_EditorClassIdentifier: 
   HP: 200
-  ATK: 10
+  ATK: 20
   DEF: 0
+  Critical: 0
+  CriticalDamage: 0
   Speed: 0

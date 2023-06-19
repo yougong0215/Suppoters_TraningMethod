@@ -8,14 +8,16 @@ using UnityEngine.VFX;
 
 public class GetBuff : PoolAble
 {
-    
+    [SerializeField] Dictionary<players, bool> pled = new();
     public LayerMask _player;
     public float LifeTime = 0;
     public float BufTime = 5;
     float curtime = 0;
 
     bool b;
-    public float value;
+    public float PlusValue;
+    public float himsValue;
+
     public Stat st;
     
     [Header("VFX")]
@@ -24,7 +26,9 @@ public class GetBuff : PoolAble
     public GetTypeShape shape;
     VisualEffect Veffect;
     ParticleSystem Peffect;
-    public bool SelfBuf;
+    public bool oneBuf;
+    public bool OnlyBuf;
+    bool use  =false;
 
     public players pl;
 
@@ -35,7 +39,7 @@ public class GetBuff : PoolAble
     public void OnEnable()
     {
         transform.localPosition = Vector3.zero;
-        LifeTime = transform.parent.GetComponent<DamageCaster>().onLife;
+        //LifeTime = transform.parent.GetComponent<DamageCaster>().onLife;
         if (vfx != null)
         {
             GameObject obj = Instantiate(vfx.gameObject, transform);
@@ -50,12 +54,20 @@ public class GetBuff : PoolAble
 
             Peffect = obj.gameObject.GetComponent<ParticleSystem>();
         }
-        init = false;
         if(pl != players.None)
         {
-            StartCoroutine(GameObject.Find(pl.ToString()).GetComponent<AgentStatus>().Buffs(value, st, BufTime));
+            if (init == true)
+            {
+
+                StartCoroutine(GameObject.Find(pl.ToString()).GetComponent<AgentStatus>().Buffs(PlusValue, himsValue, st, BufTime));
+                Debug.Log("¤·¤±¤©¤·¤·¤·");
+            }
+            else
+            {
+                Debug.Log("¤·¤±¤©¤·");
+            }
         }
-        Debug.Log("Èú½ÃÄö½º±âµ¿");
+        init = true;
     }
 
     private void Update()
@@ -90,22 +102,68 @@ public class GetBuff : PoolAble
 
     }
 
+    public void OnEnd()
+    {
+        if (Veffect)
+            Destroy(Veffect);
+        if (Peffect)
+            Destroy(Peffect);
+    }
+
+
     private void FixedUpdate()
     {
         curtime += Time.deltaTime;
+        Collider[] colliders = null;
+        colliders = Physics.OverlapSphere(transform.position, 2, _player);
+        if (use == true)
+            return;
+        if (oneBuf == true && use == false)
+        {
+            use = true;
+
+
+            if (colliders.Length > 0)
+            {
+
+                foreach (Collider collider in colliders)
+                {
+                    if (collider.GetComponent<AgentStatus>())
+                    {
+                        AgentStatus at = collider.GetComponent<AgentStatus>();
+                        Debug.Log(gameObject.name);
+                        if(OnlyBuf == true)
+                        {
+                            if (!pled.ContainsKey(at.pl))
+                            {
+                                pled.Add(at.pl, true);
+                                StartCoroutine(at.Buffs(PlusValue, himsValue, st, BufTime));
+                            }
+                            else
+                            {
+                                Debug.Log("ÀÛµ¿");
+                            }
+
+                        }
+                        else
+                        {
+
+                            StartCoroutine(at.Buffs(PlusValue, himsValue, st, BufTime));
+                        }
+                    }
+
+
+
+                }
+            }
+            return;
+        }
+
         if(curtime > LifeTime)
         {
-            if (Veffect)
-                Destroy(Veffect);
-            if (Peffect)
-                Destroy(Peffect);
+            return;
             //PoolManager.Instance.Push(this);
         }
-        Collider[] colliders = null;
-        
-
-
-        colliders = Physics.OverlapSphere(transform.position, 2, _player);
         if (colliders.Length > 0)
         {
 
@@ -128,7 +186,7 @@ public class GetBuff : PoolAble
                         }
                     }
                     cols.Add(collider);
-                    corutime.Add(StartCoroutine(at.Buffs(value, st, LifeTime)));
+                    corutime.Add(StartCoroutine(at.Buffs(PlusValue, himsValue, st, BufTime)));
 
                 }
 

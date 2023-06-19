@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ddd6c932b870104f820eda330476351, type: 3}
+  m_Name: BI
+  m_EditorClassIdentifier: 
+  clips: {fileID: 7400000, guid: 75e5a995984946f46a4d8b92e1ca72fb, type: 3}
+  SkillObj: {fileID: 5352999750627282729, guid: c6196105d01a8794ba37f9065db43c0a,
+    type: 3}
+  dashAgain: 0

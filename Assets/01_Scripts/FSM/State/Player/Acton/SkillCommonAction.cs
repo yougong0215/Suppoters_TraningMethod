@@ -20,14 +20,13 @@ public class SkillCommonAction : CommonAction
     protected override void OnEndFunc()
     {
         com.FSMMain.ChangeState(FSMState.Idle);
-        com.FSMMain.Next();
     }
 
 
     protected override void OnEventFunc()
     {
         PoolAble obj = PoolManager.Instance.Pop(_skillSO.SkillObj.name);
-
+        Debug.Log($"DMG : ({com.FSMMain.ststed.stat.ATK } + {com.FSMMain.ststed.AddDamage}) * { com.FSMMain.ststed.himsDamage} = {(int)((com.FSMMain.ststed.stat.ATK + com.FSMMain.ststed.AddDamage) * com.FSMMain.ststed.himsDamage)}");
         if (com.FSMMain.Object.Fire == false)
         {
             obj.transform.position = com.FSMMain.Object.dir;
@@ -38,8 +37,8 @@ public class SkillCommonAction : CommonAction
         }
         if (obj.GetComponent<DamageCaster>())
         {
-
-            obj.GetComponent<DamageCaster>().Init((int)(com.FSMMain.ststed.stat.ATK + com.FSMMain.ststed.AddDamage), com.FSMMain.ststed.stat.Critical + com.FSMMain.ststed.Cirt, com.FSMMain.ststed.stat.CriticalDamage + com.FSMMain.ststed.CirtDAM);
+            Debug.Log($"{com.FSMMain.gameObject.name} CRIIN d : {com.FSMMain.ststed.stat.CriticalDamage + com.FSMMain.ststed.CirtDAM}");
+            obj.GetComponent<DamageCaster>().Init((int)((com.FSMMain.ststed.stat.ATK + com.FSMMain.ststed.AddDamage) * com.FSMMain.ststed.himsDamage) , com.FSMMain.ststed.stat.Critical + com.FSMMain.ststed.Cirt, com.FSMMain.ststed.stat.CriticalDamage + com.FSMMain.ststed.CirtDAM);
         }
         obj.transform.rotation = Quaternion.LookRotation(com.FSMMain.Object.dir - transform.position);
 

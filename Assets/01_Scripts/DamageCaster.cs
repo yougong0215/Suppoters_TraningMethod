@@ -33,23 +33,29 @@ public class DamageCaster : PoolAble
     [Header("VFX")]
     public VisualEffect vfx;
     public ParticleSystem ps;
+    public VisualEffect vfxHit;
+    public ParticleSystem effectHit;
     VisualEffect Veffect;
     ParticleSystem Peffect;
+    VisualEffect VeffectHit;
+    ParticleSystem PeffectHit;
     bool vfxcast = false;
     protected bool init = false;
     bool b;
     private void Awake()
     {
         onLife = lifeTime;
+        MaxAttackfrequency = Attackfrequency;
     }
 
     private void OnEnable()
     {
-        MaxAttackfrequency = Attackfrequency;
+
+        Attackfrequency = MaxAttackfrequency;
         lifeTime = onLife;
     }
 
-    public void Init(int damage, float cird, float cri)
+    public void Init(int damage, float cir, float crid)
     {
         if (vfx != null)
         {
@@ -65,9 +71,9 @@ public class DamageCaster : PoolAble
 
             Peffect = obj.gameObject.GetComponent<ParticleSystem>();
         }
-
-        CriticalDamage += cird;
-        Critical += cri;
+        Debug.Log($"CRIIN { crid}");
+        CriticalDamage += crid;
+        Critical += cir;
         AttackDamage += damage;
         init = true;
     }
@@ -85,12 +91,28 @@ public class DamageCaster : PoolAble
             {
                 Veffect.pause = true;
             }
+            if (PeffectHit)
+            {
+                PeffectHit.Pause();
+            }
+            if (VeffectHit)
+            {
+                VeffectHit.pause = true;
+            }
         }
         else
         {
             if (b == true)
             {
                 b = false;
+                if (PeffectHit)
+                {
+                    PeffectHit.Play();
+                }
+                if (VeffectHit)
+                {
+                    VeffectHit.pause = false;
+                }
                 if (Peffect)
                 {
                     Peffect.Play();
@@ -106,7 +128,7 @@ public class DamageCaster : PoolAble
         {
             lifeTime -= Time.deltaTime;
             Attackfrequency += Time.deltaTime;
-            if (Attackfrequency > MaxAttackfrequency && lifeTime > 0)
+            if (Attackfrequency >= MaxAttackfrequency && lifeTime > 0)
             {
                 Collider[] colliders = null;
 
@@ -126,6 +148,7 @@ public class DamageCaster : PoolAble
                 {
                     IDamageAble damageable;
                     Attackfrequency = 0;
+                    Debug.Log($"적 : {collider.name}");
                     if (collider.TryGetComponent<IDamageAble>(out damageable))
                     {
                         StartCoroutine(Attack(damageable, times / AttackCount, AttackCount-1, collider));
@@ -139,6 +162,10 @@ public class DamageCaster : PoolAble
                     Destroy(Veffect);
                 if (Peffect)
                     Destroy(Peffect);
+                foreach(GetBuff buf in GetComponentsInChildren<GetBuff>())
+                {
+                    buf.OnEnd();
+                }
                 PoolManager.Instance.Push(this); // 재생 시간이 끝났을 때 오브젝트를 파괴합니다.
             }
         }
@@ -153,12 +180,10 @@ public class DamageCaster : PoolAble
         Vector3 randomPosition = new Vector3(
     Random.Range(bounds.min.x, bounds.max.x),
     Random.Range(bounds.min.y, bounds.max.y),
-    Random.Range(bounds.min.z, bounds.max.z)
-       
-);
+    Random.Range(bounds.min.z, bounds.max.z));
         randomPosition.y += 3;
 
-        if (Random.Range(0, 100f) >= Critical)
+        if (Random.Range(0, 100f) <= Critical)
         {
             able.TakeDamage(AttackDamage, randomPosition, CriticalDamage, true);
         }
@@ -166,6 +191,24 @@ public class DamageCaster : PoolAble
         {
             able.TakeDamage(AttackDamage, randomPosition);
         }
+
+        if (vfxHit != null)
+        {
+            GameObject obj = Instantiate(vfxHit.gameObject, null);
+            obj.transform.position = enemyCollider.gameObject.transform.position;
+
+            vfxHit = obj.gameObject.GetComponent<VisualEffect>();
+            obj.AddComponent<VFXCancers>();
+        }
+
+        if (effectHit != null)
+        {
+            GameObject obj = Instantiate(effectHit.gameObject, null);
+            obj.transform.position = enemyCollider.gameObject.transform.position;
+            effectHit = obj.gameObject.GetComponent<ParticleSystem>();
+            obj.AddComponent<VFXCancers>();
+        }
+
         yield return new WaitForSeconds(timed);
 
         if(count != 0)

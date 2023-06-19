@@ -8,5 +8,7 @@ public class SkillSO : ScriptableObject
     public AnimationClip clips;
 
     public PoolAble SkillObj;
+
+    public bool dashAgain = false;
 }
 

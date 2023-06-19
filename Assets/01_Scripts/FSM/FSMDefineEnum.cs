@@ -7,7 +7,7 @@ public enum FSMState
     Move    = 2,
     Dash  = 4,
     Hit     = 8,
-    Faint   = 16, // De Buff
+    Telpo   = 16, // De Buff
     nuckdown = 32,
     WakeUp  = 64,
     Death   = 128,

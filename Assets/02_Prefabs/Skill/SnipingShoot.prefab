@@ -20,7 +20,7 @@ PrefabInstance:
     - target: {fileID: 6034427996445932502, guid: 5b2e7826fca619b498b198c9e0f15623,
         type: 3}
       propertyPath: Critical
-      value: 30
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6034427996445932502, guid: 5b2e7826fca619b498b198c9e0f15623,
         type: 3}
@@ -29,8 +29,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6034427996445932502, guid: 5b2e7826fca619b498b198c9e0f15623,
         type: 3}
+      propertyPath: effectHit
+      value: 
+      objectReference: {fileID: 19800012, guid: 1b2cc8f00976f8e459d6280b24634242,
+        type: 3}
+    - target: {fileID: 6034427996445932502, guid: 5b2e7826fca619b498b198c9e0f15623,
+        type: 3}
       propertyPath: AttackDamage
-      value: 20000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 6034427996445932502, guid: 5b2e7826fca619b498b198c9e0f15623,
         type: 3}
@@ -40,7 +46,7 @@ PrefabInstance:
     - target: {fileID: 6034427996445932502, guid: 5b2e7826fca619b498b198c9e0f15623,
         type: 3}
       propertyPath: CriticalDamage
-      value: 500
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6034427996445932502, guid: 5b2e7826fca619b498b198c9e0f15623,
         type: 3}
@@ -122,3 +128,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b1e702b0699c2469557a0ea1e981fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 50

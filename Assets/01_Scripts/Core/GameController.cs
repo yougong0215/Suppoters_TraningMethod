@@ -11,6 +11,8 @@ public class GameController : MonoBehaviour
 
     public CinemachineVirtualCamera cam;
     public GameObject cav;
+    public Camera main;
+    public Camera sub;
 
     float curtime = 0;
 
@@ -25,7 +27,9 @@ public class GameController : MonoBehaviour
     GameObject Render;
     Button startBtn;
     [SerializeField] List<FSM> players = new List<FSM>();
+    [SerializeField] Dictionary<players, bool> dic = new();
     [SerializeField] List<SkillUIList> con = new List<SkillUIList>();
+    CinemachineVirtualCamera cans;
 
     private void Awake()
     {
@@ -36,15 +40,27 @@ public class GameController : MonoBehaviour
     void Start()
     {
         Render = GameObject.Find("Render");
-
+        cans = GameObject.Find("MiniCams").GetComponent<CinemachineVirtualCamera>();
+        for (int i = 0; i <= players.Count; i++)
+        {
+            dic.Add((players)i, false);
+        }
         cam.Priority = 100;
+        GameManager.Instance.Cam.depth = 1;
         TimeController.Instance.SetTime(0);
     }
 
     public void StartGame()
     {
+        for (int i = 0; i <= players.Count; i++)
+        {
+            dic[(players)i] = false;
+        }
         TimeController.Instance.SetTime(1);
+        stCount = 0;
         cam.Priority = 0;
+        cans.Priority = -100;
+        GameManager.Instance.Cam.depth = 4;
         for (int i = 0; i < players.Count; i++)
         {
             Render.SetActive(false);
@@ -55,7 +71,17 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        if(TimeController.Instance.Timer == 1)
+        Debug.Log($"stC  : {stCount}");
+        if (stCount >= players.Count)
+        {
+            stCount = 0;
+            cans.Priority = 100;
+            GameManager.Instance.Cam.depth = 1;
+            Render.SetActive(true);
+            cav.SetActive(false);
+            TimeController.Instance.SetTime(0);
+        }
+        if (TimeController.Instance.Timer == 1)
         {
             curtime += Time.deltaTime;
             if(curtime >= 1)
@@ -70,22 +96,24 @@ public class GameController : MonoBehaviour
         else
         {
             for (int i = 0; i < con.Count; i++)
-                con[i].tmpCost.text = $"Cost : {con[i].Cost} / {con[i].MaxCost}";
-        }
+            {
 
-        if (stCount == players.Count)
-        {
-            stCount = 0;
-            cam.Priority = 100;
-            Render.SetActive(true);
-            cav.SetActive(false);
-            TimeController.Instance.SetTime(0);
+                con[i].Cost = Mathf.Clamp(con[i].Cost, 0, con[i].MaxCost);
+                con[i].tmpCost.text = $"Cost : {con[i].Cost} / {con[i].MaxCost}";
+            }
         }
+        
     }
 
-    public void StopPlayer()
+    public void StopPlayer(players pl)
     {
-        stCount++;
+        if(dic[pl] == false)
+        {
+            stCount++;
+            Debug.Log($"stC {pl.ToString()} : {stCount}");
+            dic[pl] = true;
+        }
+        
     }
 
     void CO(int i)

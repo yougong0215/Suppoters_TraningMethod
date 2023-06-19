@@ -14,5 +14,6 @@ public class LookMouseObj : MonoBehaviour
 
         worldMousePos.y = 0;
         transform.LookAt(worldMousePos);
+        transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
     }
 }

@@ -1,8 +1,10 @@
+using Cinemachine;
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public enum GetTypeShape
@@ -26,12 +28,11 @@ public class ClickUI : MonoBehaviour
     public Vector2 size = Vector2.one; // 형태의 크기 (너비와 높이)
 
     SkillUIList gm;
-    Canvas cans;
     Vector3 vec;
     Button bt;
     Collider colliders;
     [SerializeField] GetTypeShape tp;
-
+    CinemachineVirtualCamera cans;
     [SerializeField] skillinfo info;
     [SerializeField] Vector3 Scale;
 
@@ -54,24 +55,34 @@ public class ClickUI : MonoBehaviour
     public void onClick()
     {
         gm = GameObject.Find("List").GetComponent<SkillUIList>();
-        if (SkillUIList.count > gm.ReturnCount())
+
+        cans.Priority = 100;
+        if (info.state == FSMState.Idle && SkillUIList.count > gm.ReturnCount())
+        {
+            skillinfo skilled = info;
+            Debug.Log(info.state);
+            gm.Setting(skilled, Player.transform.position, Player);
+            return;
+        }
+
+        if (info.state != FSMState.Idle && SkillUIList.count > gm.ReturnCount() && gm.Cost >= info.Cost)
         {
             Clicked = true;
+            cans.Priority = 100;
             center.gameObject.SetActive(true);
             center.localScale = Scale;
             vec = gm.returnpos();
-            cans.planeDistance = 100;
             btnEnable = false;
         }
+        GameManager.Instance.Cam.depth = 1;//GetComponent<UniversalAdditionalCameraData>().allow
     }
 
     private void Awake()
     {
         Player = GameObject.Find(pl.ToString()).transform;
-        cans = GameObject.Find("Render").GetComponent<Canvas>();
         print(Player.name);
-
-        foreach(TextMeshProUGUI tmp in transform.GetComponentsInChildren<TextMeshProUGUI>())
+        cans = GameObject.Find("MiniCams").GetComponent<CinemachineVirtualCamera>();
+        foreach (TextMeshProUGUI tmp in transform.GetComponentsInChildren<TextMeshProUGUI>())
         {
             tmp.raycastTarget = false;
         }
@@ -134,6 +145,7 @@ public class ClickUI : MonoBehaviour
     {
         if (Clicked == true)
         {
+            GameManager.Instance.Cam.depth = 4;
             if (vec == Vector3.zero)
             {
                 center.position = Player.position;
@@ -160,7 +172,7 @@ public class ClickUI : MonoBehaviour
                     {
                         clickPos.y = 0;
                         skillinfo skilled = info;
-                        info.dir = clickPos;
+                        skilled.dir = clickPos;
                         Debug.Log(info.state);
                         gm.Setting(skilled, clickPos, Player);
                         // 클릭한 위치의 3D 좌표를 디버그 로그로 출력
@@ -179,7 +191,7 @@ public class ClickUI : MonoBehaviour
                     Clicked = false;
                 }
                 center.gameObject.SetActive(false);
-                cans.planeDistance = 1;
+                GameManager.Instance.Cam.depth = 1;
                 btnEnable = true;
             }
         }
