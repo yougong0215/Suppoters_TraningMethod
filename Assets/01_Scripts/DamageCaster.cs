@@ -42,6 +42,7 @@ public class DamageCaster : PoolAble
     bool vfxcast = false;
     protected bool init = false;
     bool b;
+    public bool DonotPool;
     private void Awake()
     {
         onLife = lifeTime;
@@ -50,13 +51,14 @@ public class DamageCaster : PoolAble
 
     private void OnEnable()
     {
-
-        Attackfrequency = MaxAttackfrequency;
-        lifeTime = onLife;
+        init = false;
     }
 
     public void Init(int damage, float cir, float crid)
     {
+
+        Attackfrequency = MaxAttackfrequency;
+        lifeTime = onLife;
         if (vfx != null)
         {
             GameObject obj = Instantiate(vfx.gameObject, transform);
@@ -166,7 +168,8 @@ public class DamageCaster : PoolAble
                 {
                     buf.OnEnd();
                 }
-                PoolManager.Instance.Push(this); // 재생 시간이 끝났을 때 오브젝트를 파괴합니다.
+                if(DonotPool == false)
+                    PoolManager.Instance.Push(this); // 재생 시간이 끝났을 때 오브젝트를 파괴합니다.
             }
         }
 

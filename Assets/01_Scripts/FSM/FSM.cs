@@ -51,14 +51,14 @@ public class FSM : MonoBehaviour
         {
             b = false;
             StartCoroutine(delay());
-            Debug.Log($"{gameObject.name} : {useinged.Count}");
+            //Debug.Log($"{gameObject.name} : {useinged.Count}");
         }
 
     }
 
     public IEnumerator delay()
     {
-        //yield return null;
+        yield return null;
         if (TimeController.Instance.Timer == 1)
         {
             yield return new WaitUntil(() => NowState() == FSMState.Idle);

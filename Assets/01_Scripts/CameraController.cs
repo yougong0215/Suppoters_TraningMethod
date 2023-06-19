@@ -30,12 +30,22 @@ public class CameraController : Singleton<CameraController>
             if((players)i == pl)
             {
                 
-                dic[(players)i].Priority = 11;
+                dic[(players)i].Priority = 110;
             }
             else
             {
                 dic[(players)i].Priority = 10;
             }
+        }
+    }
+
+    public void EndGame()
+    {
+        for (int i = 0; i < System.Enum.GetValues(typeof(players)).Length; i++)
+        {
+            if (dic.ContainsKey((players)i))
+                    dic[(players)i].Priority = 10;
+                
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UniJSON;
 using UnityEditor.Timeline;
 using UnityEngine;
@@ -115,16 +116,20 @@ public class GetBuff : PoolAble
     {
         curtime += Time.deltaTime;
         Collider[] colliders = null;
-        colliders = Physics.OverlapSphere(transform.position, 2, _player);
+        
+        colliders = Physics.OverlapSphere(transform.position, GetColliderRadius(), _player);
+
+
+        cols = colliders.ToList();
         if (use == true)
             return;
         if (oneBuf == true && use == false)
         {
             use = true;
 
-
             if (colliders.Length > 0)
             {
+
 
                 foreach (Collider collider in colliders)
                 {
@@ -195,7 +200,21 @@ public class GetBuff : PoolAble
             }
         }
     }
-   
 
 
+    protected float GetColliderRadius()
+    {
+
+        Vector3 colliderSize = GetColliderSize();
+        return Mathf.Max(colliderSize.x, colliderSize.y, colliderSize.z) / 2f;
+
+    }
+    protected Vector3 GetColliderSize()
+    {
+        Collider collider = GetComponent<Collider>();
+
+
+        BoxCollider boxCollider = (BoxCollider)collider;
+        return Vector3.Scale(boxCollider.size, transform.localScale);
+    }
 }

@@ -86,7 +86,7 @@ public class DashState : CommonState
 
             // 대쉬 지속 시간 체크
             Debug.Log($"dfd : {vec1}, {vec2} = {Vector3.Distance(vec1, vec2)}");
-        if (Vector3.Distance(vec1, vec2) < curtime)
+        if (Vector3.Distance(vec1, vec2) < 0.02f || Vector3.Distance(vec1, vec2) < curtime)
         {
             StopDash();
 

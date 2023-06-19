@@ -6,8 +6,15 @@ using UnityEngine;
 public class SkillCommonAction : CommonAction
 {
     [SerializeField] public SkillSO _skillSO;
+
+    bool Arainge = false;
+    float Changecurtime = 2;
+    float curTime = 0;
+    
     public void SetAnim()
     {
+        curTime = 0;
+        Arainge = false;
         _skillSO = com.FSMMain.Object._skill;
         com.FSMMain.LookRotations(com.FSMMain.Object.dir);
         com.AnimationCon.ChangeAnimationClip(FSMState.Skill, _skillSO.clips);
@@ -19,6 +26,8 @@ public class SkillCommonAction : CommonAction
     }
     protected override void OnEndFunc()
     {
+        Arainge = true;
+        curTime = 0;
         com.FSMMain.ChangeState(FSMState.Idle);
     }
 
@@ -53,6 +62,16 @@ public class SkillCommonAction : CommonAction
 
     protected override void OnUpdateFunc()
     {
-
+        curTime += Time.deltaTime;
+        if(Arainge)
+        {
+            Debug.Log(com.FSMMain.name);
+        }
+        if(curTime > Changecurtime && Arainge == true)
+        {
+            //Arainge = false;
+            //curTime = 0;
+            com.FSMMain.ChangeState(FSMState.Idle);
+        }
     }
 }

@@ -56,6 +56,7 @@ public class GameController : MonoBehaviour
         {
             dic[(players)i] = false;
         }
+        CameraController.Instance.EndGame();
         TimeController.Instance.SetTime(1);
         stCount = 0;
         cam.Priority = 0;

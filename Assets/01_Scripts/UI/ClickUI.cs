@@ -80,8 +80,8 @@ public class ClickUI : MonoBehaviour
     private void Awake()
     {
         Player = GameObject.Find(pl.ToString()).transform;
-        print(Player.name);
-        cans = GameObject.Find("MiniCams").GetComponent<CinemachineVirtualCamera>();
+        //print(Player.name);
+        cans = GameObject.Find($"{pl.ToString()}TopCam").GetComponent<CinemachineVirtualCamera>();
         foreach (TextMeshProUGUI tmp in transform.GetComponentsInChildren<TextMeshProUGUI>())
         {
             tmp.raycastTarget = false;
@@ -149,11 +149,13 @@ public class ClickUI : MonoBehaviour
             if (vec == Vector3.zero)
             {
                 center.position = Player.position;
+
             }
             else
             {
                 center.position = vec;
             }
+            cans.transform.position = center.position + new Vector3(0, 30, 0);
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -192,6 +194,7 @@ public class ClickUI : MonoBehaviour
                 }
                 center.gameObject.SetActive(false);
                 GameManager.Instance.Cam.depth = 1;
+                cans.Priority = 1;
                 btnEnable = true;
             }
         }
