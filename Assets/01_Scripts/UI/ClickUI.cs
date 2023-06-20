@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
@@ -140,7 +141,11 @@ public class ClickUI : MonoBehaviour
             return 0f;
         }
     }
-
+    bool IsPositionOnNavMesh(Vector3 position)
+    {
+        NavMeshHit hit;
+        return NavMesh.SamplePosition(position, out hit, 0.1f, NavMesh.AllAreas);
+    }
     private void Update()
     {
         if (Clicked == true)
@@ -155,6 +160,7 @@ public class ClickUI : MonoBehaviour
             {
                 center.position = vec;
             }
+            center.position += new Vector3(0, 0.2f, 0);
             cans.transform.position = center.position + new Vector3(0, 30, 0);
 
             if (Input.GetMouseButtonDown(0))
@@ -164,33 +170,46 @@ public class ClickUI : MonoBehaviour
 
                 // 클릭한 위치의 3D 좌표를 계산
                 Ray ray = Camera.main.ScreenPointToRay(screenPos);
-                if (Physics.Raycast(ray, out RaycastHit hit))
+                if (Physics.Raycast(ray, out RaycastHit hit, 1 << 10))
                 {
                     Vector3 clickPos = hit.point;
                     float distance = GetDistanceToShape(clickPos);
-                    Debug.Log($"{distance}, {GetShapeRadius()}");
+                    Debug.Log($"DIS : {distance}, {GetShapeRadius()}");
                     // 클릭한 위치가 형태의 범위 안에 있는지 확인
-                    if (distance*0.1f <= GetShapeRadius())
+                    clickPos.y = 0;
+                    if (distance* 0.1f <= GetShapeRadius())
                     {
-                        clickPos.y = 0;
-                        skillinfo skilled = info;
-                        skilled.dir = clickPos;
-                        Debug.Log(info.state);
-                        gm.Setting(skilled, clickPos, Player);
-                        // 클릭한 위치의 3D 좌표를 디버그 로그로 출력
-                        Debug.Log("클릭한 위치: " + clickPos);
-                        Clicked = false;
+                        if(IsPositionOnNavMesh(clickPos) == true)
+                        {
+                            skillinfo skilled = info;
+                            skilled.dir = clickPos;
+                            Debug.Log(info.state);
+                            gm.Setting(skilled, clickPos, Player);
+                            // 클릭한 위치의 3D 좌표를 디버그 로그로 출력
+                            Debug.Log("클릭한 위치: " + clickPos);
+                            Clicked = false;
+                        }
+                        else
+                        {
+                            Debug.Log("클릭한 위치: " + clickPos);
+                            Clicked = false;
+                            GameController.Contorller.TMPSetMessage("No Ground");
+                        }
+
+
                     }
                     else
                     {
                         // 클릭한 위치가 형태의 범위 밖에 있음
                         Clicked = false;
                         Debug.Log("클릭한 위치: " + clickPos);
+                        GameController.Contorller.TMPSetMessage("Out Range");
                     }
                 }
                 else
                 {
                     Clicked = false;
+                    GameController.Contorller.TMPSetMessage("No Range");
                 }
                 center.gameObject.SetActive(false);
                 GameManager.Instance.Cam.depth = 1;

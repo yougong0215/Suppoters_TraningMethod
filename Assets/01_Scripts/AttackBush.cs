@@ -7,18 +7,35 @@ using UnityEngine.UI;
 public class AttackBush : PoolAble
 {
     [SerializeField] List<Image> img = new();
-    [SerializeField] float AttackTime = 2;
-    [SerializeField] float curtime = 0;
+    [SerializeField] public float AttackTime = 2;
+    [SerializeField] public float curtime = 0;
+    [SerializeField] public AnimationClip anim;
+    public bool FastNext = false;
+    [SerializeField] public Vector3 posOffset;
+    public AttackBush nextBush;
 
-    bool atk = false;
+    public bool FrontPos;
+    public float Angle = 0;
+    public bool atk = true;
 
-    public void Init(int dmg, float Critical, float criDamage)
+    bool att;
+
+    public void Init(int dmg, float Critical, float criDamage, Vector3 pos)
     {
+        transform.position = pos;
+        curtime = 0;
         Damage += dmg;
         criDmg += criDamage;
         cri = Critical;
+        transform.localEulerAngles += new Vector3(0, Angle, 0);
         atk = false;
         img = transform.GetChild(0).gameObject.GetComponentsInChildren<Image>().ToList();
+        transform.position += posOffset;
+        att = false;
+        if(GetComponent<FollowPlayerAttack>())
+        {
+            atk = true;
+        }
     }
 
     private void Awake()
@@ -41,8 +58,9 @@ public class AttackBush : PoolAble
             img[i].fillAmount = Mathf.Lerp(0f, 1f, curtime / AttackTime);
             img[i].color = new Color(img[i].color.r, img[i].color.g, img[i].color.b, Mathf.Lerp(0f, 1f, curtime / AttackTime));
         }
-        if(AttackTime < curtime && atk == false)
+        if(AttackTime < curtime && att ==false)
         {
+            att = true;
             atk = true;
             for(int i =0; i < img.Count; i++)
             {
@@ -50,7 +68,15 @@ public class AttackBush : PoolAble
                 {
                     cast.Init(Damage, cri, criDmg);
                 }
+                
             }
+            StartCoroutine(Push());
         }
+    }
+
+    IEnumerator Push()
+    {
+        yield return new WaitForSeconds(0.3f);
+        PoolManager.Instance.Push(this);
     }
 }

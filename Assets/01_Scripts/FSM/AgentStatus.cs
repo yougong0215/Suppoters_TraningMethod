@@ -20,7 +20,7 @@ public class AgentStatus : MonoBehaviour, IDamageAble
 {
     [SerializeField] public players pl;
     [SerializeField] public CharacterStatues stat;
-    [SerializeField] int HP;
+    [SerializeField] public int HP;
     [SerializeField] int MaxHP;
     [SerializeField] TextDamageCast tmp;
     [SerializeField] Image hpbar;
@@ -31,6 +31,7 @@ public class AgentStatus : MonoBehaviour, IDamageAble
     [SerializeField] public float DEF;
 
 
+
     public LayerMask _player;
     private void Awake()
     {
@@ -39,9 +40,15 @@ public class AgentStatus : MonoBehaviour, IDamageAble
         himsDamage = 1;
         //hpbar = transform.Find("HP").GetComponent<Image>();
     }
-    public void TakeDamage(int value, Vector3 position, float cirt, bool critical)
+    public void TakeDamage(int value, Vector3 position, float cirt, bool critical, bool nuck)
     {
         TextDamageCast damageCast = PoolManager.Instance.Pop("TMP") as TextDamageCast;
+        
+        if(nuck==true)
+        {
+            if(GetComponent<FSM>().NowState() != FSMState.WakeUp)
+            GetComponent<FSM>().ChangeState(FSMState.nuckdown);
+        }
         
         Debug.Log($"DMG : {value} => {(int)(100 / (100 + stat.DEF))} * { (value + Random.Range(-(value * 0.1f), (value * 0.1f)))} * {cirt}" +
             $"= {(int)(100 / (100 + stat.DEF) * (value + Random.Range(-(value * 0.1f), (value * 0.1f))) * cirt)}"); 
@@ -64,8 +71,16 @@ public class AgentStatus : MonoBehaviour, IDamageAble
         Debug.Log(hpbar);
         if (hpbar)
         {
-            Debug.Log(HP / MaxHP);
-            hpbar.fillAmount = ((float)HP / (float)MaxHP);
+            if(HP > 0)
+            {
+                Debug.Log(HP / MaxHP);
+                hpbar.fillAmount = ((float)HP / (float)MaxHP);
+            }
+            else
+            {
+                hpbar.fillAmount = 0;
+            }
+
         }
         else
         {

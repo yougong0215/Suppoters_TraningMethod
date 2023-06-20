@@ -10,10 +10,11 @@ public class SkillState : CommonState
         _animator.SetAttackAnimation(true);
         _animator.OnAnimationEventTrigger += EventAction;
         _animator.OnAnimationEndTrigger += EndAction;
-        if (transform.GetChild(0).gameObject.GetComponent<SkillCommonAction>())
-        {
-            transform.GetChild(0).gameObject.GetComponent<SkillCommonAction>().SetAnim();
-        }
+        Init?.Invoke();
+        //if (transform.GetChild(0).gameObject.GetComponent<SkillCommonAction>())
+        //{
+        //    transform.GetChild(0).gameObject.GetComponent<SkillCommonAction>().SetAnim();
+        //}
     }
 
     public override void ExitState()
@@ -25,6 +26,6 @@ public class SkillState : CommonState
 
     public override void UpdateState()
     {
-
+        UpdateAction?.Invoke();
     }
 }

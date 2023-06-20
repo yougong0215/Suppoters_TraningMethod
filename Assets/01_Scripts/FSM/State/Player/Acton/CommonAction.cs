@@ -11,13 +11,13 @@ public abstract class CommonAction : MonoBehaviour
     {
         com = transform.parent.GetComponent<CommonState>();
 
-
+        com.Init += Init;
         com.EventAction += OnEventFunc;
         com.EndAction += OnEndFunc;
         com.UpdateAction += OnUpdateFunc;
     }
 
-
+    protected abstract void Init();
     protected abstract void OnEventFunc();
     protected abstract void OnEndFunc();
     protected abstract void OnUpdateFunc();

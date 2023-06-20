@@ -74,4 +74,9 @@ public class SkillCommonAction : CommonAction
             com.FSMMain.ChangeState(FSMState.Idle);
         }
     }
+
+    protected override void Init()
+    {
+        SetAnim();
+    }
 }

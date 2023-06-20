@@ -10,6 +10,7 @@ public abstract class CommonState : MonoBehaviour, IState
     public AnimationController AnimationCon => _animator;
     protected Transform _parent;
 
+    public Action Init = null;
     public Action UpdateAction = null;
     public Action EventAction = null;
     public Action EndAction = null;

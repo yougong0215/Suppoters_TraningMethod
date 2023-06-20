@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEditor.PlayerSettings;
@@ -11,8 +12,7 @@ public class GameController : MonoBehaviour
 
     public CinemachineVirtualCamera cam;
     public GameObject cav;
-    public Camera main;
-    public Camera sub;
+    public TextMeshProUGUI tmp;
 
     float curtime = 0;
 
@@ -35,7 +35,7 @@ public class GameController : MonoBehaviour
     {
         _con = this;
     }
-
+    bool notStart = false;
     int stCount = 0;
     void Start()
     {
@@ -50,18 +50,38 @@ public class GameController : MonoBehaviour
         TimeController.Instance.SetTime(0);
     }
 
+    public void TMPSetMessage(string tmp)
+    {
+        this.tmp.text = tmp;
+    }
+
     public void StartGame()
     {
+        for(int i =0; i < con.Count;i++)
+        {
+            if (SkillUIList.count > con[i].SettingCount && players[i].NowState() != FSMState.Death)
+            {
+                notStart = true;
+            }
+
+        }
+        if(notStart==true)
+        {
+            tmp.text = "NOT Ready";
+            notStart = false;
+            return;
+        }
+
         for (int i = 0; i <= players.Count; i++)
         {
             dic[(players)i] = false;
         }
-        CameraController.Instance.EndGame();
         TimeController.Instance.SetTime(1);
         stCount = 0;
         cam.Priority = 0;
         cans.Priority = -100;
         GameManager.Instance.Cam.depth = 4;
+        CameraController.Instance.SetCam(global::players.None);
         for (int i = 0; i < players.Count; i++)
         {
             Render.SetActive(false);
@@ -72,15 +92,32 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
+        int te = 0;
+        for (int i = 0; i < con.Count; i++)
+        {
+            if (SkillUIList.count == con[i].SettingCount)
+            {
+                te++;
+            }
+
+        }
+        if (te == con.Count)
+        {
+            
+            tmp.text = "Start";
+        }
+
+
         Debug.Log($"stC  : {stCount}");
         if (stCount >= players.Count)
         {
-            stCount = 0;
-            cans.Priority = 100;
-            GameManager.Instance.Cam.depth = 1;
-            Render.SetActive(true);
-            cav.SetActive(false);
-            TimeController.Instance.SetTime(0);
+            //stCount = 0;
+            //cans.Priority = 100;
+            //GameManager.Instance.Cam.depth = 1;
+            //Render.SetActive(true);
+            //cav.SetActive(false);
+            //TimeController.Instance.SetTime(0);
+            //CameraController.Instance.EndGame();
         }
         if (TimeController.Instance.Timer == 1)
         {

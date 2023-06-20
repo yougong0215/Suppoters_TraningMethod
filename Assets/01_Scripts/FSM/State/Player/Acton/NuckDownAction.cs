@@ -4,41 +4,97 @@ using UnityEngine;
 
 public class NuckDownAction : CommonAction
 {
-    public float hitForce = 5f; // ¸Â¾ÒÀ» ¶§ÀÇ ÈûÀÇ ¼¼±â
-    public float pushDuration = 0.5f; // ¹Ð·Á³ª´Â ½Ã°£
-    public float pushSpeed = 5f; // ¹Ð·Á³ª´Â ¼Óµµ
-
     private bool isPushed = true;
-    private Vector3 pushDirection;
-
-    public float _wakeUPTime = 5;
-
     float curtime = 5;
-    Coroutine co;
+    float DIeTime = 0;
+
+    bool die = false;
+
+    Vector3 knockbackDirection = Vector3.zero;
+    float knockbackForce = 4f; // ï¿½Ë¹ï¿½ ï¿½ï¿½
+    float knockbackDuration = 1f; // ï¿½Ë¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
+    float knockbackTimer = 0f;
+
+    protected override void Init()
+    {
+        com.FSMMain.Character.enabled = true;
+        com.FSMMain.AG.enabled = false;
+        DIeTime = 0;
+        curtime = 1;
+        isPushed = true;
+        knockbackDirection = com.FSMMain.transform.position - GameObject.FindGameObjectWithTag("Boss").transform.position;
+        knockbackDirection.Normalize();
+        Debug.Log($"knock : {knockbackDirection}");
+        com.FSMMain.LookRotations(GameObject.FindGameObjectWithTag("Boss").transform.position);
+
+    }
     protected override void OnEndFunc()
     {
-        curtime = _wakeUPTime;
-        isPushed = false;
+        isPushed = false; // ï¿½Ë¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
+        curtime = 0;
     }
 
     protected override void OnEventFunc()
     {
         isPushed = true;
+        knockbackTimer = 0;
     }
 
+
+    bool IsPositionOnNavMesh(Vector3 position)
+    {
+        UnityEngine.AI.NavMeshHit hit;
+        return UnityEngine.AI.NavMesh.SamplePosition(position, out hit, 0.1f, UnityEngine.AI.NavMesh.AllAreas);
+    }
 
     protected override void OnUpdateFunc()
     {
-        if (isPushed == false)
-            curtime -= Time.deltaTime;
+        curtime -= Time.deltaTime;
 
-        if(curtime < 0)
+        if (knockbackTimer < knockbackDuration)
         {
-            isPushed = true;
-            com.FSMMain.ChangeState(FSMState.WakeUp);
+            knockbackTimer += Time.deltaTime;
+            com.FSMMain.Character.Move(knockbackDirection * knockbackForce * Time.deltaTime);
+        }
+        else
+        {
+            Vector3 velocity = Vector3.zero;
+            velocity.y -= 9.8f * Time.deltaTime;
+            com.FSMMain.Character.Move(velocity * Time.deltaTime);
         }
 
         
+        if(die ==false)
+        {
+            if (IsPositionOnNavMesh(com.FSMMain.transform.position))
+            {
+                if (curtime < 0 && isPushed == false)
+                {
+                    com.FSMMain.useinged.Clear();
+                    com.FSMMain.ChangeState(FSMState.WakeUp);
+                }
+
+            }
+            else
+            {
+                die = true;
+                StartCoroutine(Die());
+            }
+        }
+
+
+
 
     }
+
+    IEnumerator Die()
+    {   
+        knockbackTimer  = 0;
+        yield return new WaitForSeconds(1f);
+        com.FSMMain.ChangeState(FSMState.Death);
+    }
+
+
+
+
 }

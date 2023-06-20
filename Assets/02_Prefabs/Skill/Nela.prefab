@@ -50,13 +50,12 @@ MonoBehaviour:
     m_Bits: 64
   LifeTime: 0
   BufTime: 5
-  PlusValue: 0
-  himsValue: 2
+  PlusValue: 50000
+  himsValue: 0
   st: 0
   vfx: {fileID: 0}
   ps: {fileID: 1105273508920862929, guid: 5037376d324548b4693f7f012cae79ce, type: 3}
   shape: 0
-  SelfBuf: 1
   oneBuf: 1
   pl: 0
   cols: []
@@ -123,13 +122,12 @@ MonoBehaviour:
     m_Bits: 64
   LifeTime: 0
   BufTime: 5
-  PlusValue: 100
+  PlusValue: 50
   himsValue: 0
   st: 4
   vfx: {fileID: 0}
   ps: {fileID: 1105273508920862929, guid: 5037376d324548b4693f7f012cae79ce, type: 3}
   shape: 0
-  SelfBuf: 1
   oneBuf: 1
   pl: 0
   cols: []
@@ -202,7 +200,6 @@ MonoBehaviour:
   vfx: {fileID: 0}
   ps: {fileID: 1105273508920862929, guid: 5037376d324548b4693f7f012cae79ce, type: 3}
   shape: 0
-  SelfBuf: 1
   oneBuf: 1
   pl: 0
   cols: []
@@ -240,6 +237,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.z
       value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6034427996445932500, guid: 5b2e7826fca619b498b198c9e0f15623,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6034427996445932502, guid: 5b2e7826fca619b498b198c9e0f15623,
         type: 3}

@@ -50,14 +50,14 @@ MonoBehaviour:
     m_Bits: 64
   LifeTime: 0
   BufTime: 0
-  PlusValue: 10
+  PlusValue: 5000
   himsValue: 0
   st: 1
   vfx: {fileID: 0}
   ps: {fileID: 1105273508920862929, guid: 5037376d324548b4693f7f012cae79ce, type: 3}
   shape: 0
-  SelfBuf: 1
   oneBuf: 1
+  OnlyBuf: 0
   pl: 0
   cols: []
 --- !u!65 &8495797986741436329
@@ -84,6 +84,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Heal
+      objectReference: {fileID: 0}
+    - target: {fileID: 6034427996445932500, guid: 5b2e7826fca619b498b198c9e0f15623,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6034427996445932502, guid: 5b2e7826fca619b498b198c9e0f15623,
         type: 3}

@@ -18,11 +18,16 @@ public class FSM : MonoBehaviour
     public bool bStop = false;
     public CharacterController Character => _chara;
 
-    [SerializeField] List<skillinfo> useinged = new List<skillinfo>();
-    [SerializeField]skillinfo useing;
+    [SerializeField] public List<skillinfo> useinged = new List<skillinfo>();
+    [SerializeField] skillinfo useing;
     public AgentStatus ststed;
 
+    [SerializeField] public AttackBush bus;
+    public bool Patton = false;
     public skillinfo Object => useing;
+
+    public Vector3 SeeEnemy;
+    public Transform ts;
 
     bool b = true;
     private void Awake()
@@ -58,26 +63,37 @@ public class FSM : MonoBehaviour
 
     public IEnumerator delay()
     {
+
         yield return null;
         if (TimeController.Instance.Timer == 1)
         {
-            yield return new WaitUntil(() => NowState() == FSMState.Idle);
-            if (useinged.Count > 0)
+            if (NowState() == FSMState.Death)
             {
-               
-                useing = useinged[0];
-                ChangeState(useing.state);
-                useinged.RemoveAt(0);
-                b = true;
+                GameController.Contorller.StopPlayer(ststed.pl);
+                b = false;
+
             }
             else
             {
+                yield return new WaitUntil(() => NowState() == FSMState.Idle);
+                if (useinged.Count > 0)
+                {
 
-              
-                GameController.Contorller.StopPlayer(ststed.pl);
-                b = true;
+                    useing = useinged[0];
+                    ChangeState(useing.state);
+                    useinged.RemoveAt(0);
+                    b = true;
+                }
+                else
+                {
 
+
+                    GameController.Contorller.StopPlayer(ststed.pl);
+                    b = true;
+
+                }
             }
+           
 
         }
     }
@@ -133,13 +149,6 @@ public class FSM : MonoBehaviour
 
     private void Update()
     {
-        if(_chara.enabled == true)
-        {
-            Vector3 velocity = Vector3.zero;
-            velocity.y -= 9.8f * Time.deltaTime;
-            Character.Move(velocity * Time.deltaTime);
-
-        }
 
         currentState?.UpdateState();
 

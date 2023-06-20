@@ -9,6 +9,9 @@ public class NuckDownState : CommonState
         _animator.SetNuckDownAnimation(true);
         _animator.OnAnimationEventTrigger += EventAction;
         _animator.OnAnimationEndTrigger += EndAction;
+        FSMMain.Character.enabled = true;
+        FSMMain.AG.enabled = false;
+        Init?.Invoke();
     }
 
 

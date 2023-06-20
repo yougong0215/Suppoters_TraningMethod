@@ -28,7 +28,6 @@ public class GetBuff : PoolAble
     VisualEffect Veffect;
     ParticleSystem Peffect;
     public bool oneBuf;
-    public bool OnlyBuf;
     bool use  =false;
 
     public players pl;
@@ -48,6 +47,7 @@ public class GetBuff : PoolAble
 
             Veffect = obj.gameObject.GetComponent<VisualEffect>();
         }
+        pled.Clear();
 
         if (ps != null)
         {
@@ -118,9 +118,6 @@ public class GetBuff : PoolAble
         Collider[] colliders = null;
         
         colliders = Physics.OverlapSphere(transform.position, GetColliderRadius(), _player);
-
-
-        cols = colliders.ToList();
         if (use == true)
             return;
         if (oneBuf == true && use == false)
@@ -137,24 +134,18 @@ public class GetBuff : PoolAble
                     {
                         AgentStatus at = collider.GetComponent<AgentStatus>();
                         Debug.Log(gameObject.name);
-                        if(OnlyBuf == true)
-                        {
-                            if (!pled.ContainsKey(at.pl))
-                            {
-                                pled.Add(at.pl, true);
-                                StartCoroutine(at.Buffs(PlusValue, himsValue, st, BufTime));
-                            }
-                            else
-                            {
-                                Debug.Log("작동");
-                            }
 
+                        if (!pled.ContainsKey(at.pl))
+                        {
+                            pled.Add(at.pl, true);
+                            StartCoroutine(at.Buffs(PlusValue, himsValue, st, BufTime));
+                            Debug.Log("작동22");
                         }
                         else
                         {
-
-                            StartCoroutine(at.Buffs(PlusValue, himsValue, st, BufTime));
+                            Debug.Log("작동");
                         }
+
                     }
 
 
@@ -177,15 +168,27 @@ public class GetBuff : PoolAble
                 if(collider.GetComponent<AgentStatus>())
                 {
                     AgentStatus at = collider.GetComponent<AgentStatus>();
-                    for (int i = 0; i < corutime.Count; i++)
+                    for (int i = 0; i < cols.Count; i++)
                     {
                         if (collider == cols[i])
                         {
                             StopCoroutine(corutime[i]);
-                            at.AddDamage = 0;
-                            at.Cirt = 0;
-                            at.CirtDAM = 0;
-                            at.DEF = 0;
+                            switch (st)
+                            {
+                                case Stat.ATK:
+                                    at.AddDamage -= PlusValue;
+                                    at.himsDamage -= himsValue;
+                                    break;
+                                case Stat.DEF:
+                                    at.DEF -= (int)PlusValue;
+                                    break;
+                                case Stat.CRIT:
+                                    at.Cirt -= PlusValue;
+                                    break;
+                                case Stat.CRITDAM:
+                                    at.CirtDAM -= PlusValue;
+                                    break;
+                            }
                             corutime.RemoveAt(i);
                             cols.RemoveAt(i--);
                         }

@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class WakeUPAction : CommonAction
 {
+    protected override void Init()
+    {
+
+    }
+
     protected override void OnEndFunc()
     {
         com.FSMMain.ChangeState(FSMState.Idle);

@@ -55,6 +55,7 @@ public class AnimationController : MonoBehaviour
     public void ChangeAnimationClip(FSMState fsm, AnimationClip clip)
     {
         AOC[fsm.ToString()] = clip;
+        _animator.runtimeAnimatorController = AOC;
     }
 
     public void OnAnimationEvent()

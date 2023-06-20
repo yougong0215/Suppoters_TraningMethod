@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class TestIdle : CommonAction
 {
+    protected override void Init()
+    {
+    }
+
     protected override void OnEndFunc()
     {
     }

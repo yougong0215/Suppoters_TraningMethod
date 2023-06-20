@@ -10,11 +10,17 @@ public class FollowObj : MonoBehaviour
     
     private void Awake()
     {
-        tls = GameObject.Find(pl.ToString()).transform;    
+        if(pl != players.None)
+            tls = GameObject.Find(pl.ToString()).transform;
+        else
+        {
+            tls = GameObject.Find("Boss").transform;
+        }
     }
 
     private void Update()
     {
         transform.position = tls.position;
+        transform.rotation = Quaternion.identity;
     }
 }

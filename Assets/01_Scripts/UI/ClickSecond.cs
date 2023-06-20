@@ -9,7 +9,15 @@ public class ClickSecond : MonoBehaviour
 
     public void Click()
     {
-        ls = GameObject.FindGameObjectWithTag("List").GetComponent<SkillUIList>();
-        ls.ClickSecond(count);
+        try
+        {
+            ls = GameObject.FindGameObjectWithTag("List").GetComponent<SkillUIList>();
+            ls.ClickSecond(count);
+        }
+        catch
+        {
+
+        }
+
     }
 }

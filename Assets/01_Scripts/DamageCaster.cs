@@ -8,7 +8,7 @@ using UnityEngine.VFX;
 
 public interface IDamageAble
 {
-    void TakeDamage(int value, Vector3 position, float Crit = 1, bool critical = false);
+    void TakeDamage(int value, Vector3 position, float Crit = 1, bool critical = false, bool nuck =false);
 }
 
 public class DamageCaster : PoolAble
@@ -42,7 +42,9 @@ public class DamageCaster : PoolAble
     bool vfxcast = false;
     protected bool init = false;
     bool b;
+    public bool NuckBackAttack;
     public bool DonotPool;
+    public bool justCast;
     private void Awake()
     {
         onLife = lifeTime;
@@ -82,6 +84,8 @@ public class DamageCaster : PoolAble
 
     protected void Update()
     {
+        if (justCast == true)
+            return;
         if (Time.timeScale == 0)
         {
             b = true;
@@ -149,12 +153,17 @@ public class DamageCaster : PoolAble
                 foreach (Collider collider in colliders)
                 {
                     IDamageAble damageable;
-                    Attackfrequency = 0;
-                    Debug.Log($"Àû : {collider.name}");
-                    if (collider.TryGetComponent<IDamageAble>(out damageable))
+                    
                     {
-                        StartCoroutine(Attack(damageable, times / AttackCount, AttackCount-1, collider));
+                        Attackfrequency = 0;
+                        Debug.Log($"Àû : {collider.name}");
+                        if (collider.TryGetComponent<IDamageAble>(out damageable))
+                        {
+                            StartCoroutine(Attack(damageable, times / AttackCount, AttackCount - 1, collider));
+                        }
                     }
+
+                   
                 }
             }
 
@@ -188,11 +197,11 @@ public class DamageCaster : PoolAble
 
         if (Random.Range(0, 100f) <= Critical)
         {
-            able.TakeDamage(AttackDamage, randomPosition, CriticalDamage, true);
+            able.TakeDamage(AttackDamage, randomPosition, CriticalDamage, true, NuckBackAttack);
         }
         else
         {
-            able.TakeDamage(AttackDamage, randomPosition);
+            able.TakeDamage(AttackDamage, randomPosition, 1, false, NuckBackAttack);
         }
 
         if (vfxHit != null)
@@ -241,15 +250,26 @@ public class DamageCaster : PoolAble
     {
 
         Vector3 colliderSize = GetColliderSize();
-        return Mathf.Max(colliderSize.x, colliderSize.y, colliderSize.z) / 2f;
+        return Mathf.Max(colliderSize.x, colliderSize.y, colliderSize.z) / 2;
 
     }
     protected Vector3 GetColliderSize()
     {
         Collider collider = GetComponent<Collider>();
+        collider.enabled = true;
+        switch (shape)
+        {
+            case GetTypeShape.Box:
+                BoxCollider boxCollider = (BoxCollider)collider;
+                boxCollider.enabled = false;
+                return Vector3.Scale(boxCollider.size, transform.localScale);
+            case GetTypeShape.Sphere:
+                SphereCollider sphereCollider = (SphereCollider)collider;
+                float radius = sphereCollider.radius * Mathf.Max(transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                sphereCollider.enabled = false;
+                return new Vector3(radius, radius, radius);
+        }
 
-
-        BoxCollider boxCollider = (BoxCollider)collider;
-        return Vector3.Scale(boxCollider.size, transform.localScale);
+        return Vector3.zero;
     }
 }

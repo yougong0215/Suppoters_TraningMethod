@@ -18,13 +18,24 @@ public class UISelect : MonoBehaviour
     }
     public void Click()
     {
-        con.Click(PL);
+        if(GameObject.Find(PL.ToString()).GetComponent<FSM>().NowState() != FSMState.Death)
+            con.Click(PL);
+
         Debug.Log("Å¬¸¯");
     }
     private void Update()
     {
+
         btn.enabled = ClickUI.btnEnable;
-        tmp.text = $"{PL.ToString()} : [ {ls.ReturnCount()} / {SkillUIList.count} ] ";
+        if (GameObject.Find(PL.ToString()).GetComponent<FSM>().NowState() != FSMState.Death)
+        {
+            tmp.text = $"{PL.ToString()} : [ {ls.ReturnCount()} / {SkillUIList.count} ] ";
+
+        }
+        else
+        {
+            tmp.text = $"{PL.ToString()} »ç¸Á ";
+        }
     }
 }
 
