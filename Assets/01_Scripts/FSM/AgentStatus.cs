@@ -21,7 +21,7 @@ public class AgentStatus : MonoBehaviour, IDamageAble
     [SerializeField] public players pl;
     [SerializeField] public CharacterStatues stat;
     [SerializeField] public int HP;
-    [SerializeField] int MaxHP;
+    [SerializeField] public int MaxHP;
     [SerializeField] TextDamageCast tmp;
     [SerializeField] Image hpbar;
     [SerializeField] public float AddDamage;

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.PlayerSettings;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -57,13 +57,24 @@ public class GameController : MonoBehaviour
 
     public void StartGame()
     {
+        int die = 0;
         for(int i =0; i < con.Count;i++)
         {
             if (SkillUIList.count > con[i].SettingCount && players[i].NowState() != FSMState.Death)
             {
                 notStart = true;
             }
+            if(players[i].NowState() == FSMState.Death)
+            {
+                die++;
+            }
 
+        }
+        if(die==players.Count)
+        {
+            tmp.transform.parent.GetComponent<Button>().onClick.RemoveAllListeners();
+            tmp.transform.parent.GetComponent<Button>().onClick.AddListener(() => { SceneManager.LoadScene("Start"); });
+            return;
         }
         if(notStart==true)
         {
@@ -92,6 +103,7 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
+        int die = 0;
         int te = 0;
         for (int i = 0; i < con.Count; i++)
         {
@@ -99,8 +111,18 @@ public class GameController : MonoBehaviour
             {
                 te++;
             }
-
+            if (players[i].NowState() == FSMState.Death)
+            {
+                die++;
+            }
         }
+
+        if (die == players.Count)
+        {
+            tmp.text = "Game Over";
+            return;
+        }
+
         if (te == con.Count)
         {
             
@@ -111,13 +133,13 @@ public class GameController : MonoBehaviour
         Debug.Log($"stC  : {stCount}");
         if (stCount >= players.Count)
         {
-            //stCount = 0;
-            //cans.Priority = 100;
-            //GameManager.Instance.Cam.depth = 1;
-            //Render.SetActive(true);
-            //cav.SetActive(false);
-            //TimeController.Instance.SetTime(0);
-            //CameraController.Instance.EndGame();
+            stCount = 0;
+            cans.Priority = 100;
+            GameManager.Instance.Cam.depth = 1;
+            Render.SetActive(true);
+            cav.SetActive(false);
+            TimeController.Instance.SetTime(0);
+            CameraController.Instance.EndGame();
         }
         if (TimeController.Instance.Timer == 1)
         {

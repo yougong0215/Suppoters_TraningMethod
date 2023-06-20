@@ -48,7 +48,7 @@ MonoBehaviour:
   img: []
   AttackTime: 2
   curtime: 0
-  anim: {fileID: 0}
+  anim: {fileID: 1827226128182048838, guid: eed2c94f66259b54b97c07459fbbb770, type: 3}
   FastNext: 0
   posOffset: {x: 0, y: 0, z: 0}
   nextBush: {fileID: 0}

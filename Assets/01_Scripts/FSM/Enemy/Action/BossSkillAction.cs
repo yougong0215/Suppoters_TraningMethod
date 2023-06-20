@@ -8,8 +8,11 @@ public class BossSkillAction : CommonAction
     [SerializeField] Transform ts;
 
     bool AnimENd = false;
+    float dmg = 1;
     protected override void Init()
     {
+        if (com.FSMMain.Nexte)
+            dmg = 1.5f;
         if (com.FSMMain.bus.anim != null)
             com.AnimationCon.ChangeAnimationClip(FSMState.Skill, com.FSMMain.bus.anim);
         AnimENd = false;
@@ -37,7 +40,7 @@ public class BossSkillAction : CommonAction
             vec += new Vector3(0, 0.05f, 0);
 
             bs.transform.localEulerAngles = new Vector3(0, com.FSMMain.transform.localEulerAngles.y, 0);
-            bs.Init((int)(com.FSMMain.ststed.AddDamage + com.FSMMain.ststed.stat.ATK)
+            bs.Init((int)((com.FSMMain.ststed.AddDamage + com.FSMMain.ststed.stat.ATK) * dmg) 
                 , com.FSMMain.ststed.Cirt + com.FSMMain.ststed.stat.Critical
                 , com.FSMMain.ststed.CirtDAM + com.FSMMain.ststed.stat.CriticalDamage
                 , vec);

@@ -2066,7 +2066,7 @@ PrefabInstance:
         type: 3}
       propertyPath: anim
       value: 
-      objectReference: {fileID: 1827226128182048838, guid: 629ab08abffd21c4bbdeb81a309ecf98,
+      objectReference: {fileID: 1827226128182048838, guid: c33e2f94c5e1d2f4ab6d9ffa291a89eb,
         type: 3}
     - target: {fileID: 1733129200573767655, guid: 25469f4198e021b4b9fe6faea4aa866b,
         type: 3}

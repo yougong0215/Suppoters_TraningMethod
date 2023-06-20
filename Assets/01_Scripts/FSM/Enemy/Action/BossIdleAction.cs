@@ -7,11 +7,27 @@ public class BossIdleAction : CommonAction
 {
     public List<AttackBush> bus = new();
     public float ChangeTime = 3;
+    public AttackBush Next;
+    public List<AttackBush> Nextbus = new();
+    
     [SerializeField] float curtime = 0;
-
+    bool breakpatton = false;
     protected override void Init()
     {
         curtime = 0;
+      
+        if (com.FSMMain.ststed.HP < com.FSMMain.ststed.MaxHP * 0.25f)
+        {
+            if(breakpatton==false)
+            {
+                breakpatton = true;
+                com.FSMMain.bus = Next;
+                com.FSMMain.ChangeState(FSMState.Special);
+                bus = Nextbus;
+                ChangeTime *= 1.2f;
+                com.FSMMain.Nexte = true;
+            }
+        }
     }
 
     protected override void OnEndFunc()

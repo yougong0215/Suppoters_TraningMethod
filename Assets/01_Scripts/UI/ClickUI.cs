@@ -102,6 +102,7 @@ public class ClickUI : MonoBehaviour
                 shapeSprite = center.GetChild(0).GetComponent<SpriteRenderer>();
                 break;
         };
+        info.spi = GetComponent<Image>().sprite;
         Debug.Log(shapeSprite.name);
         colliders = shapeSprite.GetComponent<Collider>();
         radius = GetShapeRadius();

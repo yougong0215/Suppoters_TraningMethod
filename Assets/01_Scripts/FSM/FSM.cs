@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,7 +11,7 @@ public class FSM : MonoBehaviour
     [SerializeField] private CommonState currentState;
     [SerializeField] private NavMeshAgent _nav;
     [SerializeField] private CharacterController _chara;
-
+    public bool Nexte = false;
     public NavMeshAgent AG => _nav  ;
 
     public bool bStop = false;
@@ -149,7 +148,12 @@ public class FSM : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
 
+            if (ststed.pl == players.None)
+                ststed.HP = (int)(ststed.stat.HP * 0.2f);
+        }
         currentState?.UpdateState();
 
     }

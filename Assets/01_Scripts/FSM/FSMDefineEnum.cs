@@ -11,7 +11,8 @@ public enum FSMState
     nuckdown = 32,
     WakeUp  = 64,
     Death   = 128,
-    Skill   = 256
+    Skill   = 256,
+    Special = 512,
 }
 
 public enum BuddyState

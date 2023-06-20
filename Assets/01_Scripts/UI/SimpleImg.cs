@@ -11,7 +11,7 @@ public class SimpleImg : MonoBehaviour
     {
         if(spi != null)
         {
-            //GetComponent<SpriteRenderer>().sprite = spi;
+            GetComponent<SpriteRenderer>().sprite = spi;
         }
         tmp.text = t.ToString();
     }

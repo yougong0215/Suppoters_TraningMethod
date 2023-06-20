@@ -18,6 +18,7 @@ public class BossIdleState : CommonState
         _animator.OnAnimationEventTrigger += EventAction;
         FSMMain.Character.enabled = true;
         FSMMain.AG.enabled = false;
+        Init();
     }
 
     public override void ExitState()
