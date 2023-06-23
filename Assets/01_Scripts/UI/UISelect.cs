@@ -20,7 +20,6 @@ public class UISelect : MonoBehaviour
     {
         if(GameObject.Find(PL.ToString()).GetComponent<FSM>().NowState() != FSMState.Death)
             con.Click(PL);
-
         Debug.Log("Å¬¸¯");
     }
     private void Update()

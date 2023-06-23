@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour
     static GameController _con;
 
     public CinemachineVirtualCamera cam;
-    public GameObject cav;
+    public CharUIController cav;
     public TextMeshProUGUI tmp;
 
     float curtime = 0;
@@ -58,7 +58,8 @@ public class GameController : MonoBehaviour
     public void StartGame()
     {
         int die = 0;
-        for(int i =0; i < con.Count;i++)
+        bool bossdie = false;
+        for (int i =0; i < con.Count;i++)
         {
             if (SkillUIList.count > con[i].SettingCount && players[i].NowState() != FSMState.Death)
             {
@@ -68,9 +69,18 @@ public class GameController : MonoBehaviour
             {
                 die++;
             }
-
+            if (GameObject.Find("Boss").GetComponent<FSM>().NowState() == FSMState.Death)
+            {
+                bossdie = true;
+            }
         }
-        if(die==players.Count)
+        if (bossdie)
+        {
+            tmp.transform.parent.GetComponent<Button>().onClick.RemoveAllListeners();
+            tmp.transform.parent.GetComponent<Button>().onClick.AddListener(() => { SceneManager.LoadScene("Start"); });
+            return;
+        }
+        if (die==players.Count)
         {
             tmp.transform.parent.GetComponent<Button>().onClick.RemoveAllListeners();
             tmp.transform.parent.GetComponent<Button>().onClick.AddListener(() => { SceneManager.LoadScene("Start"); });
@@ -92,11 +102,11 @@ public class GameController : MonoBehaviour
         cam.Priority = 0;
         cans.Priority = -100;
         GameManager.Instance.Cam.depth = 4;
+        cav.Active(true);
         CameraController.Instance.SetCam(global::players.None);
         for (int i = 0; i < players.Count; i++)
         {
             Render.SetActive(false);
-            cav.SetActive(true); ;
             CO(i);
         }
     }
@@ -105,6 +115,18 @@ public class GameController : MonoBehaviour
     {
         int die = 0;
         int te = 0;
+        bool bossdie = false;
+        if (stCount >= players.Count)
+        {
+            stCount = 0;
+            cans.Priority = 100;
+            GameManager.Instance.Cam.depth = 1;
+            Render.SetActive(true);
+            cav.Active(false);
+            TimeController.Instance.SetTime(0);
+            CameraController.Instance.EndGame();
+        }
+
         for (int i = 0; i < con.Count; i++)
         {
             if (SkillUIList.count == con[i].SettingCount)
@@ -115,6 +137,15 @@ public class GameController : MonoBehaviour
             {
                 die++;
             }
+            if(GameObject.Find("Boss").GetComponent<FSM>().NowState() == FSMState.Death)
+            {
+                bossdie = true;
+            }
+        }
+        if(bossdie)
+        {
+            tmp.text = "당신은 죽였다 보스";
+            return;
         }
 
         if (die == players.Count)
@@ -131,16 +162,7 @@ public class GameController : MonoBehaviour
 
 
         Debug.Log($"stC  : {stCount}");
-        if (stCount >= players.Count)
-        {
-            stCount = 0;
-            cans.Priority = 100;
-            GameManager.Instance.Cam.depth = 1;
-            Render.SetActive(true);
-            cav.SetActive(false);
-            TimeController.Instance.SetTime(0);
-            CameraController.Instance.EndGame();
-        }
+
         if (TimeController.Instance.Timer == 1)
         {
             curtime += Time.deltaTime;
