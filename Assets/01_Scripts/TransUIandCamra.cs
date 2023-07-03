@@ -6,21 +6,19 @@ using UnityEngine;
 public class TransUIandCamra : MonoBehaviour
 {
     public players PL;
-    public CinemachineVirtualCamera cam;
-    public CharUIController con;
     
 
     private void Start()
     {
-        CameraController.Instance.Submit(PL, cam);
+        CameraController.Instance.Submit(PL, gameObject.GetComponent<CinemachineVirtualCamera>());
     }
 
-    public void Click()
-    {
-        CameraController.Instance.SetCam(PL);
-        //con.Click(PL);
-        Debug.Log("클릭");
-    }
+    //public void Click()
+    //{
+    //    CameraController.Instance.SetCam(PL);
+    //    //con.Click(PL);
+    //    Debug.Log("클릭");
+    //}
 
 
 }

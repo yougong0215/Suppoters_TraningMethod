@@ -24,7 +24,18 @@ public class MoveState : CommonState
             FSMMain.LookRotations(vec);
         }
         else
-            vec = FSMMain.Object.pos;
+        {
+            if(FSMMain.Object.InPos==true)
+            {
+
+                vec = FSMMain.Object.dir;
+            }
+            else
+            {
+                FSMMain.SeeEnemy = FSMMain.ts.position;
+                vec = GenerateRandomPosition();
+            }
+        }
 
     }
 
@@ -38,10 +49,11 @@ public class MoveState : CommonState
     }
 
 
-    Vector3 GenerateRandomPosition()
-    {
-        Vector2 randomCircle = UnityEngine.Random.insideUnitCircle.normalized * 5;
+    Vector3 GenerateRandomPosition() { 
+        Vector2 randomCircle = UnityEngine.Random.insideUnitCircle.normalized * 3.5f;
+
         return FSMMain.SeeEnemy + new Vector3(randomCircle.x, 0f, randomCircle.y);
+
     }
 
     public override void UpdateState()
@@ -51,7 +63,7 @@ public class MoveState : CommonState
         FSMMain.AG.SetDestination(vec);
         curtime = Mathf.Clamp(curtime, -0.5f, 0.3f);
         //print($"Range : " + FSMMain.AG.remainingDistance);
-        if ((FSMMain.AG.remainingDistance < 0.2f) && MoveTime > 0.2f)
+        if ((FSMMain.AG.remainingDistance < FSMMain.ststed.stat._distance + 0.05f) && MoveTime > 0.2f)
         {
             if(FSMMain.gameObject.name=="Boss")
             {

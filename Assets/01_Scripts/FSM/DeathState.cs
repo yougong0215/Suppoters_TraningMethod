@@ -6,7 +6,7 @@ public class DeathState : CommonState
 {
     public override void EnterState()
     {
-        FSMMain.Next(true);
+       
         FSMMain.gameObject.tag = "Player2";
     }
 

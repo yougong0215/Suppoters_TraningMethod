@@ -21,14 +21,18 @@ public class TeleportState : CommonState
         {
             PoolAble obj = PoolManager.Instance.Pop(_skillSO.SkillObj.name);
 
-            if (FSMMain.Object.Fire == false)
+
+            if (FSMMain.Object.InPos)
             {
-                obj.transform.position = FSMMain.Object.dir;
+                obj.transform.position = FSMMain.transform.position;
             }
             else
             {
-                obj.transform.position = FSMMain.Object.pos;
+
+                obj.transform.position = FSMMain.Object.dir;
             }
+
+
             if (obj.GetComponent<DamageCaster>())
             {
 
@@ -49,14 +53,17 @@ public class TeleportState : CommonState
         {
             PoolAble obj = PoolManager.Instance.Pop(_skillSO.SkillObj.name);
 
-            if (FSMMain.Object.Fire == false)
+            if (FSMMain.Object.InPos)
             {
-                obj.transform.position = FSMMain.Object.dir;
+                obj.transform.position = FSMMain.transform.position;
             }
             else
             {
-                obj.transform.position = FSMMain.Object.pos;
+
+                obj.transform.position = FSMMain.Object.dir;
             }
+
+
             if (obj.GetComponent<DamageCaster>())
             {
 

@@ -6,6 +6,13 @@ using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.VFX;
 
+public enum GetTypeShape
+{
+    Box,
+    Sphere,
+    Polygon
+}
+
 public class GetBuff : PoolAble
 {
     [SerializeField] Dictionary<players, bool> pled = new();

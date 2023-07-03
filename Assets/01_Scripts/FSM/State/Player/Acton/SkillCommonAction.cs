@@ -6,6 +6,7 @@ using UnityEngine;
 public class SkillCommonAction : CommonAction
 {
     [SerializeField] public SkillSO _skillSO;
+    [SerializeField] public SkillSO _NormalAttack;
 
     bool Arainge = false;
     float Changecurtime = 2;
@@ -15,9 +16,21 @@ public class SkillCommonAction : CommonAction
     {
         curTime = 0;
         Arainge = false;
-        _skillSO = com.FSMMain.Object._skill;
-        com.FSMMain.LookRotations(com.FSMMain.Object.dir);
-        com.AnimationCon.ChangeAnimationClip(FSMState.Skill, _skillSO.clips);
+
+        if(com.FSMMain.Object._skill != null)
+        {
+            _skillSO = com.FSMMain.Object._skill;
+            com.FSMMain.LookRotations(com.FSMMain.Object.dir);
+        }
+        else
+        {
+            _skillSO = _NormalAttack;
+            com.FSMMain.SeeEnemy = com.FSMMain.ts.position;
+            com.FSMMain.SeeEnemy.y = transform.position.y;
+            com.FSMMain.LookRotations(com.FSMMain.SeeEnemy);
+        }
+
+            com.AnimationCon.ChangeAnimationClip(FSMState.Skill, _skillSO.clips);
     }
 
     public void Destroy()
@@ -36,25 +49,33 @@ public class SkillCommonAction : CommonAction
     {
         PoolAble obj = PoolManager.Instance.Pop(_skillSO.SkillObj.name);
         Debug.Log($"DMG : ({com.FSMMain.ststed.stat.ATK } + {com.FSMMain.ststed.AddDamage}) * { com.FSMMain.ststed.himsDamage} = {(int)((com.FSMMain.ststed.stat.ATK + com.FSMMain.ststed.AddDamage) * com.FSMMain.ststed.himsDamage)}");
-        if (com.FSMMain.Object.Fire == false)
+        if (com.FSMMain.Object.InPos)
         {
-            obj.transform.position = com.FSMMain.Object.dir;
+            obj.transform.position = com.FSMMain.transform.position;
+            obj.transform.rotation = com.FSMMain.transform.rotation;
         }
         else
         {
-            obj.transform.position = com.FSMMain.Object.pos;
+            obj.transform.rotation = Quaternion.LookRotation(com.FSMMain.Object.dir - com.FSMMain.transform.position);
+            obj.transform.position = com.FSMMain.Object.dir;
         }
+
         if (obj.GetComponent<DamageCaster>())
         {
             Debug.Log($"{com.FSMMain.gameObject.name} CRIIN d : {com.FSMMain.ststed.stat.CriticalDamage + com.FSMMain.ststed.CirtDAM}");
             obj.GetComponent<DamageCaster>().Init((int)((com.FSMMain.ststed.stat.ATK + com.FSMMain.ststed.AddDamage) * com.FSMMain.ststed.himsDamage) , com.FSMMain.ststed.stat.Critical + com.FSMMain.ststed.Cirt, com.FSMMain.ststed.stat.CriticalDamage + com.FSMMain.ststed.CirtDAM);
         }
-        obj.transform.rotation = Quaternion.LookRotation(com.FSMMain.Object.dir - transform.position);
+
 
         GetBuff[] get = obj.GetComponentsInChildren<GetBuff>();
         foreach(GetBuff bt in get)
         {
-            bt.transform.position = com.FSMMain.Object.dir;
+            if (com.FSMMain.Object.InPos)
+                bt.transform.position = com.FSMMain.transform.position;
+            else
+            {
+                bt.transform.position = com.FSMMain.Object.dir;
+            }
             
         }
        

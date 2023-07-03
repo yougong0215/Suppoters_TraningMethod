@@ -49,12 +49,14 @@ public class AgentStatus : MonoBehaviour, IDamageAble
             if(GetComponent<FSM>().NowState() != FSMState.WakeUp)
             GetComponent<FSM>().ChangeState(FSMState.nuckdown);
         }
-        
-        Debug.Log($"DMG : {value} => {(int)(100 / (100 + stat.DEF))} * { (value + Random.Range(-(value * 0.1f), (value * 0.1f)))} * {cirt}" +
-            $"= {(int)(100 / (100 + stat.DEF) * (value + Random.Range(-(value * 0.1f), (value * 0.1f))) * cirt)}"); 
 
-        damageCast.Init((int)(100 / (100 + stat.DEF) * (value + Random.Range(-(value * 0.1f), (value * 0.1f))) * cirt), critical, position);
-        HP -= (int)((100 / (100 + stat.DEF) * (value + Random.Range(-(value * 0.1f), (value * 0.1f)))) * cirt);
+        float valued = (value + Random.Range(-(value * 0.1f), (value * 0.1f)));
+
+        //Debug.Log($"DMG : {value} => {(int)(100 / (100 + stat.DEF))} * { (value + Random.Range(-(value * 0.1f), (value * 0.1f)))} * {cirt}" +
+        //    $"= {(int)(100 / (100 + stat.DEF) * (value + Random.Range(-(value * 0.1f), (value * 0.1f))) * cirt)}"); 
+
+        damageCast.Init((int)(100 / (100 + stat.DEF) * valued * cirt), critical, position);
+        HP -= (int)((100 / (100 + stat.DEF) * valued) * cirt);
     }
 
 

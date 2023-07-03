@@ -193,7 +193,7 @@ public class DamageCaster : PoolAble
     Random.Range(bounds.min.x, bounds.max.x),
     Random.Range(bounds.min.y, bounds.max.y),
     Random.Range(bounds.min.z, bounds.max.z));
-        randomPosition.y += 3;
+        randomPosition.y += 1;
 
         if (Random.Range(0, 100f) <= Critical)
         {

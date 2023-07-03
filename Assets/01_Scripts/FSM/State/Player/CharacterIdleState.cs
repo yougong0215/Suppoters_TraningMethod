@@ -6,7 +6,6 @@ using UnityEngine;
 public class CharacterIdleState : CommonState
 {
     public float curtime = 0;
-    [SerializeField] public SkillSO _skillSO;
     public bool curringTime = false;
 
     public float DIeTime;
@@ -18,6 +17,8 @@ public class CharacterIdleState : CommonState
 
     public override void EnterState()
     {
+        
+
         DIeTime = 0;
         curtime = 0;
         _animator.OnAnimationEndTrigger += EndAction;
@@ -26,33 +27,34 @@ public class CharacterIdleState : CommonState
         FSMMain.AG.enabled = false;
 
 
-        if (FSMMain.Object._skill)
-            _skillSO = FSMMain.Object._skill;
 
-        if (_skillSO != null && _skillSO.dashAgain == true)
-        {
-            PoolAble obj = PoolManager.Instance.Pop(_skillSO.SkillObj.name);
 
-            if (FSMMain.Object.Fire == false)
-            {
-                obj.transform.position = FSMMain.Object.dir;
-            }
-            else
-            {
-                obj.transform.position = FSMMain.Object.pos;
-            }
-            if (obj.GetComponent<DamageCaster>())
-            {
+        //if (_skillSO != null && _skillSO.dashAgain == true)
+        //{
+        //    PoolAble obj = PoolManager.Instance.Pop(_skillSO.SkillObj.name);
 
-                obj.GetComponent<DamageCaster>().Init((int)((FSMMain.ststed.stat.ATK + FSMMain.ststed.AddDamage) * FSMMain.ststed.himsDamage), FSMMain.ststed.stat.Critical + FSMMain.ststed.Cirt, FSMMain.ststed.stat.CriticalDamage + FSMMain.ststed.CirtDAM);
-            }
-            obj.transform.rotation = Quaternion.LookRotation(FSMMain.Object.dir - transform.position);
-        }
+        //    if(FSMMain.Object.InPos)
+        //    {
+        //        obj.transform.position = FSMMain.transform.position;
+        //    }
+        //    else
+        //    {
 
-        if (FSMMain.Object.WaitTime <= 0)
-        {
-            FSMMain.Next(false);
-        }
+        //        obj.transform.position = FSMMain.Object.dir;
+        //    }
+
+        //    if (obj.GetComponent<DamageCaster>())
+        //    {
+
+        //        obj.GetComponent<DamageCaster>().Init((int)((FSMMain.ststed.stat.ATK + FSMMain.ststed.AddDamage) * FSMMain.ststed.himsDamage), FSMMain.ststed.stat.Critical + FSMMain.ststed.Cirt, FSMMain.ststed.stat.CriticalDamage + FSMMain.ststed.CirtDAM);
+        //    }
+        //    obj.transform.rotation = Quaternion.LookRotation(FSMMain.Object.dir - transform.position);
+        //}
+
+        //if (FSMMain.Object.WaitTime <= 0)
+        //{
+        //    FSMMain.Next();
+        //}
 
     }
 
@@ -65,22 +67,38 @@ public class CharacterIdleState : CommonState
 
     public override void UpdateState()
     {
-        
+        FSMMain.SeeEnemy = FSMMain.ts.position;
+        FSMMain.SeeEnemy.y = FSMMain.transform.position.y;
 
 
-        if(FSMMain.Character.isGrounded)
+        if (FSMMain.Character.isGrounded)
         {
             curtime += Time.deltaTime;
-            if (FSMMain.Object.WaitTime > 0 && TimeController.Instance.Timer == 1)
+            Vector3 vec = FSMMain.SeeEnemy, vec2 = FSMMain.transform.position;
+            vec.y = 0;
+            vec2.y = 0;
+            Debug.Log($"{FSMMain.gameObject.name} Distance : {Vector3.Distance(vec, vec2)} > {FSMMain.ststed.stat._distance*10 - 0.05f}"); 
+            if (Vector3.Distance(vec,vec2) > FSMMain.ststed.stat._distance*10 - 0.05f)
             {
-                if (curtime > FSMMain.Object.WaitTime)
-                {
-                    curtime = 0;
-                    curringTime = true;
-                    FSMMain.Next(false);
-                }
+                FSMMain.Object.InPos = false;
+                FSMMain.ChangeState(FSMState.Move);
             }
-        }
+            else
+            {
+                FSMMain.Object._skill = null;
+                FSMMain.Object.InPos = true;
+                FSMMain.ChangeState(FSMState.Skill);
+            }
+            //if (FSMMain.Object.WaitTime > 0 && TimeController.Instance.Timer == 1)
+            //{
+            //    if (curtime > FSMMain.Object.WaitTime)
+            //    {
+            //        curtime = 0;
+            //        curringTime = true;
+            //        FSMMain.Next();
+            //    }
+            //}
+        } // 아레는 죽는거
         else
         {
             Vector3 velocity = Vector3.zero;

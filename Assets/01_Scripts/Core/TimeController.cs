@@ -23,17 +23,5 @@ public class TimeController : Singleton<TimeController>
         }
     }
 
-    public void PlayTime()
-    {
-        SetTime(1);
-        Time.timeScale = 1;
-        StartCoroutine(playing(SkillUIList.count));
-    }
 
-    public IEnumerator playing(int t)
-    {
-        yield return new WaitForSeconds(t);
-        SetTime(0);
-        Time.timeScale = 0;
-    }
 }

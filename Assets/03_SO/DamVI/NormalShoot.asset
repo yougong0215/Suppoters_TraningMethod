@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: NormalShoot
   m_EditorClassIdentifier: 
   clips: {fileID: 7400000, guid: 3dcb186b33b86984c842e1b23d27053f, type: 3}
-  SkillObj: {fileID: 4779182136367655494, guid: 0ed652345f8a5104fa11c70262593db3,
+  SkillObj: {fileID: 4721093932626093151, guid: ea2102bfa33bfc5448e6a27c42c40222,
     type: 3}
+  dashAgain: 0

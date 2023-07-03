@@ -12,6 +12,7 @@ public class CharacterStatues : ScriptableObject
     public float CriticalDamage;
     public int Speed;
 
-    
 
+    [Header("Distance")]
+    public float _distance = 0.3f;
 }

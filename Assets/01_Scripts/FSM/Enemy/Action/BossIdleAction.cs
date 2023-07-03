@@ -76,7 +76,7 @@ public class BossIdleAction : CommonAction
 
                     }
 
-                    if (Vector3.Distance(com.FSMMain.transform.position, players[0].transform.position) > 4)
+                    if (Vector3.Distance(com.FSMMain.transform.position, players[0].transform.position) > 3)
                     {
 
                         com.FSMMain.ChangeState(FSMState.Move);

@@ -4,6 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[System.Serializable]
+public struct skillinfo
+{
+    public FSMState state;
+    public SkillSO _skill;
+    public Vector3 dir;
+    public bool InPos;
+
+}
+
 public class FSM : MonoBehaviour
 {
     [SerializeField]
@@ -18,12 +28,12 @@ public class FSM : MonoBehaviour
     public CharacterController Character => _chara;
 
     [SerializeField] public List<skillinfo> useinged = new List<skillinfo>();
-    [SerializeField] skillinfo useing;
+
+    public skillinfo Object;
     public AgentStatus ststed;
 
     [SerializeField] public AttackBush bus;
     public bool Patton = false;
-    public skillinfo Object => useing;
 
     public Vector3 SeeEnemy;
     public Transform ts;
@@ -34,72 +44,21 @@ public class FSM : MonoBehaviour
         _nav = GetComponent<NavMeshAgent>();
         _chara = GetComponent<CharacterController>();
         ststed = GetComponent<AgentStatus>();
+        if(gameObject.name != "Boss")
+        ts = GameObject.FindGameObjectWithTag("Boss").transform;
     }
 
-    public void SetUseing(List<skillinfo> sk)
+    public void Next(skillinfo sk)
     {
-        useinged = sk;
-        Next(true);
-    }
-
-    Coroutine co = null;
-
-    public void Next(bool a)
-    {
-        if(a==true)
-        {
-            b = true;
-        }
-
-        if(b == true)
-        {
-            b = false;
-            StartCoroutine(delay());
-            //Debug.Log($"{gameObject.name} : {useinged.Count}");
-        }
-
-    }
-
-    public IEnumerator delay()
-    {
-
-        yield return null;
-        if (TimeController.Instance.Timer == 1)
-        {
-            if (NowState() == FSMState.Death)
-            {
-                GameController.Contorller.StopPlayer(ststed.pl);
-                b = false;
-
-            }
-            else
-            {
-                yield return new WaitUntil(() => NowState() == FSMState.Idle);
-                if (useinged.Count > 0)
-                {
-
-                    useing = useinged[0];
-                    ChangeState(useing.state);
-                    useinged.RemoveAt(0);
-                    b = true;
-                }
-                else
-                {
-
-
-                    GameController.Contorller.StopPlayer(ststed.pl);
-                    b = true;
-
-                }
-            }
-           
-
-        }
+        Object = sk;
+        ChangeState(Object.state);
     }
     public void LookRotations(Vector3 dir)
     {
-        dir.y = 0;
+        dir.y = transform.position.y;
         transform.rotation = Quaternion.LookRotation(dir - transform.position);
+
+        transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
     }
 
     public void AddState(FSMState state, CommonState stateObject)
