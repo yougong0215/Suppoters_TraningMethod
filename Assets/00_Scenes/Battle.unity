@@ -905,6 +905,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: HosinoPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 3674376238805025005, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: m_Name
+      value: Move
+      objectReference: {fileID: 0}
+    - target: {fileID: 8833100447090785198, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: explain
+      value: "\uC6D0\uD558\uB294 \uC704\uCE58\uB85C \uC774\uB3D9\uD55C\uB2E4.\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8833100447090785198, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: skill.InPos
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8833100447090785198, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: skill.state
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a2d6053b1a90324abe8620df3172271, type: 3}
 --- !u!224 &479863007 stripped
@@ -1629,6 +1649,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: HaruPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 8833100447090785198, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: explain
+      value: "\uC6D0\uD558\uB294 \uC704\uCE58\uB85C \uC774\uB3D9\uD55C\uB2E4."
+      objectReference: {fileID: 0}
+    - target: {fileID: 8833100447090785198, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: skill.InPos
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8833100447090785198, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: skill.state
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a2d6053b1a90324abe8620df3172271, type: 3}
 --- !u!224 &673952619 stripped
@@ -1959,6 +1994,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 628215363}
     m_Modifications:
+    - target: {fileID: 918382458366391983, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: m_Name
+      value: Celia
+      objectReference: {fileID: 0}
     - target: {fileID: 1993935817638330152, guid: 6a2d6053b1a90324abe8620df3172271,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2079,6 +2119,73 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ALOPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 3568817663860413651, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: m_Name
+      value: HealBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 3674376238805025005, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: m_Name
+      value: Move
+      objectReference: {fileID: 0}
+    - target: {fileID: 4960086399036181996, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: explain
+      value: "\uC8FC\uBCC0\uC758 \uD30C\uD2F0\uC6D0\uC744 \uAC15\uD654\uD55C\uB2E4"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4960086399036181996, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: skill.state
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 4960086399036181996, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: skill._skill
+      value: 
+      objectReference: {fileID: 11400000, guid: 5847c4d6e6cbf8349be4dd112a927a51,
+        type: 2}
+    - target: {fileID: 4960086399036181996, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: skill.useSkill
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8785827397429014416, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: explain
+      value: "\uB9DE\uC740 \uC544\uAD70\uC758 HP\uB97C \uD68C\uBCF5\uC2DC\uD0A8\uB2E4."
+      objectReference: {fileID: 0}
+    - target: {fileID: 8785827397429014416, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: skill.state
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 8785827397429014416, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: skill._skill
+      value: 
+      objectReference: {fileID: 11400000, guid: 0e8e0c36eb08d4f4b84991c15c1acd88,
+        type: 2}
+    - target: {fileID: 8785827397429014416, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: skill.useSkill
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8833100447090785198, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: explain
+      value: "\uC6D0\uD558\uB294 \uC704\uCE58\uB85C \uC774\uB3D9\uD55C\uB2E4."
+      objectReference: {fileID: 0}
+    - target: {fileID: 8833100447090785198, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: skill.InPos
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8833100447090785198, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: skill.state
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a2d6053b1a90324abe8620df3172271, type: 3}
@@ -3724,6 +3831,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DamVIPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 3568817663860413651, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: m_Name
+      value: Gurugi
+      objectReference: {fileID: 0}
     - target: {fileID: 3674376238805025000, guid: 6a2d6053b1a90324abe8620df3172271,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -3770,6 +3882,32 @@ PrefabInstance:
       propertyPath: skill.useSkill
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8785827397429014416, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: Cost
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8785827397429014416, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: explain
+      value: "\uAD74\uB7EC\uC11C \uC774\uB3D9\uD55C\uB2E4"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8785827397429014416, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: skill.InPos
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8785827397429014416, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: skill.state
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8785827397429014416, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: skill._skill
+      value: 
+      objectReference: {fileID: 11400000, guid: 098ea4ecccc6f6643b07f60b085a6c25,
+        type: 2}
     - target: {fileID: 8785827397429014416, guid: 6a2d6053b1a90324abe8620df3172271,
         type: 3}
       propertyPath: skill.useSkill

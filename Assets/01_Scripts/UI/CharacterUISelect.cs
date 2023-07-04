@@ -30,6 +30,8 @@ public class CharacterUISelect : MonoBehaviour
     }
     private void Update()
     {
+
+
         if(SelectUI.Select == false)
         {
             foreach(InGameCharacterBar ch in _list)

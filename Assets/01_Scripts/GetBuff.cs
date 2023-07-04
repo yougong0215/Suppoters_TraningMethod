@@ -112,9 +112,9 @@ public class GetBuff : PoolAble
     public void OnEnd()
     {
         if (Veffect)
-            Destroy(Veffect);
+            Destroy(Veffect.gameObject);
         if (Peffect)
-            Destroy(Peffect);
+            Destroy(Peffect.gameObject);
     }
 
 
@@ -128,7 +128,6 @@ public class GetBuff : PoolAble
             return;
         if (oneBuf == true && use == false)
         {
-            use = true;
 
             if (colliders.Length > 0)
             {
@@ -139,11 +138,12 @@ public class GetBuff : PoolAble
                     if (collider.GetComponent<AgentStatus>())
                     {
                         AgentStatus at = collider.GetComponent<AgentStatus>();
-                        Debug.Log(gameObject.name);
+
 
                         if (!pled.ContainsKey(at.pl))
                         {
                             pled.Add(at.pl, true);
+                            Debug.Log($"»˙¿€µø {gameObject.name} : {collider.gameObject.name}");
                             StartCoroutine(at.Buffs(PlusValue, himsValue, st, BufTime));
                             Debug.Log("¿€µø22");
                         }
@@ -157,6 +157,7 @@ public class GetBuff : PoolAble
 
 
                 }
+                use = true;
             }
             return;
         }
