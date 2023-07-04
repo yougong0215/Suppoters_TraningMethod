@@ -170,9 +170,9 @@ public class DamageCaster : PoolAble
             if (lifeTime <= 0)
             {
                 if(Veffect)
-                    Destroy(Veffect);
+                    Destroy(Veffect.gameObject);
                 if (Peffect)
-                    Destroy(Peffect);
+                    Destroy(Peffect.gameObject);
                 foreach(GetBuff buf in GetComponentsInChildren<GetBuff>())
                 {
                     buf.OnEnd();
@@ -208,8 +208,6 @@ public class DamageCaster : PoolAble
         {
             GameObject obj = Instantiate(vfxHit.gameObject, null);
             obj.transform.position = enemyCollider.gameObject.transform.position;
-
-            vfxHit = obj.gameObject.GetComponent<VisualEffect>();
             obj.AddComponent<VFXCancers>();
         }
 
@@ -217,7 +215,6 @@ public class DamageCaster : PoolAble
         {
             GameObject obj = Instantiate(effectHit.gameObject, null);
             obj.transform.position = enemyCollider.gameObject.transform.position;
-            effectHit = obj.gameObject.GetComponent<ParticleSystem>();
             obj.AddComponent<VFXCancers>();
         }
 

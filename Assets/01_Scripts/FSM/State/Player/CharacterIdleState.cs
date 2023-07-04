@@ -83,7 +83,7 @@ public class CharacterIdleState : CommonState
                 FSMMain.Object.InPos = false;
                 FSMMain.ChangeState(FSMState.Move);
             }
-            else
+            else if(curtime > 1f)
             {
                 FSMMain.Object._skill = null;
                 FSMMain.Object.InPos = true;

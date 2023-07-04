@@ -33,7 +33,7 @@ public class MoveState : CommonState
             else
             {
                 FSMMain.SeeEnemy = FSMMain.ts.position;
-                vec = GenerateRandomPosition();
+                vec = GenerateRandomPosition2();
             }
         }
 
@@ -56,23 +56,54 @@ public class MoveState : CommonState
 
     }
 
+    Vector3 GenerateRandomPosition2()
+    {
+        Vector2 randomCircle = UnityEngine.Random.insideUnitCircle.normalized * 3.5f;
+
+        return new Vector3(randomCircle.x, 0f, randomCircle.y);
+
+    }
+
     public override void UpdateState()
     {
         MoveTime += Time.deltaTime;
         curtime += Time.deltaTime;
-        FSMMain.AG.SetDestination(vec);
-        curtime = Mathf.Clamp(curtime, -0.5f, 0.3f);
-        //print($"Range : " + FSMMain.AG.remainingDistance);
-        if ((FSMMain.AG.remainingDistance < FSMMain.ststed.stat._distance + 0.05f) && MoveTime > 0.2f)
+        if (FSMMain.gameObject.name == "Boss")
         {
-            if(FSMMain.gameObject.name=="Boss")
+            FSMMain.AG.SetDestination(vec);
+            if ((FSMMain.AG.remainingDistance < FSMMain.ststed.stat._distance + 0.05f) && MoveTime > 0.2f)
             {
                 FSMMain.LookRotations(FSMMain.ts.position);
                 FSMMain.ChangeState(FSMState.Skill);
             }
-            else
-                FSMMain.ChangeState(FSMState.Idle);
         }
+        else
+        {
+            if(FSMMain.AG.enabled == true)
+            if (FSMMain.Object.InPos == false)
+            {
+                FSMMain.SeeEnemy = FSMMain.ts.position;
+                FSMMain.AG.SetDestination(vec + FSMMain.SeeEnemy);
+                if ((FSMMain.AG.remainingDistance < FSMMain.ststed.stat._distance + 0.05f) && MoveTime > 0.2f)
+                {
+                    FSMMain.ChangeState(FSMState.Idle);
+                }
+
+            }
+            else
+            {
+                FSMMain.AG.SetDestination(vec);
+
+                if ((FSMMain.AG.remainingDistance < 0.2f ) && MoveTime > 0.2f)
+                {
+                    FSMMain.ChangeState(FSMState.Idle);
+                }
+            }
+
+        }
+        
+        curtime = Mathf.Clamp(curtime, -0.5f, 0.3f);
+        //print($"Range : " + FSMMain.AG.remainingDistance);
 
         UpdateAction?.Invoke();
     }

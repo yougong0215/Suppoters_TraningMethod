@@ -18,4 +18,4 @@ MonoBehaviour:
   Critical: 0
   CriticalDamage: 0
   Speed: 0
-  _distance: 0.5
+  _distance: 1

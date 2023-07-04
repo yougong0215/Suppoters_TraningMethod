@@ -11,7 +11,7 @@ public struct skillinfo
     public SkillSO _skill;
     public Vector3 dir;
     public bool InPos;
-
+    public bool useSkill;
 }
 
 public class FSM : MonoBehaviour
@@ -37,10 +37,11 @@ public class FSM : MonoBehaviour
 
     public Vector3 SeeEnemy;
     public Transform ts;
-
+    CapsuleCollider capsule;
     bool b = true;
     private void Awake()
     {
+        capsule = GetComponent<CapsuleCollider>();
         _nav = GetComponent<NavMeshAgent>();
         _chara = GetComponent<CharacterController>();
         ststed = GetComponent<AgentStatus>();
@@ -112,6 +113,21 @@ public class FSM : MonoBehaviour
 
             if (ststed.pl == players.None)
                 ststed.HP = (int)(ststed.stat.HP * 0.2f);
+        }
+
+        if(Character.enabled ==false)
+        {
+            if(capsule)
+            {
+                capsule.enabled = true;
+            }
+        }
+        else
+        {
+            if (capsule)
+            {
+                capsule.enabled = false;
+            }
         }
         currentState?.UpdateState();
 

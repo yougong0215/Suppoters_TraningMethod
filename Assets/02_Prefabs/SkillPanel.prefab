@@ -238,8 +238,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InGameCharacterBar, Assembly-CSharp
+      - m_Target: {fileID: 6034992524423988328}
+        m_TargetAssemblyTypeName: SkillUIPanel, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
@@ -268,6 +268,11 @@ MonoBehaviour:
   ExplainUI: {fileID: 5006990054000873677}
   Cost: 0
   explain: 
+  skill:
+    state: 0
+    _skill: {fileID: 0}
+    dir: {x: 0, y: 0, z: 0}
+    InPos: 0
 --- !u!1 &1993935818221281421
 GameObject:
   m_ObjectHideFlags: 0

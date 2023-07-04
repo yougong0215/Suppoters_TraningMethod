@@ -45,8 +45,16 @@ public class InGameCharacterBar : MonoBehaviour
             CharacterImage.sprite = _charSpi;
 
         SkillList.SetActive(false);
+
     }
 
+    private void Start()
+    {
+        if (_select)
+        {
+            CameraController.Instance.SetCam(_info.pl);
+        }
+    }
 
     public void OnClick()
     {

@@ -17,6 +17,7 @@ public class NuckDownAction : CommonAction
 
     protected override void Init()
     {
+        com.FSMMain.Object.useSkill = false;
         com.FSMMain.Character.enabled = true;
         com.FSMMain.AG.enabled = false;
         DIeTime = 0;

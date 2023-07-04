@@ -776,6 +776,7 @@ MonoBehaviour:
   - {fileID: 4820131576460373096, guid: c35ac70f04116014b9954a5f01dff99f, type: 3}
   - {fileID: 4820131576460373096, guid: 43fda95a6f48f03489030ddc00d910e9, type: 3}
   - {fileID: 4820131576460373096, guid: e4da82a76c7114b4ab0403c0fa54f712, type: 3}
+  - {fileID: 4721093932626093151, guid: ea2102bfa33bfc5448e6a27c42c40222, type: 3}
 --- !u!1001 &479863006
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3592,6 +3593,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 628215363}
     m_Modifications:
+    - target: {fileID: 918382458366391983, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: m_Name
+      value: Sniping
+      objectReference: {fileID: 0}
     - target: {fileID: 1993935817638330152, guid: 6a2d6053b1a90324abe8620df3172271,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3718,10 +3724,61 @@ PrefabInstance:
       propertyPath: m_Name
       value: DamVIPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 3674376238805025000, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1993935817103162140}
+    - target: {fileID: 3674376238805025000, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 3674376238805025000, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SkillUIPanel, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3674376238805025005, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: m_Name
+      value: Move
+      objectReference: {fileID: 0}
+    - target: {fileID: 4960086399036181996, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: Cost
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4960086399036181996, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: explain
+      value: "\uAC15\uB825\uD55C \uD55C\uBC29\uC744 \uB178\uB9AC\uC790"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4960086399036181996, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: skill.state
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 4960086399036181996, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: skill._skill
+      value: 
+      objectReference: {fileID: 11400000, guid: 79193d8b744ba7f4d809746f176bd0d5,
+        type: 2}
+    - target: {fileID: 4960086399036181996, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: skill.useSkill
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8785827397429014416, guid: 6a2d6053b1a90324abe8620df3172271,
+        type: 3}
+      propertyPath: skill.useSkill
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8833100447090785198, guid: 6a2d6053b1a90324abe8620df3172271,
         type: 3}
       propertyPath: explain
-      value: "\uC6C0\uC9C1\uC778\uB2E4"
+      value: "\uC6D0\uD558\uB294 \uC704\uCE58\uB85C \uC774\uB3D9\uD55C\uB2E4."
       objectReference: {fileID: 0}
     - target: {fileID: 8833100447090785198, guid: 6a2d6053b1a90324abe8620df3172271,
         type: 3}
@@ -3745,6 +3802,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b25901b2d41e9f949888c63dbf4babf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1993935817103162140 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8833100447090785198, guid: 6a2d6053b1a90324abe8620df3172271,
+    type: 3}
+  m_PrefabInstance: {fileID: 1993935817103162138}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1774651842935fd498cd4c164a089f1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &3060383347776603072

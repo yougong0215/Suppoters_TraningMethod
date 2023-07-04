@@ -22,31 +22,74 @@ public class SkillUIPanel : MonoBehaviour
     [Header("Skill")]
     [SerializeField] skillinfo skill;
 
+    float _originPosX;
+    RectTransform me;
+    RectTransform parent;
     bool click = false;
+
+    TimeStopButton tp;
+
+    FSM fs;
     private void Awake()
     {
         game = transform.parent.parent.GetComponent<InGameCharacterBar>();
-        if(_charSpi != null)
+        fs = game._info.GetComponent<FSM>();
+        if (_charSpi != null)
             CharacterImage.sprite = _charSpi;
 
         CostUI.text = explain;
         ExplainUI.text = $"Cost : {Cost}";
+        
+        tp = GameObject.Find("TimeStop").GetComponent<TimeStopButton>();
+        me = GetComponent<RectTransform>();
+        parent = transform.parent.GetComponent<RectTransform>();
+        _originPosX = me.localPosition.x;
     }
 
     public void OnClick()
     {
-        click = true;
-        transform.parent.parent.parent.GetComponent<RectTransform>().position -= new Vector3(0, 400, 0);
+        if(CanSelect() && fs.Object.useSkill==false)
+        {
+            click = true;
+            parent.position -= new Vector3(0, 200, 0);
+            me.localPosition = new Vector3(-140, 1120, 0);
+            GetComponent<RectTransform>();
+            tp.SelectStop();
+        }
+    }
+
+    bool CanSelect()
+    {
+        if(fs.NowState() != FSMState.nuckdown && fs.NowState() != FSMState.WakeUp && fs.NowState() != FSMState.Death)
+        {
+            return true;
+        }
+        return false;
     }
 
     private void Update()
     {
-        if(click==true)
+        if(CanSelect() == false && click)
         {
+
+            click = false;
+            parent.position += new Vector3(0, 200, 0);
+
+            me.localPosition = new Vector3(_originPosX, 0, 0);
+
+            tp.SelectEnd();
+        }
+
+        if(click)
+        {
+            
             if (Input.GetMouseButtonDown(0))
             {
                 click = false;
-                transform.parent.parent.parent.GetComponent<RectTransform>().position += new Vector3(0, 400, 0);
+                parent.position += new Vector3(0, 200, 0);
+
+                me.localPosition = new Vector3(_originPosX, 0, 0);
+
                 Vector3 screenPos = Input.mousePosition;
 
                 // 클릭한 위치의 3D 좌표를 계산
@@ -58,13 +101,19 @@ public class SkillUIPanel : MonoBehaviour
                     skill.dir = new Vector3(0, 0, 0);
 
                 }
+                tp.SelectEnd();
             }
             else if (Input.GetMouseButtonDown(1))
             {
                 click = false;
-                transform.parent.parent.parent.GetComponent<RectTransform>().position += new Vector3(0, 400, 0);
+                parent.position += new Vector3(0, 200, 0);
+                me.localPosition = new Vector3(_originPosX, 0, 0);
+                tp.SelectEnd();
             }
 
+            
+
         }
+        
     }
 }

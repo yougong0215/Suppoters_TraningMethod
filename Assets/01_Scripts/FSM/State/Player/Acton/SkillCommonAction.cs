@@ -9,7 +9,6 @@ public class SkillCommonAction : CommonAction
     [SerializeField] public SkillSO _NormalAttack;
 
     bool Arainge = false;
-    float Changecurtime = 2;
     float curTime = 0;
     
     public void SetAnim()
@@ -41,6 +40,7 @@ public class SkillCommonAction : CommonAction
     {
         Arainge = true;
         curTime = 0;
+        com.FSMMain.Object.useSkill = false;
         com.FSMMain.ChangeState(FSMState.Idle);
     }
 
@@ -84,11 +84,7 @@ public class SkillCommonAction : CommonAction
     protected override void OnUpdateFunc()
     {
         curTime += Time.deltaTime;
-        if(Arainge)
-        {
-            Debug.Log(com.FSMMain.name);
-        }
-        if(curTime > Changecurtime && Arainge == true)
+        if( Arainge == true)
         {
             //Arainge = false;
             //curTime = 0;
