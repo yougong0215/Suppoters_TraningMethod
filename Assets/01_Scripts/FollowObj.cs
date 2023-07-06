@@ -12,15 +12,22 @@ public class FollowObj : MonoBehaviour
     {
         if(pl != players.None)
             tls = GameObject.Find(pl.ToString()).transform;
-        else
-        {
-            tls = GameObject.Find("Boss").transform;
-        }
+
+        //transform.localEulerAngles = new Vector3(0, 45, 0);
+
     }
 
     private void Update()
     {
-        transform.position = tls.position;
+        if(tls != null)
+        {
+
+            transform.position = tls.position;
+        }
+        else
+        {
+            transform.position = CameraController.Instance.NoneCameraPos;
+        }
         transform.rotation = Quaternion.identity;
     }
 }

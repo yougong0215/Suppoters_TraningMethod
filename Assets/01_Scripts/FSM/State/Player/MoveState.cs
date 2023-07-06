@@ -82,19 +82,27 @@ public class MoveState : CommonState
             if(FSMMain.AG.enabled == true)
             if (FSMMain.Object.InPos == false)
             {
-                FSMMain.SeeEnemy = FSMMain.ts.position;
+                    if (fsm.AutoMove == false)
+                    {
+                        FSMMain.ChangeState(FSMState.Idle);
+                        return;
+                    }
+
+                    FSMMain.SeeEnemy = FSMMain.ts.position;
                 FSMMain.AG.SetDestination(vec + FSMMain.SeeEnemy);
                 if ((FSMMain.AG.remainingDistance < FSMMain.ststed.stat._distance + 0.05f) && MoveTime > 0.2f)
                 {
                     FSMMain.ChangeState(FSMState.Idle);
                 }
 
+
+
             }
             else
             {
                 FSMMain.AG.SetDestination(vec);
 
-                if ((FSMMain.AG.remainingDistance < 0.2f ) && MoveTime > 0.2f)
+                if ((FSMMain.AG.remainingDistance < 0.05f ) && MoveTime > 0.2f)
                 {
                     FSMMain.ChangeState(FSMState.Idle);
                 }

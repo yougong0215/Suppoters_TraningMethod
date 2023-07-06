@@ -44,7 +44,7 @@ public class AgentStatus : MonoBehaviour, IDamageAble
     {
         TextDamageCast damageCast = PoolManager.Instance.Pop("TMP") as TextDamageCast;
         
-        if(nuck==true)
+        if(nuck==true && GetComponent<FSM>().CanSelect())
         {
             if(GetComponent<FSM>().NowState() != FSMState.WakeUp)
             GetComponent<FSM>().ChangeState(FSMState.nuckdown);

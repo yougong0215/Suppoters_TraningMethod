@@ -78,7 +78,7 @@ public class CharacterIdleState : CommonState
             vec.y = 0;
             vec2.y = 0;
             Debug.Log($"{FSMMain.gameObject.name} Distance : {Vector3.Distance(vec, vec2)} > {FSMMain.ststed.stat._distance*10 - 0.05f}"); 
-            if (Vector3.Distance(vec,vec2) > FSMMain.ststed.stat._distance*10 - 0.05f)
+            if (Vector3.Distance(vec,vec2) > FSMMain.ststed.stat._distance*10 - 0.05f && fsm.AutoMove)
             {
                 FSMMain.Object.InPos = false;
                 FSMMain.ChangeState(FSMState.Move);

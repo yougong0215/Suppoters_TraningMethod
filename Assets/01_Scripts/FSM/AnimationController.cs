@@ -21,6 +21,9 @@ public class AnimationController : MonoBehaviour
     private readonly int _isWakeHash = Animator.StringToHash("is_wake");
     private readonly int _wakeTriggerhash = Animator.StringToHash("wakeUP");
 
+    private readonly int _isDashHash = Animator.StringToHash("is_dash");
+    private readonly int _dashTriggerhash = Animator.StringToHash("dash");
+
     public event Action OnAnimationEndTrigger = null;
     public event Action OnAnimationEventTrigger = null;
     public event Action OnPreAnimationEventTrigger = null;
@@ -56,6 +59,20 @@ public class AnimationController : MonoBehaviour
     {
         AOC[fsm.ToString()] = clip;
         _animator.runtimeAnimatorController = AOC;
+    }
+
+    public void SetDashAnimation(bool b)
+    {
+        if (b == true)
+        {
+            _animator.SetBool(_isDashHash, b);
+            _animator.SetTrigger(_dashTriggerhash);
+        }
+        else
+        {
+            _animator.SetBool(_isDashHash, b);
+            _animator.ResetTrigger(_dashTriggerhash);
+        }
     }
 
     public void OnAnimationEvent()

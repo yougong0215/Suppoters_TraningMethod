@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class DeathState : CommonState
 {
+    bool death = false;
     public override void EnterState()
     {
        
         FSMMain.gameObject.tag = "Player2";
+        if(death ==false)
+        {
+            death = true;
+
+             _animator.SetNuckDownAnimation(true);
+        }
     }
 
     public override void ExitState()

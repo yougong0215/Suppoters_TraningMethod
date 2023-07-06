@@ -27,6 +27,7 @@ public class SkillCommonAction : CommonAction
             com.FSMMain.SeeEnemy = com.FSMMain.ts.position;
             com.FSMMain.SeeEnemy.y = transform.position.y;
             com.FSMMain.LookRotations(com.FSMMain.SeeEnemy);
+            com.FSMMain.Object.useSkill = false;
         }
 
             com.AnimationCon.ChangeAnimationClip(FSMState.Skill, _skillSO.clips);

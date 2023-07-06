@@ -57,7 +57,6 @@ MonoBehaviour:
   ps: {fileID: 1105273508920862929, guid: 5037376d324548b4693f7f012cae79ce, type: 3}
   shape: 0
   oneBuf: 1
-  OnlyBuf: 1
   pl: 0
   cols: []
 --- !u!65 &8737300081648130260
@@ -200,7 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b1e702b0699c2469557a0ea1e981fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 4
 --- !u!4 &4721093932626093150 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6034427996445932503, guid: 5b2e7826fca619b498b198c9e0f15623,

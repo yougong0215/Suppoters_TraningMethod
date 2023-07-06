@@ -54,7 +54,7 @@ MonoBehaviour:
   himsValue: 0
   st: 3
   vfx: {fileID: 0}
-  ps: {fileID: 1105273508920862929, guid: 5037376d324548b4693f7f012cae79ce, type: 3}
+  ps: {fileID: 1105273508920862929, guid: 754eb5940dafd8d449634297abf7e926, type: 3}
   shape: 0
   oneBuf: 1
   pl: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
   himsValue: 0
   st: 4
   vfx: {fileID: 0}
-  ps: {fileID: 1105273508920862929, guid: 5037376d324548b4693f7f012cae79ce, type: 3}
+  ps: {fileID: 1105273508920862929, guid: 754eb5940dafd8d449634297abf7e926, type: 3}
   shape: 0
   oneBuf: 1
   pl: 0
@@ -198,7 +198,7 @@ MonoBehaviour:
   himsValue: 0
   st: 1
   vfx: {fileID: 0}
-  ps: {fileID: 1105273508920862929, guid: 5037376d324548b4693f7f012cae79ce, type: 3}
+  ps: {fileID: 1105273508920862929, guid: 754eb5940dafd8d449634297abf7e926, type: 3}
   shape: 0
   oneBuf: 1
   pl: 0
@@ -247,8 +247,7 @@ PrefabInstance:
         type: 3}
       propertyPath: ps
       value: 
-      objectReference: {fileID: 1105273508920862929, guid: 754eb5940dafd8d449634297abf7e926,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 6034427996445932502, guid: 5b2e7826fca619b498b198c9e0f15623,
         type: 3}
       propertyPath: Critical

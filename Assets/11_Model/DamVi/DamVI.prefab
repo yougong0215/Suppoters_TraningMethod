@@ -1077,7 +1077,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _myState: 1
   curtime: 0
-  _skillSO: {fileID: 0}
   curringTime: 0
   DIeTime: 0
 --- !u!1 &1615247623394405306
@@ -1138,7 +1137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1615247623599549153
 Transform:
   m_ObjectHideFlags: 0
@@ -1177,15 +1176,12 @@ MonoBehaviour:
   Nexte: 0
   bStop: 0
   useinged: []
-  useing:
+  Object:
     state: 0
-    spi: {fileID: 0}
     _skill: {fileID: 0}
     dir: {x: 0, y: 0, z: 0}
-    pos: {x: 0, y: 0, z: 0}
-    Fire: 0
-    Cost: 0
-    WaitTime: 0
+    InPos: 0
+    useSkill: 0
   ststed: {fileID: 0}
   bus: {fileID: 0}
   Patton: 0
@@ -2582,6 +2578,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skillSO: {fileID: 11400000, guid: 8fbd06fa021ac314fa23db895f4d6eeb, type: 2}
+  _NormalAttack: {fileID: 0}
 --- !u!1 &4170137785394101869
 GameObject:
   m_ObjectHideFlags: 0

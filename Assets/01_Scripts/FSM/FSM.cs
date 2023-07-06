@@ -39,6 +39,8 @@ public class FSM : MonoBehaviour
     public Transform ts;
     CapsuleCollider capsule;
     bool b = true;
+
+    [NonSerialized] public bool AutoMove = true;
     private void Awake()
     {
         capsule = GetComponent<CapsuleCollider>();
@@ -131,5 +133,14 @@ public class FSM : MonoBehaviour
         }
         currentState?.UpdateState();
 
+    }
+
+    public bool CanSelect()
+    {
+        if (NowState() != FSMState.nuckdown && NowState() != FSMState.WakeUp && NowState() != FSMState.Death)
+        {
+            return true;
+        }
+        return false;
     }
 }

@@ -15,7 +15,8 @@ MonoBehaviour:
   HP: 50000
   ATK: 20
   DEF: 0
+  Cost: 20
   Critical: 0
   CriticalDamage: 0
   Speed: 0
-  _distance: 1
+  _distance: 0.5

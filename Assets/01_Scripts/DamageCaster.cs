@@ -45,10 +45,16 @@ public class DamageCaster : PoolAble
     public bool NuckBackAttack;
     public bool DonotPool;
     public bool justCast;
+
+    [Header("Sound")]
+    [SerializeField] AudioClip FireSound;
+    [SerializeField] AudioClip HitSound;
+    [SerializeField] AudioSource ad;
     private void Awake()
     {
         onLife = lifeTime;
         MaxAttackfrequency = Attackfrequency;
+        ad = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -58,6 +64,8 @@ public class DamageCaster : PoolAble
 
     public void Init(int damage, float cir, float crid)
     {
+        if(FireSound!=null)
+            ad.PlayOneShot(FireSound);
 
         Attackfrequency = MaxAttackfrequency;
         lifeTime = onLife;
@@ -67,6 +75,7 @@ public class DamageCaster : PoolAble
 
 
             Veffect = obj.gameObject.GetComponent<VisualEffect>();
+            Veffect.transform.rotation = transform.rotation;
         }
 
         if (ps != null)
@@ -82,7 +91,7 @@ public class DamageCaster : PoolAble
         init = true;
     }
 
-    protected void Update()
+    protected void FixedUpdate()
     {
         if (justCast == true)
             return;
@@ -162,7 +171,7 @@ public class DamageCaster : PoolAble
                             StartCoroutine(Attack(damageable, times / AttackCount, AttackCount - 1, collider));
                         }
                     }
-
+                    //ustCast = true;
                    
                 }
             }
@@ -195,12 +204,16 @@ public class DamageCaster : PoolAble
     Random.Range(bounds.min.z, bounds.max.z));
         randomPosition.y += 1;
 
+
+
         if (Random.Range(0, 100f) <= Critical)
         {
+            ad.PlayOneShot(HitSound);
             able.TakeDamage(AttackDamage, randomPosition, CriticalDamage, true, NuckBackAttack);
         }
         else
         {
+            ad.PlayOneShot(HitSound);
             able.TakeDamage(AttackDamage, randomPosition, 1, false, NuckBackAttack);
         }
 
@@ -222,6 +235,7 @@ public class DamageCaster : PoolAble
 
         if(count != 0)
         {
+
             StartCoroutine(Attack(able,timed,count-1, enemyCollider));
         }
     }

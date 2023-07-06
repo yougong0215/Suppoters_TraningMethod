@@ -24,6 +24,28 @@ public class InGameCharacterBar : MonoBehaviour
     [Header("Info")]
     [SerializeField] bool _select = false;
     [SerializeField] GameObject SkillList;
+    [SerializeField] public int Cost;
+    [SerializeField] TextMeshProUGUI Sibal;
+    [SerializeField] string CharName;
+
+    [Header("AutoMove")]
+    [SerializeField] Image checkImg;
+    [SerializeField] Sprite Check;
+    [SerializeField] Sprite nonCehck;
+    
+    public void OnAutmoveClick()
+    {
+        if(_info.GetComponent<FSM>().AutoMove == false)
+        {
+            checkImg.sprite = Check;
+            _info.GetComponent<FSM>().AutoMove = true;
+        }
+        else
+        {
+            _info.GetComponent<FSM>().AutoMove = false;
+            checkImg.sprite = nonCehck;
+        }
+    }
 
     bool click = true;
     CharacterUISelect ui;
@@ -44,7 +66,9 @@ public class InGameCharacterBar : MonoBehaviour
         if (_charSpi != null)
             CharacterImage.sprite = _charSpi;
 
+        Cost = _info.stat.Cost;
         SkillList.SetActive(false);
+        Sibal.text = CharName;
 
     }
 
@@ -91,9 +115,23 @@ public class InGameCharacterBar : MonoBehaviour
         }
     }
 
+    float curtime = 0;
+
     private void Update()
     {
+        if(curtime >= 1 && Cost < _info.stat.Cost)
+        {
+            Cost += 1;
+            curtime = 0;
+        }
+        else
+        {
+            curtime += Time.deltaTime;
+        }
         HPBar.fillAmount = Mathf.Lerp(0, 1, (float)_info.HP / (float)_info.MaxHP);
         HPText.text = $"{_info.HP}/{_info.MaxHP}";
+        MPBar.fillAmount = Mathf.Lerp(0, 1, (float)Cost / (float)_info.stat.Cost);
+        MPText.text = $"{Cost}/{ _info.stat.Cost}"; 
+        Cost = Mathf.Clamp(Cost, 0, _info.stat.Cost);
     }
 }

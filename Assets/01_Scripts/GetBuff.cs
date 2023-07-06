@@ -75,6 +75,7 @@ public class GetBuff : PoolAble
             }
         }
         init = true;
+        use = false;
     }
 
     private void Update()
@@ -167,7 +168,7 @@ public class GetBuff : PoolAble
             return;
             //PoolManager.Instance.Push(this);
         }
-        if (colliders.Length > 0)
+        if (oneBuf == false && colliders.Length > 0)
         {
 
             foreach (Collider collider in colliders)
