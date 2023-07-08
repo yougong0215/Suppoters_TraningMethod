@@ -47,8 +47,17 @@ public class FSM : MonoBehaviour
         _nav = GetComponent<NavMeshAgent>();
         _chara = GetComponent<CharacterController>();
         ststed = GetComponent<AgentStatus>();
-        if(gameObject.name != "Boss")
-        ts = GameObject.FindGameObjectWithTag("Boss").transform;
+        try
+        {
+            if (gameObject.name != "Boss")
+                ts = GameObject.FindGameObjectWithTag("Boss").transform;
+        }
+        catch
+        {
+            Debug.Log("·Îºñ¾À");
+            ts = transform;
+        }
+
     }
 
     public void Next(skillinfo sk)

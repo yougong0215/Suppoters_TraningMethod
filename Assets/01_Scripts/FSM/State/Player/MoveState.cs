@@ -89,6 +89,7 @@ public class MoveState : CommonState
                     }
 
                     FSMMain.SeeEnemy = FSMMain.ts.position;
+                    FSMMain.LookRotations(vec + FSMMain.SeeEnemy);
                 FSMMain.AG.SetDestination(vec + FSMMain.SeeEnemy);
                 if ((FSMMain.AG.remainingDistance < FSMMain.ststed.stat._distance + 0.05f) && MoveTime > 0.2f)
                 {
@@ -101,8 +102,8 @@ public class MoveState : CommonState
             else
             {
                 FSMMain.AG.SetDestination(vec);
-
-                if ((FSMMain.AG.remainingDistance < 0.05f ) && MoveTime > 0.2f)
+                    FSMMain.LookRotations(vec);
+                    if ((FSMMain.AG.remainingDistance < 0.05f ) && MoveTime > 0.2f)
                 {
                     FSMMain.ChangeState(FSMState.Idle);
                 }

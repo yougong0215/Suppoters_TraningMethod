@@ -83,7 +83,7 @@ public class CharacterIdleState : CommonState
                 FSMMain.Object.InPos = false;
                 FSMMain.ChangeState(FSMState.Move);
             }
-            else if(curtime > 1f)
+            else if(curtime > 1f && Vector3.Distance(vec, vec2) < FSMMain.ststed.stat._distance * 20 - 0.05f && FSMMain.ts != FSMMain.transform)
             {
                 FSMMain.Object._skill = null;
                 FSMMain.Object.InPos = true;

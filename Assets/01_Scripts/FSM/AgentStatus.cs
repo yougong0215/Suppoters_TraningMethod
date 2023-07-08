@@ -29,7 +29,7 @@ public class AgentStatus : MonoBehaviour, IDamageAble
     [SerializeField] public float Cirt;
     [SerializeField] public float CirtDAM;
     [SerializeField] public float DEF;
-
+    [SerializeField] public float Cost;
 
 
     public LayerMask _player;
@@ -58,6 +58,8 @@ public class AgentStatus : MonoBehaviour, IDamageAble
         damageCast.Init((int)(100 / (100 + stat.DEF) * valued * cirt), critical, position);
         HP -= (int)((100 / (100 + stat.DEF) * valued) * cirt);
     }
+
+    
 
 
     public void Update()

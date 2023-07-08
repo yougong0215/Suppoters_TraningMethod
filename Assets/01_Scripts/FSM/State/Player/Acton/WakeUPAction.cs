@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WakeUPAction : CommonAction
 {
+    bool wakeup = false;
     protected override void Init()
     {
 
@@ -11,7 +12,7 @@ public class WakeUPAction : CommonAction
 
     protected override void OnEndFunc()
     {
-        com.FSMMain.ChangeState(FSMState.Idle);
+        wakeup =true;
     }
 
     protected override void OnEventFunc()
@@ -20,5 +21,9 @@ public class WakeUPAction : CommonAction
 
     protected override void OnUpdateFunc()
     {
+        if(com.FSMMain.NowState() == FSMState.WakeUp && wakeup ==true)
+        {
+            com.FSMMain.ChangeState(FSMState.Idle);
+        }
     }
 }

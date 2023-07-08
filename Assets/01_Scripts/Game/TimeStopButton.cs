@@ -7,7 +7,7 @@ public class TimeStopButton : MonoBehaviour
     bool btnstop = false;
     public void TimeStop()
     {
-        Time.timeScale = Time.timeScale == 1 ? 0.01f : 1;
+        Time.timeScale = Time.timeScale == 1 ? 0.05f : 1;
         btnstop = btnstop == false ? true : false;
     }
 
@@ -15,7 +15,7 @@ public class TimeStopButton : MonoBehaviour
     {
         if(btnstop==false)
         {
-            Time.timeScale = 0.01f;
+            Time.timeScale = 0.05f;
         }
     }
 

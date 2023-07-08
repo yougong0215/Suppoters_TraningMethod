@@ -32,6 +32,8 @@ public class InGameCharacterBar : MonoBehaviour
     [SerializeField] Image checkImg;
     [SerializeField] Sprite Check;
     [SerializeField] Sprite nonCehck;
+
+    public bool Lobby = false;
     
     public void OnAutmoveClick()
     {
@@ -82,7 +84,8 @@ public class InGameCharacterBar : MonoBehaviour
 
     public void OnClick()
     {
-
+        if (Lobby == true)
+            return;
         if(_select == false)
         {
             ui.Select();
@@ -119,7 +122,9 @@ public class InGameCharacterBar : MonoBehaviour
 
     private void Update()
     {
-        if(curtime >= 1 && Cost < _info.stat.Cost)
+        if (Lobby == true)
+            return;
+        if (curtime >= 1 && Cost < _info.stat.Cost)
         {
             Cost += 1;
             curtime = 0;
@@ -133,5 +138,6 @@ public class InGameCharacterBar : MonoBehaviour
         MPBar.fillAmount = Mathf.Lerp(0, 1, (float)Cost / (float)_info.stat.Cost);
         MPText.text = $"{Cost}/{ _info.stat.Cost}"; 
         Cost = Mathf.Clamp(Cost, 0, _info.stat.Cost);
+        _info.Cost = Cost;
     }
 }

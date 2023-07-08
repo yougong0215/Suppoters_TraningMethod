@@ -1,7 +1,9 @@
 using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum players
 {
@@ -17,6 +19,17 @@ public class CameraController : Singleton<CameraController>
 {
 
     [SerializeField] Dictionary<players, CinemachineVirtualCamera> dic = new Dictionary<players, CinemachineVirtualCamera>();
+
+    public void CamLock()
+    {
+        cammod = cammod == false ? true : false;
+    }
+
+    public bool GetLock()
+    {
+        return cammod;
+    }
+
     players selected = players.None;
     players lasted = players.DamVI;
     public void Submit(players pl, CinemachineVirtualCamera cam)
