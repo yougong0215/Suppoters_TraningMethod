@@ -57,7 +57,6 @@ MonoBehaviour:
   ps: {fileID: 0}
   shape: 0
   oneBuf: 0
-  OnlyBuf: 0
   pl: 0
   cols: []
 --- !u!65 &6557236184223692864
@@ -130,7 +129,6 @@ MonoBehaviour:
   ps: {fileID: 0}
   shape: 0
   oneBuf: 0
-  OnlyBuf: 0
   pl: 0
   cols: []
 --- !u!65 &6416672652088604649
@@ -153,6 +151,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3992123204938273328, guid: 5b2e7826fca619b498b198c9e0f15623,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992123204938273328, guid: 5b2e7826fca619b498b198c9e0f15623,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992123204938273328, guid: 5b2e7826fca619b498b198c9e0f15623,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 7347543810577370871, guid: af59c3f237cae084c88dcd36cdf2454b,
+        type: 2}
     - target: {fileID: 6034427996445932497, guid: 5b2e7826fca619b498b198c9e0f15623,
         type: 3}
       propertyPath: m_Name
@@ -185,9 +199,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6034427996445932502, guid: 5b2e7826fca619b498b198c9e0f15623,
         type: 3}
+      propertyPath: HitSound
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6034427996445932502, guid: 5b2e7826fca619b498b198c9e0f15623,
+        type: 3}
       propertyPath: lifeTime
       value: 0.88
       objectReference: {fileID: 0}
+    - target: {fileID: 6034427996445932502, guid: 5b2e7826fca619b498b198c9e0f15623,
+        type: 3}
+      propertyPath: FireSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 3a83baa2ec2010843acf9b3ccc76ff32, type: 3}
     - target: {fileID: 6034427996445932502, guid: 5b2e7826fca619b498b198c9e0f15623,
         type: 3}
       propertyPath: AttackDamage

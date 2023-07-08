@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    public bool GameClear;
+    public int HP;
+    public int diecnt;
+    public int clearcnt;
+
+
+    public float percent;
     Camera _cam;
 
     public Camera Cam

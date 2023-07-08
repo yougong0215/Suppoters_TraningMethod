@@ -25,8 +25,11 @@ public class DamageCaster : PoolAble
     public float times = 1f;
     [Header("데미지 SO연결 필요")]
     public int AttackDamage = 10;
+    float AttOn;
     public float CriticalDamage = 2;
+    float criDamOn;
     public float Critical = 0;
+    float criFOn;
     [Header("VFX")]
     public VisualEffect vfx;
     public ParticleSystem ps;
@@ -51,17 +54,22 @@ public class DamageCaster : PoolAble
     {
         onLife = lifeTime;
         MaxAttackfrequency = Attackfrequency;
+        if(!GetComponent<AudioSource>())
+         gameObject. AddComponent<AudioSource>();
         ad = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
     {
         init = false;
+        AttOn = AttackDamage;
+        criDamOn = CriticalDamage;
+        criFOn = Critical;
     }
 
     public void Init(int damage, float cir, float crid)
     {
-        if(FireSound!=null)
+        if (FireSound != null)
             ad.PlayOneShot(FireSound);
 
         Attackfrequency = MaxAttackfrequency;
@@ -82,6 +90,9 @@ public class DamageCaster : PoolAble
             Peffect = obj.gameObject.GetComponent<ParticleSystem>();
         }
         Debug.Log($"CRIIN { crid}");
+        CriticalDamage = criDamOn;
+        Critical = criFOn;
+        AttackDamage = (int)AttOn;
         CriticalDamage += crid;
         Critical += cir;
         AttackDamage += damage;
@@ -165,6 +176,8 @@ public class DamageCaster : PoolAble
                         Debug.Log($"적 : {collider.name}");
                         if (collider.TryGetComponent<IDamageAble>(out damageable))
                         {
+                            if (HitSound != null)
+                                ad.PlayOneShot(HitSound);
                             StartCoroutine(Attack(damageable, times / AttackCount, AttackCount - 1, collider));
                         }
                     }
@@ -205,12 +218,11 @@ public class DamageCaster : PoolAble
 
         if (Random.Range(0, 100f) <= Critical)
         {
-            ad.PlayOneShot(HitSound);
+
             able.TakeDamage(AttackDamage, randomPosition, CriticalDamage, true, NuckBackAttack);
         }
         else
         {
-            ad.PlayOneShot(HitSound);
             able.TakeDamage(AttackDamage, randomPosition, 1, false, NuckBackAttack);
         }
 

@@ -7,6 +7,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3992123204938273328, guid: 5b2e7826fca619b498b198c9e0f15623,
+        type: 3}
+      propertyPath: m_Pitch
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992123204938273328, guid: 5b2e7826fca619b498b198c9e0f15623,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992123204938273328, guid: 5b2e7826fca619b498b198c9e0f15623,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6034427996445932497, guid: 5b2e7826fca619b498b198c9e0f15623,
         type: 3}
       propertyPath: m_Name
@@ -44,9 +59,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6034427996445932502, guid: 5b2e7826fca619b498b198c9e0f15623,
         type: 3}
+      propertyPath: HitSound
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6034427996445932502, guid: 5b2e7826fca619b498b198c9e0f15623,
+        type: 3}
       propertyPath: lifeTime
       value: 0.88
       objectReference: {fileID: 0}
+    - target: {fileID: 6034427996445932502, guid: 5b2e7826fca619b498b198c9e0f15623,
+        type: 3}
+      propertyPath: FireSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 70be4678228579748b3bff58b3933a87, type: 3}
     - target: {fileID: 6034427996445932502, guid: 5b2e7826fca619b498b198c9e0f15623,
         type: 3}
       propertyPath: AttackCount
