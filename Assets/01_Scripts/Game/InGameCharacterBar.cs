@@ -69,6 +69,7 @@ public class InGameCharacterBar : MonoBehaviour
             CharacterImage.sprite = _charSpi;
 
         Cost = _info.stat.Cost;
+        if(SkillList)
         SkillList.SetActive(false);
         Sibal.text = CharName;
 
@@ -105,12 +106,14 @@ public class InGameCharacterBar : MonoBehaviour
             {
                 click = true;
                 ui.ObjectActive(true);
-                SkillList.SetActive(false);
+                if (SkillList)
+                    SkillList.SetActive(false);
             }
             else
             {
                 click = false;
                 ui.ObjectActive(false);
+                if(SkillList)
                 SkillList.SetActive(true);
             }
 

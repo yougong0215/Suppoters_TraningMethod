@@ -15,8 +15,9 @@ public enum players
     
 }
 
-public class CameraController : Singleton<CameraController>
+public class CameraController : MonoBehaviour
 {
+    public static CameraController Instance;
 
     [SerializeField] Dictionary<players, CinemachineVirtualCamera> dic = new Dictionary<players, CinemachineVirtualCamera>();
 
@@ -43,6 +44,7 @@ public class CameraController : Singleton<CameraController>
 
     private void Awake()
     {
+        Instance = this;
         x = Screen.width;
         y = Screen.height;
     }
