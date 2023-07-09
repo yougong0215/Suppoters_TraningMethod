@@ -96,25 +96,25 @@ public class AgentStatus : MonoBehaviour, IDamageAble
     }
     public IEnumerator Buffs(float value, float hims, Stat st, float Time)
     {
-        //switch (st)
-        //{
-        //    case Stat.ATK:
-        //        AddDamage += value;
-        //        himsDamage += hims;
-        //        break;
-        //    case Stat.HP:
-        //        HP += (int)value;
-        //        break;
-        //    case Stat.DEF:
-        //        DEF += (int)value;
-        //        break;
-        //    case Stat.CRIT:
-        //        Cirt += value;
-        //        break;
-        //    case Stat.CRITDAM:
-        //        CirtDAM += value;
-        //        break;
-        //}
+        switch (st)
+        {
+            case Stat.ATK:
+                AddDamage += value;
+                himsDamage += hims;
+                break;
+            case Stat.HP:
+                HP += (int)value;
+                break;
+            case Stat.DEF:
+                DEF += (int)value;
+                break;
+            case Stat.CRIT:
+                Cirt += value;
+                break;
+            case Stat.CRITDAM:
+                CirtDAM += value;
+                break;
+        }
         Debug.Log($"{st.ToString()} {gameObject.name} Ω√¿€ : {value}|{hims}");
         
         yield return new WaitForSeconds(Time);

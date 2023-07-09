@@ -17,10 +17,12 @@ public class GameRule : MonoBehaviour
     {
         if(BOSS.HP <=0)
         {
-            GameManager.Instance.GameClear = true;
-            GameManager.Instance.clearcnt++;
-            SceneManager.LoadScene("GameOver");
+            GameManager.Instance._savedata.GameClear = true;
+            GameManager.Instance._savedata.clearcnt++;
+            GameManager.Instance.JsonSave();
             GameManager.Instance.percent = 0;
+            SceneManager.LoadScene("GameOver");
+
         }
 
         if(pl1.HP <=0)
@@ -29,7 +31,8 @@ public class GameRule : MonoBehaviour
                 if (pl4.HP <= 0)
                     {
                         GameManager.Instance.percent = (float)BOSS.HP / (float)BOSS.MaxHP;
-                        GameManager.Instance.diecnt++;
+                        GameManager.Instance._savedata.diecnt++;
+                        GameManager.Instance.JsonSave();
                         SceneManager.LoadScene("GameOver");
                     }
     }

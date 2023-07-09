@@ -26,7 +26,8 @@ public class CharacterIdleState : CommonState
         FSMMain.Character.enabled = true;
         FSMMain.AG.enabled = false;
 
-
+        _animator.SetNuckDownAnimation(false);
+        _animator.SetWakeAnimation(false);
 
 
         //if (_skillSO != null && _skillSO.dashAgain == true)

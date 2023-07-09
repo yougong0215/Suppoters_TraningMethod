@@ -5,11 +5,12 @@ using DG.Tweening;
 using UnityEngine.UI;
 using System.Linq;
 using Cinemachine;
+using UnityEngine.Video;
 
 public class UISommon : MonoBehaviour
 {
     public List<Button> bList = new();
-
+    public VideoPlayer pl;
     private void Awake()
     {
         bList = transform.GetComponentsInChildren<Button>().ToList();
@@ -17,6 +18,9 @@ public class UISommon : MonoBehaviour
         {
             btn.interactable = false;
         }
+
+        if(pl)
+        pl.Stop();
     }
     void Start()
     {
@@ -31,6 +35,9 @@ public class UISommon : MonoBehaviour
     {
         gameObject.SetActive(true);
 
+
+        if (pl)
+            pl.Play();
 
         // DOTween 함수를 차례대로 수행하게 해줍니다.
         var seq = DOTween.Sequence();
@@ -51,7 +58,8 @@ public class UISommon : MonoBehaviour
 
     public void Hide()
     {
-
+        if (pl)
+            pl.Stop();
         foreach (Button btn in bList)
         {
             btn.interactable = false;
@@ -75,6 +83,8 @@ public class UISommon : MonoBehaviour
 
     public void FastHid()
     {
+        if (pl)
+            pl.Stop();
         transform.localScale = new Vector3(0.2f, 0.2f);
         foreach (Button btn in bList)
         {

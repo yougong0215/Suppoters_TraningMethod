@@ -123,7 +123,7 @@ public class FSM : MonoBehaviour
         {
 
             if (ststed.pl == players.None)
-                ststed.HP = (int)(ststed.stat.HP * 0.2f);
+                ststed.HP = (int)(ststed.MaxHP * 0.15f);
         }
 
         if(Character.enabled ==false)

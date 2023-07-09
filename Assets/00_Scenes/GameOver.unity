@@ -278,29 +278,55 @@ MonoBehaviour:
     \uD558\uC9C0 \uC54A\uB294\uB2E4\r\n\r\n\r\n\r\n\r\n\r\n'\uC774 \uC774\uB7EC\uBA74
     \uC548\uB418\uB294 \uAC70.. \uC796\uC544? \r\n\r\n\r\n\r\n\r\n\r\n'\uBA4D\uCCAD\uC544
     \uAC00\uB9CC\uD788 \uC788\uC9C0\uB9C8!'\r\n\r\n\r\n\r\n\r\n\r\n\uC544.. \uB610...\r\n\r\n\r\n\r\n\r\n\r\n\"\uD06C\uB989
-    \uD06C\uB974\uB974\uB989\" \r\n\r\n\r\n\r\n\r\n'\uD750\uC73D.. \uD750\uC73C..'
-    \uC6B8\uAEBC\uAC19\uB2E4..\r\n\r\n\r\n\r\n\r\n\r\n\uC548\uB3FC.. \uC9C0\uAE08
-    \uC6B8\uC5B4 \uBC84\uB9AC\uBA74..\r\n\r\n\r\n\r\n\r\n\r\n\"\uD22D\" \uBB34\uC5B8\uAC00\uAC00
-    \uB0A0 \uBC00\uC5B4 \uBC84\uB838\uB2E4.\r\n\r\n\r\n\r\n\r\n\r\n'... \uC798\uAC00..'\r\n\r\n\r\n\r\n\r\n\r\n\"\uD391\"
-    \r\n\r\n\r\n\r\n\r\n\r\n'\uC544.. \uB354\uC774\uC0C1\uC740 \uC548\uB418...' \r\n\r\n\r\n\r\n\r\n\r\n'\uD6C4..
-    \uC544\uC9C1\uC740 \uD0C8\uCD9C\uD560\uC218 \uC788\uC5B4'\r\n\r\n\r\n\r\n\r\n\r\n\r\n'\uC5B4\uC774.....
-    \uB108\uBB34 \uC6B8\uC9C0 \uB9D0\uB77C\uACE0?'\r\n'\u3141\u3141 \uC2DC\u3141\u3141
-    \u3141\u3141\u3141 \u3141\u3141\u3141 \u3141\u3141\u3141\uB3D9\u3141 \u3141\u3141'\r\n\r\n\r\n\r\n\uBE5B\uC774
-    \uB098\uB97C \uAC10\uC2F8 \uC548\uC558\uB2E4. \r\n\r\n\r\n\r\n\r\n\r\n'\uB098\uB294
-    \uB610.. \uC2E4\uD328 \uD574\uBC84\uB838\uB2E4.'\r\n\r\n\r\n\r\n\r\n\r\n"
+    \uD06C\uB974\uB974\uB989\" \r\n\r\n\r\n\r\n\r\n\uC6B8\uAEBC\uAC19\uB2E4..\r\n\r\n\r\n\r\n\r\n\r\n\uC548\uB3FC..
+    \uC9C0\uAE08 \uC6B8\uC5B4 \uBC84\uB9AC\uBA74..\r\n\r\n\r\n\r\n\r\n\r\n\"\uD22D..\"  
+    \uBB34\uC5B8\uAC00\uAC00 \uB0A0 \uBC00\uC5B4 \uBC84\uB838\uB2E4.\r\n\r\n\r\n\r\n\r\n\r\n'...
+    ... .... ...'\r\n\r\n\r\n\r\n\r\n\r\n\"\uD391\" \r\n\r\n\r\n\r\n\r\n\r\n'\uC544..
+    \uB354\uC774\uC0C1\uC740 \uC548\uB418...' \r\n\r\n\r\n\r\n\r\n\r\n'.. \uC544\uC9C1\uC740
+    \uD0C8\uCD9C\uD560\uC218 \uC788\uC5B4'\r\n\r\n\r\n\r\n\r\n\r\n\r\n'... \uB108\uBB34
+    \uC6B8\uC9C0 \uB9C8..'\r\n'\u3141\u3141 \uC2DC\u3141\u3141 \u3141\u3141\u3141
+    \u3141\u3141\u3141 \u3141\u3141\u3141\uB3D9\u3141 \u3141\u3141'\r\n\r\n\r\n\r\n\uBE5B\uC774
+    \uB098\uB97C \uAC10\uC2F8 \uC548\uC558\uB2E4. \r\n\r\n\r\n\r\n\r\n\r\n\uB098\uB294
+    \uB610.. \uC2E4\uD328 \uD574\uBC84\uB838\uB2E4.\r\n\r\n\r\n\r\n\r\n\r\n"
   one: "Bad End - \uB2D8 \uAC1C\uBABB\uD568"
-  BadEnd2: 
-  otwo: 
-  BadEnd3: 
-  three: 
+  BadEnd2: "\uC5EC\uC720\r\n\r\n\r\n\r\n\r\n\r\n\r\n'\uBB50\uC57C \uC774\uC815\uB3C4
+    \uBC16\uC5D0 \uC548\uB42C\uB358\uAC70\uC57C?' Haru:\r\n\r\n\r\n\r\n\r\n\r\n\r\n\uAD34\uBB3C\uC740
+    \uAC15\uD588\uC9C0\uB9CC \uB108\uBB34 \uB290\uB838\uB2E4. \r\n\r\n\r\n\r\n\r\n\r\n'\uC65C\uC774\uB807\uAC8C
+    \uB2E8\uB2E8\uD55C \uAC70\uC9C0?' DamVI:\r\n\r\n\r\n\r\n\r\n\r\n'\uC7A0\uC2DC\uB9CC..
+    \uBB54\uAC00 \uC774\uC0C1\uD574'\r\n\r\n\r\n\r\n\r\n\r\n\"\uC2F9\"\r\n\r\n\r\n\r\n\r\n\uB0A0\uC774
+    \uD295\uACA8\uC838 \uB098\uAC14\uB2E4.\r\n\r\n\r\n\r\n\r\n\r\n'\uC5B4...?'\r\n\r\n\r\n\r\n\r\n\r\n'Haru!!!'\r\n\r\n\r\n\r\n\r\n\uB9DD\uD560
+    \uB9DD\uD560 \uB9DD\uD560 \uB9DD\uD560 \uB9DD\uD560 \uB9DD\uD560\r\n\r\n\r\n\r\n\r\n\r\n\uBC29\uC2EC\uD588\uB2E4.\r\n\r\n\r\n\r\n\r\n\r\n\uC800\uB807\uAC8C
+    \uB290\uB9B0\uB370 \uC704\uD5D8\uB3C4\uAC00 \uADF8\uC815\uB3C4 \uC77C\uB9AC\uAC00
+    \uC5C6\uC9C0..\r\n\r\n\r\n\r\n\r\n\r\n'\uBC84\uD504!'\r\n\r\n\r\n\r\n\r\n\r\n'\uB12C\uB77C\uC2DC\uC544!'\r\n\r\n\r\n\r\n\r\n\"\uD0D5
+    \uD0D5 \uD0D5\"\r\n\r\n\r\n\r\n\r\n\r\n\uC73C\uC544\uC544 \uAD34\uBB3C\uC790\uC2DD
+    \uC65C\uC774\uB9AC \uC548\uC8FD\uB294\uAC70\uC57C\r\n\r\n\r\n\r\n\r\n\uC5B4,
+    \uBD84\uBA85 \uB208\uC55E\uC5D0 \uC788\uC5C8\uB294\uB370..?\r\n\r\n\r\n\r\n\r\n\r\n\"\uCFF5\"\r\n\r\n\r\n\r\n\r\n\r\n\uAC11\uC790\uAE30
+    \uC774\uB807\uAC8C...\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n"
+  otwo: "Bad End -  \uC548\uD0C0\uAE4C\uC6B4 \uC774\uC57C\uAE30"
+  BadEnd3: "\uC544\uC9C1 \uC9C0\uC6D0\uC740 \uBA40\uC740\uAC74\uAC00?\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n'\uC870\uAE08\uB9CC
+    \uB354 \uBC84\uD168!'\r\n\r\n\r\n\r\n\r\n\uC5B8\uC81C\uAE4C\uC9C0 \uC774 \uC804\uD22C\uB97C
+    \uD560\uC9C0 \uBAA8\uB974\uACA0\uB2E4.\r\n\r\n\r\n\r\n\r\n\r\n'\uC81C\uBC1C..
+    \uC870\uAE08\uB9CC\uB354!'\r\n\r\n\r\n\r\n\r\n\r\n\uB140\uC11D\uB3C4 \uC870\uAE08\uC740
+    \uC9C0\uCCD0 \uBCF4\uC778\uB2E4.\r\n\r\n\r\n\r\n\r\n\r\n'\uACE7.. \uC870\uAE08\uB9CC
+    \uB354 \uC788\uC73C\uBA74...' \r\n\r\n\r\n\r\n\r\n\r\n\r\n'\uC0E4\uC545' \uBC14\uB78C\uC774
+    \uB0A0 \uC2A4\uCCD0 \uC9C0\uB098\uAC04\uB2E4.\r\n\r\n\r\n\r\n\r\n\r\n\uAC70\uC9D3\uB9D0...\r\n\r\n\r\n\r\n\r\n\r\n\"\u314B..\uD06C\uB974\uC751\"
+    \r\n\r\n\r\n\r\n\r\n\uB098\uB77C\uB3C4 \uBC84\uD168\uC57C\uB418..\r\n\r\n\r\n\r\n\r\n\r\n\uD558\uB098..
+    \uB458.. \uC4F0\uB7EC\uC838 \uAC04\uB2E4.\r\n\r\n\r\n\r\n\r\n\r\n\uC5B8\uC81C\uAE4C\uC9C0\uACE0
+    \uBC84\uD2F8\uC218 \uC788\uC744\uC9C0 \uBAA8\uB978\uB2E4.\r\n\r\n\r\n\r\n\r\n\r\n\uC544..
+    \uC5D0\uCD08\uC5D0 \uC9C0\uC6D0\uC744 \uBC14\uB780\uAC8C \uBB38\uC81C\uC600\uB358\uAC00..\r\n\r\n\r\n\r\n\r\n\r\n\r\n'\uBB3C\uC774
+    \uC5EC\uAE30\uAE4C\uC9C0 \uCC28\uC624\uB974\uB2E4\uB2C8..' \r\n\r\n\r\n\r\n\r\n\r\n\uC5EC\uAE30\uC11C
+    \uBA48\uCDB0 \uC124\uC218 \uC5C6\uB2E4. \r\n\r\n\r\n\r\n\r\n\r\n'\uD790\uC744
+    \uBD80\uD0C1\uD574!'\r\n\r\n\r\n\r\n\r\n\r\n\r\n'\uADF8\uC804\uC5D0 \uD53C\uD574!!!'\r\n\r\n\r\n\r\n\r\n\uC544. 
+    \r\n\r\n\r\n\r\n\r\n\r\n'\uB9DD\uD560 \uC790\uC2DD...!'\r\n\r\n\r\n\r\n\r\n\r\n"
+  three: "Normal End - \uCE68\uC218"
   TruEnd: "\uACB0\uB9D0\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\uBD84\uBA85 \uB370\uC774\uD130\uB294
-    \uC815\uD655\uD588\uB2E4.\r\n\r\n\r\n\r\n\r\n\uD558\uC9C0\uB9CC.. \uADF8\uAC74
-    \uB370\uC774\uD130 \uB9CC\uC73C\uB860 \uC548\uB418\uB294 \uAC70\uC600\uB2E4.\r\n\r\n\r\n\r\n\r\n\uC774\uAC8C
-    \uD6C4\uD68C \uC778\uAC74\uAC00?\r\n\r\n\r\n\r\n\r\n\r\n\uC544\uC9C1.. \uCD5C\uD6C4\uC758
-    \uC218\uAC00 \uB0A8\uC558\uB2E4.\r\n\r\n\r\n\r\n\r\n'\uBBF8\uC548.. \uC57D\uC18D\uC740
-    \uBABB\uC9C0\uD0AC\uAEBC \uAC19\uC544..' \r\n\r\n\r\n\r\n\r\nDAMVI : '\uC5B4..?
-    \uC548\uB418 \uBA48\uCDB0!!'\r\n\r\n\r\n\r\n\r\n'\uC0DD\uC874 \uD558\uB098 \uC0AC\uB9DD
-    \uC14B...'\r\n\r\n\r\n\r\n\r\n\r\n\"\uD06C\uC640\uC544\uC544\uC545\"\r\n\r\n\r\n\r\n\r\n\uC544..
+    \uC815\uD655\uD588\uB2E4.\r\n\r\n\r\n\r\n\r\n\uD558\uC9C0\uB9CC.. \uB108\uBB34\uB098\uB3C4
+    \uD06C\uB098\uD070 \uBCC0\uC218\uAC00 \uB4F1\uC7A5\uD588\uB2E4.\r\n\r\n\r\n\r\n\r\n\uC774\uAC8C
+    \uD6C4\uD68C \uC778\uAC74\uAC00?\r\n\r\n\r\n\r\n\r\n\r\n\uC774\uB807\uAC8C \uD5C8\uBB34\uD558\uAC8C..\r\n\r\n\r\n\r\n\r\n'\uC5EC\uAE30\uC5D0
+    \uC788\uC73C\uBA74 \uC548\uB418\uB294 \uAC70\uC796\uC544.. \uCD08\uC774\uC218\uC774\uD658'\r\n\r\n\r\n\r\n\r\nDAMVI
+    : '\uC5B4..? \uC548\uB418 \uBA48\uCDB0!!'\r\n\r\n\r\n\r\n\r\n'\uC0DD\uC874 \uD558\uB098
+    \uC0AC\uB9DD \uC14B...' \uBE5B\uC774 \uD3EC\uAC1C\uC5B4 \uB0A0\uC544\uAC04\uB2E4.\r\n\r\n\r\n\r\n\r\n\r\n\"\u3148\u314E\u3147
+    \u3137\u3148\u3139 \u3148\u3145\u3148\u3147\u3131 \u3137\u3131\u3147\u3147\u3148\"\r\n\r\n\r\n\r\n\r\n\uC544..
     \uC5EC\uAE30 \uAE4C\uC9C0 \uC778\uAC74\uAC00.\r\n\r\n\r\n\r\n\r\n\r\n\uD558\uC9C0\uB9CC..
     \uC9C0\uAE08 \uC774\uB77C\uBA74 \uD560\uC218\uC788\uB2E4.\r\n\r\n\r\n\r\n\r\n\r\n\uC4F0\uB7EC\uD2B8\uB9AC\uB294\uAC74
     \uBB34\uB9AC\uB2E4.\r\n\r\n\r\n\r\n\r\n\r\n'\uD154\uB808\uD3EC\uD2B8 \uC2DC\uD038\uC2A4
@@ -310,8 +336,9 @@ MonoBehaviour:
     \uC774\uBBF8 \uB2A6\uC5C8\uB2E4.\r\n\r\n\r\n\r\n\r\n\r\n\uBBF8\uC548\uD574 \uB2E4\uB4E4..
     \uCD5C\uC18C\uD55C \uC62C\uBC14\uB978 \uACF3\uC5D0 \uC788\uC5B4\uC57C \uB418\uB294\uB370..\r\n\r\n\r\n\r\n\r\n\r\n\uBE5B\uC740
     \uC704\uB85C \uD5A5\uD558\uC5EC \uD769\uC5B4\uC84C\uB2E4.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n"
-  fo: "True End - \uC804\uC2B9"
+  fo: "True End - \uCD08\uC774\uC218\uC774\uD658"
   tmp: {fileID: 571437773}
+  ending: 0
 --- !u!1 &571437770
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,9 +350,8 @@ GameObject:
   - component: {fileID: 571437771}
   - component: {fileID: 571437774}
   - component: {fileID: 571437773}
-  - component: {fileID: 571437772}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: tmp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -338,12 +364,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 571437770}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1512374316}
+  m_Father: {fileID: 1712823047}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -351,27 +377,6 @@ RectTransform:
   m_AnchoredPosition: {x: -852, y: -461}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &571437772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 571437770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74f7c9bb468201e4c8ac866e9306f9a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BadEnd1: 
-  one: 
-  BadEnd2: 
-  otwo: 
-  BadEnd3: 
-  three: 
-  TruEnd: 
-  fo: 
-  tmp: {fileID: 0}
 --- !u!114 &571437773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -803,7 +808,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6300530}
-  - {fileID: 571437771}
   m_Father: {fileID: 1712823047}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -955,6 +959,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1512374316}
+  - {fileID: 571437771}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
